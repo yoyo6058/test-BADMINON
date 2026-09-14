@@ -216,6 +216,23 @@ button.action{font-size:18px}
 }
 
 </style>
+
+<style>
+/* 2026-09-14 測試版：鎖定討論後的首頁與報名頁版面 */
+#list{display:flex;flex-direction:column;gap:14px}
+.eventCard{border-radius:22px!important;padding:18px 18px 16px!important;box-shadow:0 8px 24px rgba(60,90,110,.08);border:1px solid rgba(180,210,225,.35)}
+.eventCard .date{font-size:24px!important;font-weight:400!important;color:#111!important;margin-bottom:8px}
+.eventCard .title{font-size:23px!important;font-weight:800!important;color:#1f3442!important;margin-bottom:10px}
+.eventCard .venueLine,.eventCard .countLine{font-size:19px!important;font-weight:400!important;color:#5e6d75!important;margin:7px 0}
+.eventCard .noteBlock{margin-top:9px!important;padding:10px 12px!important;border-radius:13px!important}
+.eventCard .note{font-size:16px!important}
+.eventCard .viewBtn{margin-top:9px!important;border:0!important;border-radius:12px!important;background:#f0f2f3!important;color:#4f5c63!important;font-size:17px!important;font-weight:700!important;padding:10px 16px!important;cursor:pointer}
+.eventCard.pastel1{background:#fff7fa!important}.eventCard.pastel2{background:#f5fbff!important}.eventCard.pastel3{background:#f5fcf8!important}.eventCard.pastel4{background:#fffdf3!important}
+.detailCard{background:#fff!important}
+.detailCard .eventSummary{background:#eef8ff!important;border-radius:18px!important}
+.rosterCard{margin-top:12px!important}
+@media(max-width:480px){.eventCard .date{font-size:22px!important}.eventCard .title{font-size:22px!important}.eventCard .venueLine,.eventCard .countLine{font-size:18px!important}.detailActions{grid-template-columns:repeat(3,1fr)!important}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -385,19 +402,22 @@ async function loadEvents(){
   $("create").classList.add("hidden");
   $("detail").classList.add("hidden");
   $("list").innerHTML='<div class="card empty">載入場次中…</div>';
-  const {data,error}=await db.from("events").select("*").order("event_date",{ascending:true}).order("start_time",{ascending:true});
+  const {data,error}=await db.from("events").select("*").order("created_at",{ascending:false});
   if(error){$("list").innerHTML='<div class="card empty">讀取失敗：請確認 Supabase 資料表設定。</div>';return}
   if(!data.length){$("list").innerHTML='<div class="card empty">目前還沒有場次</div>';return}
+  const events=data.slice(0,4);
   const cards=[];
-  for(const e of data){
+  for(let idx=0;idx<events.length;idx++){
+    const e=events[idx];
     const {data:r}=await db.from("registrations").select("id,status").eq("event_id",e.id);
     const confirmed=(r||[]).filter(x=>x.status==="confirmed").length;
-    cards.push(`<div class="event">
+    cards.push(`<div class="event eventCard pastel${idx+1}">
       <div class="date">${fmtDate(e.event_date)}　${String(e.start_time).slice(0,5)}–${String(e.end_time).slice(0,5)}</div>
       <div class="title">${esc(e.title)}</div>
-      <div class="muted">${esc(e.venue||"未填場地")}　｜　${e.courts} 面場</div>
-      <div class="muted">目前 ${confirmed} / ${e.participant_limit} 人</div>${e.notes?`<div class="noteBlock"><div class="note">📝 ${esc(e.notes)}</div></div>`:""}
-      <button onclick="openEvent('${e.id}')">查看／報名</button>
+      <div class="muted venueLine">${esc(e.venue||"未填場地")}　｜　${e.courts} 面場</div>
+      <div class="muted countLine">目前 ${confirmed} / ${e.participant_limit} 人</div>
+      ${e.notes?`<div class="noteBlock"><div class="note">📝 ${esc(e.notes)}</div></div>`:""}
+      <button class="viewBtn" onclick="openEvent('${e.id}')">查看／報名</button>
     </div>`);
   }
   $("list").innerHTML=cards.join("");
@@ -407,15 +427,18 @@ async function createEvent(){
   const date=$("date").value,start=$("start").value,end=$("end").value,title=$("title").value.trim();
   if(!date||!start||!end||!title){toast("請填日期、時間和場次名稱");return}
   if(start>=end){toast("結束時間要晚於開始時間");return}
-  const payload={
-    title,event_date:date,start_time:start,end_time:end,
+  const payload={title,event_date:date,start_time:start,end_time:end,
     venue:$("venue").value.trim(),courts:Number($("courts").value)||1,
-    participant_limit:Number($("limit").value)||20,notes:$("note").value.trim()
-  };
+    participant_limit:Number($("limit").value)||20,notes:$("note").value.trim()};
   $("createBtn").disabled=true;
   const {data,error}=await db.from("events").insert(payload).select().single();
   $("createBtn").disabled=false;
   if(error){toast("建立失敗："+error.message);return}
+  const {data:all}=await db.from("events").select("id,created_at").order("created_at",{ascending:false});
+  if((all||[]).length>4){
+    const oldest=all[all.length-1];
+    await db.from("events").delete().eq("id",oldest.id);
+  }
   openEvent(data.id);
 }
 
@@ -476,7 +499,7 @@ async function renderDetail(){
       <div class="detailActions">${actionButtons}</div>
       <div class="rosterCard" id="rosterCard">
         <div class="rosterHead"><span>👥 已報名名單</span><span class="rosterCount">(${confirmed.length} 人)</span><button class="rosterToggle" onclick="toggleRoster()">⌃</button></div>
-        <div id="rosterBody">${roster}${waitHtml}</div>
+        <div id="rosterBody" class="hidden">${roster}${waitHtml}</div>
       </div>
       <div class="adminBlock">
         <div class="adminHead">🔒 團主管理</div>
