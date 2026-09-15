@@ -521,6 +521,75 @@ body:not(.subpage) .content{padding-bottom:18px!important}
 @media(max-width:360px){.header{height:148px!important;min-height:148px!important}.event-card{grid-template-columns:62px minmax(0,1fr) 76px!important}.datebox{height:92px!important}.event-card .view{font-size:12px!important}.home-time{font-size:16px!important}.detail-basic{grid-template-columns:66px minmax(0,1fr)!important}}
 @media(min-width:431px){body{background:#edf6fa}.app{box-shadow:0 0 24px rgba(40,100,145,.08)}}
 </style>
+
+<style id="final-four-page-adjustments">
+/* 四版面最終確認：以 V10.5 原始版為母版，只覆蓋已確認視覺修改 */
+body:not(.subpage) .header{height:148px!important;border-radius:0 0 25px 25px!important}
+body:not(.subpage) .header .hero-copy{left:20px!important;top:28px!important;width:235px!important}
+body:not(.subpage) .header .play-text{font-size:20px!important;margin-left:9px!important;margin-bottom:4px!important}
+body:not(.subpage) .header .logo-title{font-size:37px!important;letter-spacing:-1px!important;line-height:1!important;color:#fff!important}
+body:not(.subpage) .header .logo-title b{display:none!important}
+body:not(.subpage) .header .sub{font-size:13px!important;margin-top:8px!important}
+body:not(.subpage) .header .racketSvg{width:54px!important;right:42px!important;top:33px!important}
+body:not(.subpage) .header .shuttleSvg{width:28px!important;right:11px!important;top:84px!important}
+body:not(.subpage) .nav .create-top{background:#bfe7f6!important;color:#2f7897!important}
+body:not(.subpage) .event-card{grid-template-columns:76px minmax(0,1fr) 70px!important;min-height:100px!important;gap:8px!important;padding:8px!important}
+body:not(.subpage) .datebox{width:76px!important;height:84px!important;background:transparent!important}
+body:not(.subpage) .date{font-size:21px!important;color:#6db9d8!important}
+body:not(.subpage) .weekday{font-size:14px!important;color:#7d9aa9!important}
+body:not(.subpage) .event-title{font-size:18px!important;color:#246ea3!important}
+body:not(.subpage) .home-time{font-size:15px!important;color:#7c67a8!important}
+body:not(.subpage) .home-count{font-size:13px!important}
+body:not(.subpage) .event-card .view{width:70px!important;height:62px!important;border-radius:14px!important;background:#9ed9ee!important;color:#fff!important;font-size:13px!important;white-space:normal!important;line-height:1.25!important;padding:0 5px!important}
+body:not(.subpage) .event-card .view::first-line{ }
+/* subpage header：保留 V10.5 高度/配色，文字與新版圖案分開 */
+body.subpage .header{height:150px!important;border-radius:0 0 26px 26px!important}
+body.subpage .header .detail-brand{display:block!important;left:50%!important;top:54px!important;transform:translateX(-50%)!important;font-size:27px!important;line-height:1!important;white-space:nowrap!important;color:#fff!important}
+body.subpage .header .backTop{display:block!important;left:15px!important;top:43px!important;font-size:36px!important}
+body.subpage .header .racketSvg,body.subpage .header .shuttleSvg{display:block!important;position:absolute!important;z-index:5!important}
+body.subpage .header .racketSvg{width:50px!important;height:auto!important;right:27px!important;top:26px!important;left:auto!important;transform:rotate(18deg)!important}
+body.subpage .header .shuttleSvg{width:28px!important;height:auto!important;right:11px!important;top:83px!important;left:auto!important;transform:rotate(10deg)!important}
+body.subpage[data-screen="signupScreen"] .header .detail-brand{display:none!important}
+body.subpage[data-screen="rosterScreen"] .header .detail-brand{font-size:25px!important}
+/* 第三頁詳細資訊 */
+#detail .detail-basic{grid-template-columns:76px minmax(0,1fr)!important;gap:10px!important;padding-bottom:12px!important;align-items:start!important}
+#detail .detail-datebox{width:76px!important;height:76px!important;background:transparent!important;border-radius:0!important;align-items:flex-start!important;justify-content:flex-start!important;padding-top:2px!important}
+#detail .detail-datebox b{font-size:22px!important;color:#6db9d8!important}
+#detail .detail-datebox span{font-size:14px!important;color:#7d9aa9!important;margin-top:4px!important}
+#detail .detail-main{padding-top:0!important}
+#detail .detail-title{font-size:23px!important;color:#246ea3!important;margin-bottom:5px!important}
+#detail .detail-time{font-size:19px!important;color:#7c67a8!important}
+#detail .detail-meta{grid-column:1/-1!important;display:flex!important;flex-direction:row!important;gap:18px!important;margin-top:1px!important;padding-top:7px!important;border-top:0!important;color:#425b70!important}
+#detail .detail-meta span{overflow:visible!important;text-overflow:clip!important;white-space:nowrap!important}
+#detail .attendance-line b{color:#e45757!important}
+#detail .attendance-line span{color:inherit!important}
+#detail .detail-actions{display:flex!important;flex-direction:column!important;gap:0!important}
+#detail .detail-action-row{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;padding:4px 0!important}
+#detail .detail-action-row .join{width:100%!important;height:46px!important;margin:0!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:20px!important}
+#detail .detail-action-row .action{height:46px!important;padding:0 4px!important;display:flex!important;align-items:center!important;justify-content:center!important}
+#detail .detail-action-row .friend{background:#eef8fc!important;color:#315f7b!important;border:1px solid #d6eaf2!important}
+#detail .detail-action-row .cancel{background:#fff2f4!important;color:#d95770!important;border:1px solid #f1d8de!important}
+#detail .detail-action-row .roster-link{height:46px!important;padding:0 10px!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:15px!important}
+#detail .roster-link .arrow{display:none!important}
+#detail .admin-btn,#detail .admin-btn.red,#detail .admin-btn.coffee{background:#edf0f2!important;border-color:#dfe4e7!important;color:#111!important}
+/* 第二頁我的紀錄 */
+#recordsScreen .records-head,#recordsScreen .record-tabs{display:none!important}
+#recordsScreen .record-list{padding:8px 10px!important;box-shadow:none!important;border-radius:18px!important}
+#recordsScreen .record-item{grid-template-columns:62px minmax(0,1fr) auto!important;gap:11px!important;padding:15px 0!important;min-height:78px!important}
+#recordsScreen .record-date{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important}
+#recordsScreen .record-date b{font-size:21px!important}
+#recordsScreen .record-date-0 b{color:#72bedc!important}
+#recordsScreen .record-date-1 b{color:#d99aaa!important}
+#recordsScreen .record-date-2 b{color:#76b894!important}
+#recordsScreen .record-date-3 b{color:#b19acb!important}
+#recordsScreen .record-date span{color:#83939c!important}
+#recordsScreen .record-title{font-size:17px!important;color:#246ea3!important}
+#recordsScreen .record-info{font-size:13px!important;color:#7c67a8!important}
+/* 第四頁報名：移除內容區重複標題，綠色按鈕淡 10% */
+#signupScreen .section-title{display:none!important}
+#signupScreen .screen-btn{background:linear-gradient(90deg,#67bd89,#73c796)!important}
+@media(max-width:390px){body:not(.subpage) .header{height:144px!important}.event-card{grid-template-columns:74px minmax(0,1fr) 68px!important}.datebox{width:74px!important}.event-card .view{width:68px!important;height:60px!important}.subpage .header{height:150px!important}#detail .detail-meta{gap:12px!important;font-size:13px!important}#recordsScreen .record-item{grid-template-columns:58px minmax(0,1fr) auto!important}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -531,10 +600,10 @@ body:not(.subpage) .content{padding-bottom:18px!important}
   <div class="hamb">☰</div>
   <div class="hero-copy">
     <div class="play-text">Let's Play</div>
-    <div class="logo-title"><span>羽球</span><b>＋1</b></div>
+    <div class="logo-title">活動報名</div>
     <div class="sub">揪團打球・運動更快樂</div>
   </div>
-  <div class="detail-brand">一起來打羽球</div>
+  <div id="subBrand" class="detail-brand">我的紀錄</div>
 </header>
 <div class="nav">
   <button id="newBtn" class="create-top">＋ 建立場次</button>
@@ -561,12 +630,12 @@ $('modalCancel').onclick=()=>closeModal(null);$('modalOK').onclick=()=>{const i=
 function askText(title,ph,val=''){return showModal(title,`<input id="modalInput" type="text" maxlength="30" placeholder="${esc(ph)}" value="${esc(val)}">`).then(v=>v===null?null:String(v).trim())}
 async function requireAdmin(){if(adminMode||localStorage.getItem('badminton_admin_unlocked')==='1'){adminMode=true;return true}const v=await showModal('🔐 團主管理','<input id="modalInput" type="password" inputmode="numeric" maxlength="8" placeholder="請輸入團主密碼">');if(v==='2418'){adminMode=true;localStorage.setItem('badminton_admin_unlocked','1');return true}return false}
 function fmtDate(d){let [y,m,day]=String(d).split('-');return `${m}/${day}`}function week(d){return ['日','一','二','三','四','五','六'][new Date(d+'T00:00:00').getDay()]}function fmtTime(t){return String(t||'').slice(0,5)}function myKey(id){return 'badminton_reg_'+id}function myId(id){return localStorage.getItem(myKey(id))||''}function setMy(id,r){localStorage.setItem(myKey(id),r)}function clearMy(id){localStorage.removeItem(myKey(id))}
-function showTab(t){document.body.classList.toggle('subpage',t!=='list');['create','list','detail','rosterScreen','signupScreen','successScreen','recordsScreen'].forEach(id=>{const el=$(id);if(el)el.classList.toggle('hidden',id!==t)});$('newBtn').classList.toggle('hidden',t!=='list');$('bottomNav').classList.toggle('hidden',t==='create'||t==='signupScreen');document.querySelectorAll('.bn').forEach(b=>b.classList.toggle('on',b.dataset.tab===t||(t==='list'&&b.dataset.tab==='list')));if(t==='list')loadEvents();if(t==='rosterScreen')renderRosterPage();if(t==='signupScreen')renderSignupScreen();if(t==='recordsScreen')renderRecords()}
-let eventsLoading=false;async function loadEvents(){if(eventsLoading)return;eventsLoading=true;const box=$('events');if(!box.dataset.ready)box.innerHTML='<div class="empty">載入場次中…</div>';try{const {data,error}=await db.from('events').select('*').order('created_at',{ascending:false});if(error){box.innerHTML='<div class="empty">讀取失敗，請稍後再試</div>';return}const rows=(data||[]).slice(0,4);if(!rows.length){box.innerHTML='<div class="empty">目前沒有場次</div>';box.dataset.ready='1';return}const counts=await Promise.all(rows.map(async e=>{const {data:r}=await db.from('registrations').select('status').eq('event_id',e.id);return (r||[]).filter(x=>x.status==='confirmed').length}));let html='';for(let i=0;i<rows.length;i++){const e=rows[i],n=counts[i],p=['pastel1','pastel2','pastel3','pastel4'][i%4];html+=`<div class="event-card"><div class="datebox ${p}"><div class="date">${fmtDate(e.event_date)}</div><div class="weekday">(${week(e.event_date)})</div></div><div><div class="event-title">${esc(e.title)}</div><div class="event-line home-time">◷ ${fmtTime(e.start_time)} - ${fmtTime(e.end_time)}</div><div class="event-line home-count">👥 ${n} / ${e.participant_limit||21} 人</div></div><button class="view" onclick="openEvent('${e.id}')">查看<br>報名</button></div>`}box.innerHTML=html;box.dataset.ready='1'}finally{eventsLoading=false}}
+function showTab(t){document.body.classList.toggle('subpage',t!=='list');const brand=$('subBrand');if(brand)brand.textContent=t==='recordsScreen'?'我的紀錄':t==='detail'?'報名＋1':'';document.body.dataset.screen=t;['create','list','detail','rosterScreen','signupScreen','successScreen','recordsScreen'].forEach(id=>{const el=$(id);if(el)el.classList.toggle('hidden',id!==t)});$('newBtn').classList.toggle('hidden',t!=='list');$('bottomNav').classList.toggle('hidden',t==='create'||t==='signupScreen');document.querySelectorAll('.bn').forEach(b=>b.classList.toggle('on',b.dataset.tab===t||(t==='list'&&b.dataset.tab==='list')));if(t==='list')loadEvents();if(t==='rosterScreen')renderRosterPage();if(t==='signupScreen')renderSignupScreen();if(t==='recordsScreen')renderRecords()}
+let eventsLoading=false;async function loadEvents(){if(eventsLoading)return;eventsLoading=true;const box=$('events');if(!box.dataset.ready)box.innerHTML='<div class="empty">載入場次中…</div>';try{const {data,error}=await db.from('events').select('*').order('created_at',{ascending:false});if(error){box.innerHTML='<div class="empty">讀取失敗，請稍後再試</div>';return}const rows=(data||[]).slice(0,4);if(!rows.length){box.innerHTML='<div class="empty">目前沒有場次</div>';box.dataset.ready='1';return}const counts=await Promise.all(rows.map(async e=>{const {data:r}=await db.from('registrations').select('status').eq('event_id',e.id);return (r||[]).filter(x=>x.status==='confirmed').length}));let html='';for(let i=0;i<rows.length;i++){const e=rows[i],n=counts[i],p=['pastel1','pastel2','pastel3','pastel4'][i%4];html+=`<div class="event-card"><div class="datebox ${p}"><div class="date">${fmtDate(e.event_date)}</div><div class="weekday">(${week(e.event_date)})</div></div><div><div class="event-title">${esc(e.title)}</div><div class="event-line home-time">◷ ${fmtTime(e.start_time)} - ${fmtTime(e.end_time)}</div><div class="event-line home-count">👥 ${n} / ${e.participant_limit||21} 人</div></div><button class="view" onclick="openEvent('${e.id}')">查看／報名</button></div>`}box.innerHTML=html;box.dataset.ready='1'}finally{eventsLoading=false}}
 
 async function createEvent(){if(!(await requireAdmin())){toast('密碼錯誤');return}const date=$('date').value,start=$('start').value,end=$('end').value,title=$('title').value.trim();if(!date||!start||!end||!title){toast('請填完整資料');return}if(start>=end){toast('結束時間要晚於開始時間');return}const payload={title,event_date:date,start_time:start,end_time:end,venue:$('venue').value.trim(),courts:+$('courts').value||1,participant_limit:+$('limit').value||21,notes:$('note').value.trim()};const {error}=await db.from('events').insert(payload);if(error){toast('建立失敗：'+error.message);return}const {data:all}=await db.from('events').select('id,created_at').order('created_at',{ascending:false});for(const old of (all||[]).slice(4))await db.from('events').delete().eq('id',old.id);toast('場次建立成功');showTab('list')}
 async function openEvent(id){const {data,error}=await db.from('events').select('*').eq('id',id).single();if(error||!data){toast('找不到場次');return}currentEvent=data;showTab('detail');await renderDetail();subscribeEvent(id)}
-async function renderDetail(){if(!currentEvent)return;const {data,error}=await db.from('registrations').select('*').eq('event_id',currentEvent.id).order('registered_at',{ascending:true});if(error){toast('讀取報名資料失敗');return}const regs=data||[],confirmed=regs.filter(r=>r.status==='confirmed'),wait=regs.filter(r=>r.status==='waitlist'),mine=myId(currentEvent.id),mineReg=regs.find(r=>r.id===mine),limit=currentEvent.participant_limit||21,pct=Math.min(100,Math.round(confirmed.length/limit*100));$('detailCard').innerHTML=`<div class="detail-card"><div class="detail-basic"><div class="detail-datebox"><b>${fmtDate(currentEvent.event_date)}</b><span>(${week(currentEvent.event_date)})</span></div><div class="detail-main"><div class="detail-title">${esc(currentEvent.title)}</div><div class="detail-time">◷ ${fmtTime(currentEvent.start_time)} - ${fmtTime(currentEvent.end_time)}</div><div class="detail-meta"><span>📍 ${esc(currentEvent.venue||'未提供球館')}</span><span>🏸 ${currentEvent.courts||1} 面場地</span></div></div></div><div class="attendance-new"><div class="attendance-line"><span>👥 報名人數</span><b>${confirmed.length} / ${limit} 人</b></div><div class="progress"><i style="width:${pct}%"></i></div><div class="attendance-foot"><span>${confirmed.length<limit?`還有 ${limit-confirmed.length} 個名額`: '目前已額滿'}</span><span>${mineReg?'你已報名':'你未報名'}</span></div></div>${currentEvent.notes?`<div class="detail-note-box"><b>備註</b><span>${esc(currentEvent.notes)}</span></div>`:''}<div class="detail-actions"><button class="join" onclick="showTab('signupScreen')">＋1 我要報名</button><div class="actions"><button class="action friend" onclick="joinForOther()">👥 幫朋友報名</button><button class="action cancel" onclick="cancelMine()">✕ 取消報名</button></div><button class="roster-link" onclick="showTab('rosterScreen')">👥 報名名單 <span>(${confirmed.length})</span><span class="arrow">›</span></button></div>${adminHtml()}</div>`;renderRoster(confirmed,wait,mine)}
+async function renderDetail(){if(!currentEvent)return;const {data,error}=await db.from('registrations').select('*').eq('event_id',currentEvent.id).order('registered_at',{ascending:true});if(error){toast('讀取報名資料失敗');return}const regs=data||[],confirmed=regs.filter(r=>r.status==='confirmed'),wait=regs.filter(r=>r.status==='waitlist'),mine=myId(currentEvent.id),mineReg=regs.find(r=>r.id===mine),limit=currentEvent.participant_limit||21,pct=Math.min(100,Math.round(confirmed.length/limit*100));$('detailCard').innerHTML=`<div class="detail-card"><div class="detail-basic"><div class="detail-datebox"><b>${fmtDate(currentEvent.event_date)}</b><span>(${week(currentEvent.event_date)})</span></div><div class="detail-main"><div class="detail-title">${esc(currentEvent.title)}</div><div class="detail-time">◷ ${fmtTime(currentEvent.start_time)} - ${fmtTime(currentEvent.end_time)}</div></div><div class="detail-meta"><span>📍 ${esc(currentEvent.venue||'未提供球館')}</span><span>🏸 ${currentEvent.courts||1} 面場地</span></div></div><div class="attendance-new"><div class="attendance-line"><span>👥 報名人數</span><b>${confirmed.length} / ${limit} 人</b></div><div class="progress"><i style="width:${pct}%"></i></div><div class="attendance-foot"><span>${confirmed.length<limit?`還有 ${limit-confirmed.length} 個名額`: '目前已額滿'}</span><span>${mineReg?'你已報名':'你未報名'}</span></div></div>${currentEvent.notes?`<div class="detail-note-box"><b>備註</b><span>${esc(currentEvent.notes)}</span></div>`:''}<div class="detail-actions"><div class="detail-action-row"><button class="join" onclick="showTab('signupScreen')">＋1 報名</button><button class="action cancel" onclick="cancelMine()">✕ 取消報名</button></div><div class="detail-action-row"><button class="action friend" onclick="joinForOther()">👥 幫朋友報名</button><button class="roster-link" onclick="showTab('rosterScreen')">👥 報名名單 <span>(${confirmed.length})</span></button></div></div>${adminHtml()}</div>`;renderRoster(confirmed,wait,mine)}
 function trashSvg(){return `<svg class="trash-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v6M14 11v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`}
 function adminHtml(){return `<div class="admin"><div class="admin-title">🔒 團主管理</div>${adminMode?`<div class="admin-grid"><button class="admin-btn" onclick="editEvent()">✎ 編輯場次</button><button class="admin-btn red" onclick="deleteEvent()">${trashSvg()} 刪除場次</button><button class="admin-btn coffee" onclick="toggleRoster(true)">👥 修改／刪除報名</button></div>`:`<button class="admin-open" onclick="enterAdmin()">🔐 開啟團主管理</button>`}</div>`}
 function renderRoster(arr,wait,mine){const e=$('rosterCard'),wasOpen=e.dataset.open==='1';let cols=arr.length>=16?'cols3':'cols2',ordered=arr;if(cols==='cols3'){const rows=Math.ceil(arr.length/3),tmp=[];for(let r=0;r<rows;r++)for(let c=0;c<3;c++){const idx=r+c*rows;if(idx<arr.length)tmp.push(arr[idx])}ordered=tmp}e.innerHTML=`<div class="roster"><div class="roster-head">👥 已報名名單 <span style="font-size:16px;margin-left:5px">(${arr.length}人)</span><button class="chev" onclick="toggleRoster()">⌃</button></div><div class="roster-list ${cols}">${ordered.map(r=>`<div class="person"><span class="num">${arr.indexOf(r)+1}.</span><span class="pname">${esc(r.name)}</span><span class="person-actions">${r.id===mine&&!adminMode?`<button class="mini" onclick="editMyReg('${r.id}')">✎</button><button class="mini del" onclick="cancelReg('${r.id}')">${trashSvg()}</button>`:''}${adminMode?`<button class="mini" onclick="editReg('${r.id}')">✎</button><button class="mini del" onclick="adminDeleteReg('${r.id}')">${trashSvg()}</button>`:''}</span></div>`).join('')}</div>${wait.length?`<div class="wait"><b>候補 ${wait.length} 人</b><br>${wait.map((r,i)=>`${i+1}. ${esc(r.name)}${adminMode?`　<button class="mini" onclick="editReg('${r.id}')">✎</button><button class="mini del" onclick="adminDeleteReg('${r.id}')">${trashSvg()}</button>`:''}`).join('<br>')}</div>`:''}</div>`;e.dataset.open=wasOpen?'1':'0';e.classList.toggle('hidden',!wasOpen)}
@@ -587,168 +656,12 @@ function renderSignupScreen(){if(!currentEvent)return;const mine=myId(currentEve
 async function confirmSignup(){const name=($('signupName')?.value||'').trim();if(!name){toast('請輸入姓名');return}if($('rememberName')?.checked)localStorage.setItem('badminton_name',name);else localStorage.removeItem('badminton_name');await doJoin(name)}
 async function doJoin(name){if(!currentEvent)return;const {data:old}=await db.from('registrations').select('*').eq('event_id',currentEvent.id).eq('name',name).maybeSingle();if(old){setMy(currentEvent.id,old.id);toast('你已經報名過了');showTab('detail');return}const {data:all}=await db.from('registrations').select('status').eq('event_id',currentEvent.id);const n=(all||[]).filter(x=>x.status==='confirmed').length;const status=n<(currentEvent.participant_limit||21)?'confirmed':'waitlist';const {data:r,error}=await db.from('registrations').insert({event_id:currentEvent.id,name,status}).select().single();if(error){toast('報名失敗：'+error.message);return}setMy(currentEvent.id,r.id);showTab('successScreen');renderSuccess(status,name)}
 function renderSuccess(status,name){$('successCard').innerHTML=`<div class="success-card"><div class="success-icon">✓</div><div class="success-title">${status==='confirmed'?'報名成功！':'已加入候補'}</div><div class="success-sub">${fmtDate(currentEvent.event_date)} ${esc(currentEvent.title)}<br>${esc(name)}${status==='waitlist'?'<br>目前已額滿，你已排入候補名單。':''}</div><button class="screen-btn secondary" onclick="showTab('rosterScreen')">查看名單</button><button class="screen-btn" onclick="showTab('list')">返回首頁</button></div>`}
-function renderRecords(){const wrap=$('recordsCard');wrap.innerHTML='<div class="records-head">我的紀錄</div><div class="record-tabs"><button class="record-tab on">即將參加</button><button class="record-tab">歷史紀錄</button></div><div id="recordList" class="record-list"><div class="records-empty">讀取中…</div></div>';loadRecords()}
-async function loadRecords(){const {data:events,error}=await db.from('events').select('*').order('event_date',{ascending:true});if(error){$('recordList').innerHTML='<div class="records-empty">目前無法讀取</div>';return}const mine=[];for(const e of (events||[])){const id=myId(e.id);if(!id)continue;const {data:r}=await db.from('registrations').select('*').eq('id',id).maybeSingle();if(r)mine.push({e,r})}const now=new Date();const upcoming=mine.filter(x=>new Date(x.e.event_date+'T'+fmtTime(x.e.end_time))>=now).sort((a,b)=>a.e.event_date.localeCompare(b.e.event_date));const history=mine.filter(x=>!upcoming.includes(x)).sort((a,b)=>b.e.event_date.localeCompare(a.e.event_date));const list=[...upcoming,...history];if(!list.length){$('recordList').innerHTML='<div class="records-empty">目前還沒有報名紀錄</div>';return} $('recordList').innerHTML=list.map(({e,r})=>`<div class="record-item"><div class="record-date"><b>${fmtDate(e.event_date)}</b><span>週${week(e.event_date)}</span></div><div><div class="record-title">${esc(e.title)}</div><div class="record-info">◷ ${fmtTime(e.start_time)} - ${fmtTime(e.end_time)}</div></div><span class="record-status ${r.status==='waitlist'?'wait':''}">${r.status==='waitlist'?'候補中':'已報名'}</span></div>`).join('')}
+function renderRecords(){const wrap=$('recordsCard');wrap.innerHTML='<div id="recordList" class="record-list"><div class="records-empty">讀取中…</div></div>';loadRecords()}
+async function loadRecords(){const {data:events,error}=await db.from('events').select('*').order('event_date',{ascending:true});if(error){$('recordList').innerHTML='<div class="records-empty">目前無法讀取</div>';return}const mine=[];for(const e of (events||[])){const id=myId(e.id);if(!id)continue;const {data:r}=await db.from('registrations').select('*').eq('id',id).maybeSingle();if(r)mine.push({e,r})}const now=new Date();const upcoming=mine.filter(x=>new Date(x.e.event_date+'T'+fmtTime(x.e.end_time))>=now).sort((a,b)=>a.e.event_date.localeCompare(b.e.event_date));const history=mine.filter(x=>!upcoming.includes(x)).sort((a,b)=>b.e.event_date.localeCompare(a.e.event_date));const list=[...upcoming,...history];if(!list.length){$('recordList').innerHTML='<div class="records-empty">目前還沒有報名紀錄</div>';return} $('recordList').innerHTML=list.map(({e,r},i)=>`<div class="record-item"><div class="record-date record-date-${i%4}"><b>${fmtDate(e.event_date)}</b><span>週${week(e.event_date)}</span></div><div><div class="record-title">${esc(e.title)}</div><div class="record-info">◷ ${fmtTime(e.start_time)} - ${fmtTime(e.end_time)}</div></div><span class="record-status ${r.status==='waitlist'?'wait':''}">${r.status==='waitlist'?'候補中':'已報名'}</span></div>`).join('')}
 function subscribeEvent(id){if(realtimeChannel)db.removeChannel(realtimeChannel);realtimeChannel=db.channel('event-'+id).on('postgres_changes',{event:'*',schema:'public',table:'registrations',filter:'event_id=eq.'+id},()=>renderDetail()).on('postgres_changes',{event:'*',schema:'public',table:'events',filter:'id=eq.'+id},()=>refresh()).subscribe()}
 function setupRealtime(){db.channel('events-list').on('postgres_changes',{event:'*',schema:'public',table:'events'},()=>loadEvents()).subscribe()}
 async function refresh(){if(currentEvent){const {data}=await db.from('events').select('*').eq('id',currentEvent.id).maybeSingle();if(data){currentEvent=data;renderDetail()}else{currentEvent=null;showTab('list')}}else loadEvents()}
 document.querySelectorAll('.bn').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
 $('newBtn').onclick=async()=>{if(await requireAdmin())showTab('create')};$('createBtn').onclick=createEvent;$('backTop').onclick=()=>{currentEvent=null;showTab('list')};$('backBtn')?.addEventListener('click',()=>{currentEvent=null;showTab('list')});$('rosterBack').onclick=()=>showTab('list');$('signupBack').onclick=()=>showTab('detail');window.addEventListener('hashchange',()=>{const id=location.hash.startsWith('#event=')?location.hash.slice(7):'';if(id)openEvent(id)});setInterval(refresh,3000);setupRealtime();const now=new Date();$('date').value=new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,10);const hash=location.hash.startsWith('#event=')?location.hash.slice(7):'';if(hash)openEvent(hash);else loadEvents();
-
-/* ===== 2026-09-16：四個版面確認後的最終調整 ===== */
-<style id="confirmed-pages-final">
-/* 共用：全新羽球／球拍圖案位置，避免文字重疊 */
-.header .racketSvg{right:5%!important;left:auto!important;top:22%!important;width:clamp(52px,16vw,68px)!important;height:auto!important;transform:rotate(8deg)!important}
-.header .shuttleSvg{right:1.5%!important;left:auto!important;top:58%!important;width:clamp(30px,8vw,36px)!important;height:auto!important;transform:rotate(-8deg)!important}
-
-/* ① 場次首頁 */
-body:not(.subpage) .header{height:145px!important;min-height:145px!important;max-height:145px!important}
-body:not(.subpage) .header .hero-copy{left:7%!important;top:25%!important;width:62%!important;text-align:center!important}
-body:not(.subpage) .header .play-text{font-size:clamp(20px,5vw,24px)!important;margin:0 0 6px!important;transform:rotate(-3deg)!important}
-body:not(.subpage) .header .logo-title{font-size:clamp(38px,10.5vw,44px)!important;letter-spacing:-1px!important;text-align:center!important}
-body:not(.subpage) .header .logo-title span{display:none!important}
-body:not(.subpage) .header .logo-title b{font-size:1em!important;color:#fff!important;text-shadow:1px 3px 0 rgba(17,74,130,.16)!important;margin:0!important}
-body:not(.subpage) .header .logo-title b::after{content:"活動報名";font-size:1em!important}
-body:not(.subpage) .header .logo-title b{font-size:0!important}
-body:not(.subpage) .header .logo-title b::after{font-size:clamp(32px,8.4vw,38px)!important}
-body:not(.subpage) .header .sub{display:none!important}
-body:not(.subpage) .header .racketSvg{right:5%!important;top:23%!important}
-body:not(.subpage) .header .shuttleSvg{right:1%!important;top:61%!important}
-body:not(.subpage) .event-card{grid-template-columns:74px minmax(0,1fr) 62px!important;gap:8px!important;min-height:112px!important;padding:9px!important}
-body:not(.subpage) .datebox{width:74px!important;height:94px!important}
-body:not(.subpage) .date{font-size:clamp(20px,5.8vw,23px)!important;white-space:nowrap!important}
-body:not(.subpage) .event-title{font-size:18px!important;color:#173d78!important;margin-left:0!important}
-body:not(.subpage) .home-time{font-size:15px!important;color:#3d9fc9!important;font-weight:850!important}
-body:not(.subpage) .home-count{font-size:13px!important;color:#71818d!important}
-body:not(.subpage) .event-card .view{width:62px!important;height:58px!important;padding:0!important;border-radius:13px!important;background:#a9dff3!important;color:#246a8d!important;font-size:14px!important;line-height:1.15!important;white-space:normal!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important}
-body:not(.subpage) .event-card .view::first-line{ }
-
-/* ② 我的紀錄 */
-body.subpage.records-page .header{height:92px!important;min-height:92px!important;max-height:92px!important}
-body.subpage.records-page .header .detail-brand{font-size:26px!important}
-body.subpage.records-page .header .racketSvg,body.subpage.records-page .header .shuttleSvg{display:block!important;z-index:5!important}
-body.subpage.records-page .header .racketSvg{right:7%!important;top:20%!important;width:48px!important}
-body.subpage.records-page .header .shuttleSvg{right:1%!important;top:55%!important;width:29px!important}
-.records-page .records-head{display:none!important}
-.records-page .record-tabs{display:none!important}
-.records-page .record-list{padding:0 6px!important;box-shadow:none!important;border-radius:0!important}
-.records-page .record-item{grid-template-columns:66px minmax(0,1fr) auto!important;gap:12px!important;padding:17px 4px!important;min-height:92px!important}
-.records-page .record-date{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;align-self:center!important;text-align:left!important}
-.records-page .record-date b{font-size:22px!important;color:#8fcfe9!important;line-height:1.1!important}
-.records-page .record-date span{font-size:13px!important;color:#9aa9b2!important}
-.records-page .record-item:nth-child(2n) .record-date b{color:#e8aeb9!important}
-.records-page .record-item:nth-child(3n) .record-date b{color:#9bcbb7!important}
-.records-page .record-item:nth-child(4n) .record-date b{color:#e0c28d!important}
-.records-page .record-title{font-size:17px!important;color:#244e77!important}
-.records-page .record-info{font-size:14px!important;color:#54a9ca!important;margin-top:7px!important}
-.records-page .record-status{font-size:12px!important;padding:5px 8px!important}
-.records-page .bottom-nav{margin-top:0!important}
-
-/* ③ 場次詳細頁 */
-body.subpage.detail-page .header{height:92px!important;min-height:92px!important;max-height:92px!important}
-body.subpage.detail-page .header .detail-brand{font-size:27px!important}
-body.subpage.detail-page .header .racketSvg,body.subpage.detail-page .header .shuttleSvg{display:block!important;z-index:5!important}
-body.subpage.detail-page .header .racketSvg{right:7%!important;top:18%!important;width:50px!important}
-body.subpage.detail-page .header .shuttleSvg{right:1%!important;top:53%!important;width:30px!important}
-.detail-page .detail-card{padding:15px 14px!important}
-.detail-page .detail-basic{display:grid!important;grid-template-columns:88px minmax(0,1fr)!important;grid-template-rows:auto auto!important;gap:2px 12px!important;align-items:center!important;padding:0 0 11px!important}
-.detail-page .detail-datebox{width:auto!important;height:auto!important;background:transparent!important;border-radius:0!important;align-items:flex-start!important;justify-content:center!important;grid-row:1 / span 2!important;padding-left:2px!important}
-.detail-page .detail-datebox b{font-size:24px!important;color:#8fcfe9!important;line-height:1.1!important}
-.detail-page .detail-datebox span{font-size:16px!important;color:#9aa9b2!important;margin-top:5px!important}
-.detail-page .detail-main{padding-top:0!important}
-.detail-page .detail-title{font-size:24px!important;color:#173d78!important;margin:0 0 7px!important}
-.detail-page .detail-time{font-size:20px!important;color:#e0a4b0!important;font-weight:900!important}
-.detail-page .detail-meta{grid-column:1 / -1!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important;margin-top:10px!important;padding-top:9px!important;border-top:0!important;font-size:15px!important;color:#425b70!important}
-.detail-page .detail-meta span{overflow:visible!important;text-overflow:clip!important}
-.detail-page .attendance-line b{color:#ee6077!important}
-.detail-page .join{height:52px!important;font-size:21px!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:center!important;margin-top:0!important}
-.detail-page .actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;padding:8px 0 0!important}
-.detail-page .actions .action{height:46px!important;padding:0 4px!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:14px!important}
-.detail-page .actions .friend{grid-column:1!important;grid-row:2!important}
-.detail-page .actions .cancel{grid-column:2!important;grid-row:1!important}
-.detail-page .roster-link{grid-column:2!important;grid-row:2!important;width:100%!important;height:46px!important;padding:0 8px!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;font-size:14px!important}
-.detail-page .roster-link .arrow{display:none!important}
-.detail-page .detail-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
-.detail-page .detail-actions .join{grid-column:1!important;grid-row:1!important}
-.detail-page .detail-actions .actions{grid-column:1 / -1!important;grid-row:2!important}
-.detail-page .detail-actions .roster-link{grid-column:2!important;grid-row:2!important}
-.detail-page .detail-actions .actions .friend{grid-column:1!important;grid-row:1!important}
-.detail-page .detail-actions .actions .cancel{grid-column:2!important;grid-row:1!important}
-.detail-page .detail-actions .actions{display:contents!important}
-.detail-page .detail-actions .join{grid-column:1!important;grid-row:1!important}
-.detail-page .detail-actions .action.friend{grid-column:1!important;grid-row:2!important}
-.detail-page .detail-actions .action.cancel{grid-column:2!important;grid-row:1!important}
-.detail-page .detail-actions .roster-link{grid-column:2!important;grid-row:2!important}
-.detail-page .admin{margin-top:10px!important}
-.detail-page .admin-btn,.detail-page .admin-btn.red,.detail-page .admin-btn.coffee{background:#eef1f3!important;border:1px solid #d9dee2!important;color:#222!important}
-
-/* ④ 報名頁 */
-body.subpage.signup-page .header{height:92px!important;min-height:92px!important;max-height:92px!important}
-body.subpage.signup-page .header .detail-brand{display:none!important}
-body.subpage.signup-page .header .racketSvg,body.subpage.signup-page .header .shuttleSvg{display:block!important;z-index:5!important}
-body.subpage.signup-page .header .racketSvg{right:30%!important;top:18%!important;width:50px!important}
-body.subpage.signup-page .header .shuttleSvg{right:18%!important;top:53%!important;width:30px!important}
-.signup-page #signupCard .signup-card{padding:15px!important}
-.signup-page #signupCard .section-title{display:none!important}
-.signup-page #signupCard .detail-card{box-shadow:none!important;border:0!important;padding:5px 0 12px!important}
-.signup-page #signupCard .detail-title{font-size:24px!important;color:#173d78!important}
-.signup-page #signupCard .detail-date{font-size:22px!important;color:#8fcfe9!important}
-.signup-page #signupCard .detail-time{font-size:20px!important;color:#e0a4b0!important;font-weight:900!important}
-.signup-page #signupCard .detail-venue{font-size:16px!important;color:#425b70!important;margin-top:7px!important}
-.signup-page #signupCard .screen-btn{background:#b7dfc7!important;color:#276d4c!important;margin-top:13px!important}
-</style>
-
-
-<script>
-/* ===== confirmed page behavior ===== */
-(function(){
-  const oldShowTab=showTab;
-  showTab=function(t){
-    oldShowTab(t);
-    document.body.classList.remove('records-page','detail-page','signup-page');
-    if(t==='recordsScreen')document.body.classList.add('records-page');
-    if(t==='detail')document.body.classList.add('detail-page');
-    if(t==='signupScreen')document.body.classList.add('signup-page');
-  };
-
-  /* 全新圖案：不同於原先版本的圓框球拍／羽球組合 */
-  const racket=document.querySelector('.racketSvg');
-  const shuttle=document.querySelector('.shuttleSvg');
-  if(racket)racket.innerHTML='<path d="M35 4c13 0 23 10 23 23S48 51 35 51 12 40 12 27 22 4 35 4Z" fill="none" stroke="#ffffff" stroke-width="4"/><path d="M19 13l32 28M12 27h46M20 42l29-30" stroke="#b9e8f7" stroke-width="2.2"/><path d="M34 50L23 96" stroke="#245184" stroke-width="7" stroke-linecap="round"/><path d="M21 96h11" stroke="#f3a7b5" stroke-width="7" stroke-linecap="round"/>';
-  if(shuttle)shuttle.innerHTML='<path d="M7 7L23 31L41 8M12 9l9 26M23 31l-1-27M41 8L29 35" fill="none" stroke="#ffffff" stroke-width="2.6"/><path d="M13 35Q24 43 34 35L31 45Q24 51 17 45Z" fill="#ffffff"/><path d="M17 45Q24 49 31 45" fill="none" stroke="#8fcfe9" stroke-width="2.5"/>';
-
-  /* 首頁卡片按鈕兩行 */
-  const oldLoadEvents=loadEvents;
-  loadEvents=async function(){
-    await oldLoadEvents();
-    document.querySelectorAll('body:not(.subpage) .event-card .view').forEach(b=>{b.innerHTML='查看<br>報名';});
-  };
-
-  /* 場次詳細頁：重新排版與按鈕順序 */
-  renderDetail=async function(){
-    if(!currentEvent)return;
-    const {data,error}=await db.from('registrations').select('*').eq('event_id',currentEvent.id).order('registered_at',{ascending:true});
-    if(error){toast('讀取報名資料失敗');return}
-    const regs=data||[],confirmed=regs.filter(r=>r.status==='confirmed'),wait=regs.filter(r=>r.status==='waitlist'),mine=myId(currentEvent.id),mineReg=regs.find(r=>r.id===mine),limit=currentEvent.participant_limit||21,pct=Math.min(100,Math.round(confirmed.length/limit*100));
-    $('detailCard').innerHTML=`<div class="detail-card"><div class="detail-basic"><div class="detail-datebox"><b>${fmtDate(currentEvent.event_date)}</b><span>(${week(currentEvent.event_date)})</span></div><div class="detail-main"><div class="detail-title">${esc(currentEvent.title)}</div><div class="detail-time">${fmtTime(currentEvent.start_time)}－${fmtTime(currentEvent.end_time)}</div></div><div class="detail-meta"><span>📍 ${esc(currentEvent.venue||'未提供球館')}</span><span>🏸 ${currentEvent.courts||1} 面場地</span></div></div><div class="attendance-new"><div class="attendance-line"><span>👥 報名人數</span><b>${confirmed.length} / ${limit} 人</b></div><div class="progress"><i style="width:${pct}%"></i></div><div class="attendance-foot"><span>${confirmed.length<limit?`還有 ${limit-confirmed.length} 個名額`:'目前已額滿'}</span><span>${mineReg?'你已報名':'你未報名'}</span></div></div>${currentEvent.notes?`<div class="detail-note-box"><b>備註</b><span>${esc(currentEvent.notes)}</span></div>`:''}<div class="detail-actions"><button class="join" onclick="showTab('signupScreen')">＋1 報名</button><button class="action cancel" onclick="cancelMine()">✕ 取消報名</button><button class="action friend" onclick="joinForOther()">👥 幫朋友報名</button><button class="roster-link" onclick="showTab('rosterScreen')">👥 報名名單 <span>(${confirmed.length})</span></button></div>${adminHtml()}</div>`;
-    renderRoster(confirmed,wait,mine);
-  };
-
-  /* 報名頁：維持原有姓名／記住姓名／確認流程，只整理資訊區 */
-  renderSignupScreen=function(){
-    if(!currentEvent)return;
-    const name=localStorage.getItem('badminton_name')||'';
-    $('signupCard').innerHTML='<div class="signup-card"><div class="section-title">我要報名</div><div class="detail-card" style="box-shadow:none;padding:8px 0"><div class="detail-title">'+esc(currentEvent.title)+'</div><div class="detail-date">'+fmtDate(currentEvent.event_date)+' ('+week(currentEvent.event_date)+')</div><div class="detail-time">'+fmtTime(currentEvent.start_time)+' - '+fmtTime(currentEvent.end_time)+'</div><div class="detail-venue">📍 '+esc(currentEvent.venue||'未提供球館')+'</div></div><label>姓名</label><input id="signupName" value="'+esc(name)+'" placeholder="請輸入姓名"><label style="display:flex;align-items:center;gap:8px;margin-top:13px;color:#24435f"><input id="rememberName" type="checkbox" checked style="width:20px;height:20px">記住我的姓名</label><button class="screen-btn" onclick="confirmSignup()">確認報名</button></div>';
-  };
-
-  /* 我的紀錄：移除重複標題與分頁 */
-  renderRecords=function(){
-    const wrap=$('recordsCard');
-    wrap.innerHTML='<div id="recordList" class="record-list"><div class="records-empty">讀取中…</div></div>';
-    loadRecords();
-  };
-})();
-</script>
-
 </script>
 </body></html>
