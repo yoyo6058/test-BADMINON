@@ -440,9 +440,8 @@ body.subpage .header{height:178px!important;border-radius:0 0 28px 28px!importan
 <div class="app">
 <header class="header">
   <div id="backTop" class="backTop">‹</div>
-  <svg class="racketSvg" viewBox="0 0 70 110" aria-hidden="true"><ellipse cx="31" cy="29" rx="22" ry="29" fill="none" stroke="#1556a7" stroke-width="6"/><path d="M18 8L44 51M9 20L52 36M10 40L47 16M25 2L54 43" stroke="#9bdcf5" stroke-width="2"/><path d="M30 56L18 103" stroke="#19376d" stroke-width="8" stroke-linecap="round"/><path d="M20 98L16 108" stroke="#302b55" stroke-width="7" stroke-linecap="round"/></svg>
-  <svg class="shuttleSvg" viewBox="0 0 48 52" aria-hidden="true"><path d="M8 8L25 29L39 10" fill="none" stroke="#fff" stroke-width="3"/><path d="M8 8L14 34M25 29L22 3M39 10L30 36" stroke="#fff" stroke-width="3"/><path d="M14 34Q24 44 34 36L29 46Q23 51 17 46Z" fill="#fff"/><ellipse cx="23" cy="44" rx="9" ry="4" fill="#ef6680"/></svg>
-  <div class="hamb" aria-hidden="true"></div>
+  <svg class="racketSvg" viewBox="0 0 80 120" aria-hidden="true"><ellipse cx="34" cy="31" rx="25" ry="30" fill="#ffffff" fill-opacity=".16" stroke="#18558f" stroke-width="5"/><ellipse cx="34" cy="31" rx="18" ry="23" fill="none" stroke="#8fe0f5" stroke-width="2"/><path d="M18 10L50 51M10 27L57 37M16 48L51 15M34 2L45 57" stroke="#ffffff" stroke-width="2" opacity=".9"/><path d="M35 58L24 104" stroke="#18477a" stroke-width="8" stroke-linecap="round"/><path d="M24 100L20 114" stroke="#f4d36a" stroke-width="7" stroke-linecap="round"/></svg>
+  <svg class="shuttleSvg" viewBox="0 0 56 64" aria-hidden="true"><path d="M10 8L28 33L46 8M10 8L17 37M28 33L28 5M46 8L38 37" fill="none" stroke="#fff" stroke-width="3"/><path d="M16 36Q28 47 40 36L36 51Q28 59 20 51Z" fill="#fff"/><ellipse cx="28" cy="51" rx="10" ry="5" fill="#f2cf65"/></svg>
   <div class="hero-copy">
     <div class="play-text">Let's Play</div>
     <div class="logo-title"><span>羽球</span><b>＋1</b></div>
@@ -502,7 +501,7 @@ async function confirmSignup(){const name=($('signupName')?.value||'').trim();if
 async function doJoin(name){if(!currentEvent)return;const {data:old}=await db.from('registrations').select('*').eq('event_id',currentEvent.id).eq('name',name).maybeSingle();if(old){setMy(currentEvent.id,old.id);toast('你已經報名過了');showTab('detail');return}const {data:all}=await db.from('registrations').select('status').eq('event_id',currentEvent.id);const n=(all||[]).filter(x=>x.status==='confirmed').length;const status=n<(currentEvent.participant_limit||21)?'confirmed':'waitlist';const {data:r,error}=await db.from('registrations').insert({event_id:currentEvent.id,name,status}).select().single();if(error){toast('報名失敗：'+error.message);return}setMy(currentEvent.id,r.id);showTab('successScreen');renderSuccess(status,name)}
 function renderSuccess(status,name){$('successCard').innerHTML=`<div class="success-card"><div class="success-icon">✓</div><div class="success-title">${status==='confirmed'?'報名成功！':'已加入候補'}</div><div class="success-sub">${fmtDate(currentEvent.event_date)} ${esc(currentEvent.title)}<br>${esc(name)}${status==='confirmed'?'':'<br>目前已額滿，你已排入候補名單。'}</div><button class="screen-btn secondary" onclick="showTab('rosterScreen')">查看名單</button><button class="screen-btn" onclick="showTab('list')">返回首頁</button></div>`}
 function renderRecords(){const wrap=$('recordsCard');wrap.innerHTML='<div class="records-head">我的紀錄</div><div class="record-tabs"><button class="record-tab on">即將參加</button><button class="record-tab">歷史紀錄</button></div><div id="recordList" class="record-list"><div class="records-empty">讀取中…</div></div>';loadRecords()}
-async function loadRecords(){const {data:events,error}=await db.from('events').select('*').order('event_date',{ascending:true});if(error){$('recordList').innerHTML='<div class="records-empty">目前無法讀取</div>';return}const mine=[];for(const e of (events||[])){const id=myId(e.id);if(!id)continue;const {data:r}=await db.from('registrations').select('*').eq('id',id).maybeSingle();if(r)mine.push({e,r})}const now=new Date();const upcoming=mine.filter(x=>new Date(x.e.event_date+'T'+fmtTime(x.e.end_time))>=now).sort((a,b)=>a.e.event_date.localeCompare(b.e.event_date));const history=mine.filter(x=>!upcoming.includes(x)).sort((a,b)=>b.e.event_date.localeCompare(a.e.event_date));const list=[...upcoming,...history];if(!list.length){$('recordList').innerHTML='<div class="records-empty">目前還沒有報名紀錄</div>';return} $('recordList').innerHTML=list.map(({e,r})=>`<div class="record-item"><div class="record-date"><b>${fmtDate(e.event_date)}</b><span>週${week(e.event_date)}</span></div><div><div class="record-title">${esc(e.title)}</div><div class="record-info">◷ ${fmtTime(e.start_time)} - ${fmtTime(e.end_time)}<br>⌖ ${esc(e.venue||'未提供球館')} · ${e.courts||1} 面</div></div><span class="record-status ${r.status==='waitlist'?'wait':''}">${r.status==='waitlist'?'候補中':'已報名'}</span></div>`).join('')}
+async function loadRecords(){const {data:events,error}=await db.from('events').select('*').order('event_date',{ascending:true});if(error){$('recordList').innerHTML='<div class="records-empty">目前無法讀取</div>';return}const mine=[];for(const e of (events||[])){const id=myId(e.id);if(!id)continue;const {data:r}=await db.from('registrations').select('*').eq('id',id).maybeSingle();if(r)mine.push({e,r})}const now=new Date();const upcoming=mine.filter(x=>new Date(x.e.event_date+'T'+fmtTime(x.e.end_time))>=now).sort((a,b)=>a.e.event_date.localeCompare(b.e.event_date));const history=mine.filter(x=>!upcoming.includes(x)).sort((a,b)=>b.e.event_date.localeCompare(a.e.event_date));const list=[...upcoming,...history];if(!list.length){$('recordList').innerHTML='<div class="records-empty">目前還沒有報名紀錄</div>';return} $('recordList').innerHTML=list.map(({e,r})=>`<div class="record-item"><div class="record-date"><b>${fmtDate(e.event_date)}</b><span>週${week(e.event_date)}</span></div><div><div class="record-title">${esc(e.title)}</div><div class="record-info">◷ ${fmtTime(e.start_time)} - ${fmtTime(e.end_time)}</div></div><span class="record-status ${r.status==='waitlist'?'wait':''}">${r.status==='waitlist'?'候補中':'已報名'}</span></div>`).join('')}
 function subscribeEvent(id){if(realtimeChannel)db.removeChannel(realtimeChannel);realtimeChannel=db.channel('event-'+id).on('postgres_changes',{event:'*',schema:'public',table:'registrations',filter:'event_id=eq.'+id},()=>renderDetail()).on('postgres_changes',{event:'*',schema:'public',table:'events',filter:'id=eq.'+id},()=>refresh()).subscribe()}
 function setupRealtime(){db.channel('events-list').on('postgres_changes',{event:'*',schema:'public',table:'events'},()=>loadEvents()).subscribe()}
 async function refresh(){if(currentEvent){const {data}=await db.from('events').select('*').eq('id',currentEvent.id).maybeSingle();if(data){currentEvent=data;renderDetail()}else{currentEvent=null;showTab('list')}}else loadEvents()}
@@ -604,80 +603,107 @@ body.subpage .header{height:178px!important;border-radius:0 0 28px 28px!importan
 }
 </style>
 <style>
-/* V10.5 FINAL MOBILE PASS — based strictly on V10.4 9:16 */
+/* V10.5 FINAL CORRECTED — based strictly on V10.4 9:16 and the requested screen-by-screen fixes */
 html,body{width:100%;max-width:100%;overflow-x:hidden!important}
 body{margin:0!important;background:#f6fbfe!important}
 .app{width:100%!important;max-width:393px!important;margin:0 auto!important;min-height:100dvh!important;box-sizing:border-box!important;overflow-x:hidden!important}
-.header{width:100%!important;box-sizing:border-box!important;overflow:hidden!important}
-/* Home brand: compact, separated, no hamburger */
-body:not(.subpage) .header{height:170px!important;border-radius:0 0 28px 28px!important}
-body:not(.subpage) .header .hamb{display:none!important}
-body:not(.subpage) .header .hero-copy{left:18px!important;top:25px!important;width:240px!important;z-index:5!important}
-body:not(.subpage) .header .play-text{font-family:"Segoe Print","Bradley Hand","Comic Sans MS",cursive!important;font-size:25px!important;line-height:1!important;margin:0 0 5px 9px!important;transform:rotate(-4deg)!important}
-body:not(.subpage) .header .logo-title{font-size:43px!important;line-height:.95!important;letter-spacing:-2px!important;white-space:nowrap!important}
-body:not(.subpage) .header .logo-title b{font-size:51px!important;margin-left:2px!important;color:#ffe13a!important}
-body:not(.subpage) .header .sub{position:static!important;margin:8px 0 0 3px!important;font-size:13px!important;line-height:1.2!important;white-space:nowrap!important}
-body:not(.subpage) .header .racketSvg{right:31px!important;top:39px!important;width:58px!important;height:90px!important;z-index:3!important}
-body:not(.subpage) .header .shuttleSvg{right:8px!important;top:91px!important;width:31px!important;height:35px!important;z-index:3!important}
-/* Home cards: no overflow, no extra fields */
+.header{width:100%!important;box-sizing:border-box!important;overflow:hidden!important;position:relative!important}
+/* Shared branding: identical visual language on every page */
+.header .hero-copy{display:block!important;position:absolute!important;z-index:5!important;left:18px!important;top:23px!important;width:245px!important;text-align:left!important}
+.header .play-text{font-family:"Segoe Print","Bradley Hand","Comic Sans MS",cursive!important;font-size:25px!important;font-weight:500!important;line-height:1!important;transform:rotate(-4deg)!important;margin:0 0 5px 8px!important;color:#fff!important}
+.header .logo-title{font-family:"DFKai-SB","BiauKai","KaiTi","Noto Sans TC",sans-serif!important;font-size:43px!important;font-weight:900!important;line-height:.98!important;letter-spacing:-2px!important;white-space:nowrap!important;color:#fff!important;text-shadow:2px 3px 0 rgba(20,91,146,.18)!important}
+.header .logo-title b{font-size:50px!important;font-weight:900!important;color:#ffe13a!important;margin-left:2px!important;text-shadow:2px 3px 0 rgba(132,105,0,.18)!important}
+.header .sub{position:static!important;margin:8px 0 0 3px!important;font-size:13px!important;font-weight:700!important;line-height:1.2!important;white-space:nowrap!important;color:#fff!important}
+.header .detail-brand{display:none!important}
+.header .racketSvg{position:absolute!important;z-index:3!important;display:block!important;left:auto!important;right:30px!important;top:35px!important;width:59px!important;height:88px!important;transform:rotate(10deg)!important}
+.header .shuttleSvg{position:absolute!important;z-index:3!important;display:block!important;left:auto!important;right:8px!important;top:91px!important;width:31px!important;height:36px!important;transform:rotate(8deg)!important}
+.header .hamb{display:none!important}
+/* Home header */
+body:not(.subpage) .header{height:166px!important;border-radius:0 0 28px 28px!important}
 body:not(.subpage) .content{padding:9px 12px 126px!important;box-sizing:border-box!important}
-body:not(.subpage) .event-card{display:grid!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;grid-template-columns:61px minmax(0,1fr) 76px!important;gap:7px!important;padding:9px!important;min-height:110px!important;overflow:hidden!important}
-body:not(.subpage) .datebox{width:61px!important;height:92px!important;box-sizing:border-box!important}
-body:not(.subpage) .date{font-size:20px!important}
-body:not(.subpage) .weekday{font-size:14px!important}
-body:not(.subpage) .event-title{font-size:17px!important;line-height:1.2!important;margin:1px 0 6px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-body:not(.subpage) .event-line{font-size:12.5px!important;line-height:1.48!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-body:not(.subpage) .home-time{font-size:16px!important;font-weight:900!important}
+/* Home event card */
+body:not(.subpage) .event-card{display:grid!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;grid-template-columns:61px minmax(0,1fr) 78px!important;gap:7px!important;padding:9px!important;min-height:110px!important;overflow:hidden!important}
+body:not(.subpage) .datebox{width:61px!important;height:92px!important;min-height:92px!important;box-sizing:border-box!important;overflow:hidden!important;display:flex!important;align-items:center!important;justify-content:center!important}
+body:not(.subpage) .date{font-size:20px!important;line-height:1.05!important;white-space:nowrap!important}
+body:not(.subpage) .weekday{font-size:14px!important;line-height:1.1!important;margin-top:5px!important;white-space:nowrap!important}
+body:not(.subpage) .event-title{font-size:18px!important;line-height:1.2!important;margin:2px 0 7px 3px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+body:not(.subpage) .event-line{font-size:13px!important;line-height:1.5!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+body:not(.subpage) .home-time{font-size:17px!important;font-weight:900!important}
 body:not(.subpage) .event-note,body:not(.subpage) .latest{display:none!important}
-body:not(.subpage) .event-card .view{width:76px!important;max-width:76px!important;height:40px!important;box-sizing:border-box!important;padding:0 2px!important;border:0!important;border-radius:13px!important;background:#a7d8ea!important;color:#2c6783!important;font-size:12px!important;font-weight:900!important;white-space:nowrap!important;overflow:hidden!important}
-/* Create button */
-body:not(.subpage) .nav{position:fixed!important;left:50%!important;bottom:70px!important;transform:translateX(-50%)!important;width:min(393px,100%)!important;box-sizing:border-box!important;padding:7px 14px 6px!important;z-index:49!important}
-body:not(.subpage) .nav .create-top{font-size:16px!important;padding:8px 10px!important;border-radius:12px!important;background:#72d3a3!important;box-shadow:none!important}
-/* Bottom nav exactly 50/50 */
+body:not(.subpage) .event-card .view{width:78px!important;max-width:78px!important;height:40px!important;box-sizing:border-box!important;padding:0 2px!important;border:0!important;border-radius:13px!important;background:#a7d8ea!important;color:#2f6d87!important;font-size:12px!important;font-weight:900!important;white-space:nowrap!important;overflow:hidden!important}
+/* Create button and bottom nav */
+body:not(.subpage) .nav{position:fixed!important;left:50%!important;bottom:70px!important;transform:translateX(-50%)!important;width:min(393px,100%)!important;box-sizing:border-box!important;padding:6px 14px!important;z-index:49!important}
+body:not(.subpage) .nav .create-top{font-size:16px!important;padding:8px 10px!important;border-radius:12px!important;background:#72cfa0!important;box-shadow:none!important}
 .bottom-nav{width:min(393px,100%)!important;height:70px!important;grid-template-columns:1fr 1fr!important;box-sizing:border-box!important}
 .bottom-nav .bn{width:100%!important;min-width:0!important}
-/* Every subpage uses the same compact brand area as home */
-body.subpage .header{height:170px!important;border-radius:0 0 28px 28px!important}
-.subpage .header .hamb{display:none!important}
-.subpage .header .backTop{display:block!important;left:14px!important;top:50px!important;font-size:34px!important;line-height:1!important;color:#fff!important;z-index:10!important}
-.subpage .header .detail-brand{display:block!important;left:18px!important;top:28px!important;transform:none!important;width:235px!important;height:105px!important;font-size:0!important;white-space:normal!important;text-align:left!important;z-index:5!important}
-.subpage .header .detail-brand:before{content:"Let's Play";display:block;font-family:"Segoe Print","Bradley Hand","Comic Sans MS",cursive;font-size:25px!important;line-height:1;color:#fff;transform:rotate(-4deg);margin-left:10px;margin-bottom:6px}
-.subpage .header .detail-brand:after{content:"羽球  +1";display:block;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;font-size:43px!important;font-weight:1000;line-height:.95;letter-spacing:-2px;color:#fff;text-shadow:2px 3px 0 rgba(20,91,146,.2)}
-.subpage .header .detail-brand{color:transparent!important}
-.subpage .header .racketSvg{display:block!important;left:auto!important;right:31px!important;top:39px!important;width:58px!important;height:90px!important;z-index:3!important}
-.subpage .header .shuttleSvg{display:block!important;left:auto!important;right:8px!important;top:91px!important;width:31px!important;height:35px!important;z-index:3!important}
-.subpage .header .sub,.subpage .header .slogan{display:none!important}
-/* Remove textual back rows on roster/success/signup */
-#rosterScreen>.roster-page>.back-row,#signupScreen>.back-row,#successScreen>.back-row{display:none!important}
-/* Detail */
+/* All inner pages use the SAME branding, compactly */
+body.subpage .header{height:150px!important;border-radius:0 0 28px 28px!important}
+body.subpage .header .hero-copy{display:block!important;left:56px!important;top:22px!important;width:235px!important}
+body.subpage .header .play-text{font-size:23px!important;margin-left:5px!important}
+body.subpage .header .logo-title{font-size:38px!important;letter-spacing:-2px!important}
+body.subpage .header .logo-title b{font-size:45px!important}
+body.subpage .header .sub{font-size:12px!important;margin-top:7px!important}
+body.subpage .header .backTop{display:block!important;left:12px!important;top:50px!important;font-size:34px!important;line-height:1!important;color:#fff!important;z-index:10!important}
+body.subpage .header .racketSvg{display:block!important;right:28px!important;top:38px!important;width:54px!important;height:82px!important}
+body.subpage .header .shuttleSvg{display:block!important;right:6px!important;top:90px!important;width:29px!important;height:34px!important}
+body.subpage .header .hamb,.subpage .header .detail-brand,.subpage .header .slogan{display:none!important}
+/* Remove duplicate top return rows only where requested */
+#rosterScreen>.roster-page>.back-row,#successScreen>.back-row{display:none!important}
+/* Detail: date left, title/time/meta right; attendance is its own section */
 .subpage .content{padding:10px 12px 100px!important;box-sizing:border-box!important}
 .detail-card{width:100%!important;box-sizing:border-box!important;padding:14px!important;border-radius:20px!important;overflow:hidden!important}
-.detail-basic{grid-template-columns:68px minmax(0,1fr)!important;gap:10px!important}
-.detail-datebox{width:68px!important;height:80px!important}
-.detail-datebox b{font-size:22px!important}.detail-datebox span{font-size:14px!important}
+.detail-basic{display:grid!important;grid-template-columns:68px minmax(0,1fr)!important;gap:10px!important;align-items:start!important}
+.detail-datebox{width:68px!important;height:80px!important;box-sizing:border-box!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;overflow:hidden!important}
+.detail-datebox b{font-size:22px!important;white-space:nowrap!important}.detail-datebox span{font-size:14px!important;white-space:nowrap!important}
+.detail-main{min-width:0!important;padding-top:2px!important}
 .detail-title{font-size:22px!important;line-height:1.2!important;margin:0 0 5px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
 .detail-time{font-size:18px!important;white-space:nowrap!important}
-.detail-meta{font-size:13px!important;line-height:1.4!important}
-.attendance-new{padding:9px 1px 7px!important}.attendance-line{font-size:15px!important}.attendance-line b{font-size:17px!important}
+.detail-meta{font-size:13px!important;line-height:1.5!important;display:flex!important;flex-direction:column!important;gap:1px!important}
+.attendance-new{width:100%!important;box-sizing:border-box!important;padding:10px 1px 8px!important;margin-top:5px!important;border-top:1px solid #e4edf2!important}
+.attendance-line{font-size:15px!important}.attendance-line b{font-size:17px!important}
 .detail-note-box{width:100%!important;box-sizing:border-box!important;margin:8px 0 9px!important;padding:9px 10px!important;font-size:13px!important;line-height:1.45!important}
-.join{width:100%!important;height:52px!important;border-radius:14px!important;background:#72d3a3!important;font-size:21px!important;box-shadow:none!important}
-.actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;padding:8px 0!important}
+.join{width:100%!important;height:52px!important;border-radius:14px!important;background:#72cfa0!important;font-size:21px!important;box-shadow:none!important}
+.actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;padding:8px 0!important;background:transparent!important}
 .actions .action{width:100%!important;height:44px!important;box-sizing:border-box!important;padding:0 3px!important;font-size:13px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
 .roster-link{width:100%!important;height:46px!important;box-sizing:border-box!important;padding:0 11px!important;font-size:15px!important;white-space:nowrap!important}
-.roster-link .arrow{line-height:43px!important}
-/* Admin: one pale-blue visual family, no close button */
+/* Admin: one pale-blue family */
 .admin{width:100%!important;box-sizing:border-box!important;margin-top:10px!important;padding:11px!important;background:#eef8fc!important;border:1px solid #d4eaf3!important;border-radius:15px!important;box-shadow:none!important}
 .admin-title{font-size:17px!important;color:#2f6f89!important;margin:0 0 8px!important}
 .admin-open{background:#e3f4fb!important;border-color:#cde6f0!important;color:#2f6f89!important;font-size:15px!important}
 .admin-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important}
 .admin-btn,.admin-btn.red,.admin-btn.coffee{width:100%!important;height:42px!important;box-sizing:border-box!important;padding:0 3px!important;border-radius:10px!important;background:#e3f4fb!important;border:1px solid #cde6f0!important;color:#2f6f89!important;font-size:12px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
 .admin-btn.coffee{grid-column:1/-1!important}.admin-close{display:none!important}
-/* Records */
-.records-head{font-size:24px!important;margin:4px 3px 11px!important}.record-list{width:100%!important;box-sizing:border-box!important}.record-date{background:#f4f8fa!important;color:#39758f!important}.record-date b{font-size:22px!important}.record-title{font-size:16px!important}.record-info{font-size:12px!important}
-/* Signup/success/roster pages: no giant page titles */
+/* My records */
+.records-head{font-size:24px!important;margin:4px 3px 11px!important}.record-list{width:100%!important;box-sizing:border-box!important}.record-date{background:transparent!important;border-radius:0!important;padding:3px 1px!important;color:#39758f!important}.record-date b{font-size:22px!important}.record-title{font-size:16px!important}.record-info{font-size:14px!important;line-height:1.45!important;margin-top:4px!important}
+/* Signup / success / roster */
+#signupScreen>.back-row{display:flex!important;margin-bottom:7px!important}
+#signupScreen>.back-row .back{font-size:16px!important;padding:2px 0 7px!important}
 .signup-card,.success-card,.roster-page-card{width:100%!important;box-sizing:border-box!important}
+#signupScreen .section-title{display:none!important}
+#signupScreen .detail-title{font-size:21px!important}
+#signupScreen .detail-title:first-letter{font-size:inherit!important}
 .success-sub{font-size:15px!important;line-height:1.55!important}
 .screen-btn{box-sizing:border-box!important;width:100%!important}
-.roster-back{width:100%!important;box-sizing:border-box!important;background:#72d3a3!important;color:#fff!important;border:0!important;border-radius:13px!important;font-weight:900!important}
-@media(max-width:390px){.app{max-width:390px!important}body:not(.subpage) .event-card{grid-template-columns:60px minmax(0,1fr) 74px!important;gap:6px!important}.event-card .view{width:74px!important;font-size:11.5px!important}.subpage .header .detail-brand:after{font-size:41px!important}.subpage .header .backTop{top:49px!important}.actions .action{font-size:12.5px!important}.admin-btn{font-size:11.5px!important}}
+#successScreen .screen-btn:not(.secondary){background:#72cfa0!important}
+.roster-back{width:100%!important;box-sizing:border-box!important;background:#72cfa0!important;color:#fff!important;border:0!important;border-radius:13px!important;font-weight:900!important}
+@media(max-width:390px){
+ .app{max-width:390px!important}
+ body:not(.subpage) .header{height:166px!important}
+ body:not(.subpage) .header .hero-copy{left:16px!important;top:22px!important;width:235px!important}
+ body:not(.subpage) .header .play-text{font-size:23px!important}
+ body:not(.subpage) .header .logo-title{font-size:41px!important}
+ body:not(.subpage) .header .logo-title b{font-size:48px!important}
+ body:not(.subpage) .header .racketSvg{right:29px!important;top:37px!important;width:55px!important;height:84px!important}
+ body:not(.subpage) .header .shuttleSvg{right:6px!important;top:91px!important;width:29px!important}
+ body:not(.subpage) .event-card{grid-template-columns:60px minmax(0,1fr) 74px!important;gap:6px!important}
+ body:not(.subpage) .datebox{width:60px!important;height:90px!important;min-height:90px!important}
+ body:not(.subpage) .event-title{font-size:17px!important;margin-left:3px!important}
+ body:not(.subpage) .event-line{font-size:12.5px!important}.event-card .view{width:74px!important;font-size:11.5px!important}
+ body.subpage .header{height:148px!important}
+ body.subpage .header .hero-copy{left:53px!important;top:21px!important;width:225px!important}
+ body.subpage .header .play-text{font-size:22px!important}.subpage .header .logo-title{font-size:36px!important}.subpage .header .logo-title b{font-size:43px!important}
+ .subpage .header .backTop{top:49px!important}
+ .subpage .header .racketSvg{right:27px!important;top:37px!important;width:52px!important}.subpage .header .shuttleSvg{right:5px!important;top:89px!important;width:28px!important}
+ .detail-title{font-size:21px!important}.detail-time{font-size:17px!important}.detail-meta{font-size:12.5px!important}.join{font-size:20px!important}.actions .action{font-size:12.5px!important}.admin-btn{font-size:11.5px!important}.record-info{font-size:13.5px!important}
+}
 </style>
