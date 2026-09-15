@@ -278,11 +278,67 @@ body:not(.subpage) .nav .create-top{font-size:17px!important;padding:9px 10px!im
 .records-head{font-size:25px!important;margin:5px 3px 12px!important}.record-list{width:100%;padding:4px 10px!important}.record-item{grid-template-columns:62px minmax(0,1fr) auto!important;gap:8px!important}.record-title{font-size:16px!important}.record-info{font-size:12px!important}
 @media(max-width:390px){body:not(.subpage) .header{height:158px!important}body:not(.subpage) .header .hero-copy{top:34px!important;left:17px!important;width:225px!important}body:not(.subpage) .header .play-text{font-size:23px!important}.header .logo-title{font-size:42px!important}.header .logo-title b{font-size:50px!important}.header .sub{font-size:13px!important}.header .racketSvg{right:37px!important;width:57px!important}.header .shuttleSvg{right:10px!important}.event-card{grid-template-columns:64px minmax(0,1fr) 70px!important;gap:6px!important}.datebox{height:98px!important}.date{font-size:20px!important}.weekday{font-size:14px!important}.event-title{font-size:17px!important}.event-line{font-size:12.5px!important}.event-card .view{font-size:12px!important}.subpage .header .detail-brand{font-size:23px!important}.detail-basic{grid-template-columns:70px minmax(0,1fr);gap:9px}.detail-datebox{height:78px}.detail-datebox b{font-size:21px}.detail-title{font-size:21px!important}.detail-time{font-size:18px!important}.detail-meta{font-size:13px}.attendance-line{font-size:15px}.attendance-line b{font-size:17px}.join{font-size:20px!important}.actions .action{font-size:13px!important}}
 </style>
+
+<style>
+/* V10.2 手機版重新校正：以實際手機截圖為基準 */
+html,body{overflow-x:hidden!important}
+.app{width:100%;max-width:480px;margin:0 auto;overflow-x:hidden}
+/* 首頁與子頁標題區統一，不讓文字互相重疊 */
+body:not(.subpage) .header{height:150px!important;border-radius:0 0 26px 26px!important}
+body:not(.subpage) .header .hero-copy{left:20px!important;top:27px!important;width:225px!important;height:auto!important}
+body:not(.subpage) .header .play-text{font-size:24px!important;line-height:1!important;margin:0 0 4px 12px!important;transform:rotate(-4deg)!important}
+body:not(.subpage) .header .logo-title{font-size:43px!important;line-height:.95!important;letter-spacing:-2px!important;white-space:nowrap!important}
+body:not(.subpage) .header .logo-title b{font-size:51px!important;margin-left:2px!important}
+body:not(.subpage) .header .sub{position:static!important;font-size:14px!important;line-height:1.2!important;margin:8px 0 0 5px!important;white-space:nowrap!important}
+body:not(.subpage) .header .racketSvg{width:58px!important;height:90px!important;right:46px!important;top:31px!important}
+body:not(.subpage) .header .shuttleSvg{width:30px!important;height:34px!important;right:18px!important;top:84px!important}
+body:not(.subpage) .header .hamb{right:15px!important;top:14px!important;font-size:31px!important}
+/* 詳情頁標題區與首頁同一視覺高度，只保留一個返回箭頭 */
+body.subpage .header{height:150px!important;border-radius:0 0 26px 26px!important}
+body.subpage .header .backTop{display:block!important;left:15px!important;top:43px!important;font-size:36px!important}
+.subpage .header .detail-brand{font-size:28px!important;top:55px!important}
+/* 詳情頁：移除重複的「返回場次」 */
+.subpage #backBtn{display:none!important}
+/* 詳情資訊卡避免巨大右側數字與橫向溢出 */
+.subpage .content{padding:14px 12px 100px!important}
+.detail-card{width:100%!important;max-width:100%!important;overflow:hidden!important}
+.detail-basic{grid-template-columns:68px minmax(0,1fr)!important;gap:9px!important}
+.detail-title{font-size:23px!important}
+.detail-time{font-size:19px!important}
+.detail-meta{font-size:14px!important}
+/* 操作按鈕全部在手機寬度內 */
+.join{font-size:20px!important;padding:13px 8px!important}
+.actions{grid-template-columns:1fr 1fr!important;gap:8px!important}
+.actions .action{min-width:0!important;font-size:14px!important;white-space:nowrap!important}
+.roster-link{font-size:16px!important;white-space:nowrap!important}
+/* 團主管理：三個功能改成兩欄＋第三個滿版，絕不截字 */
+.admin{width:100%!important;overflow:hidden!important}
+.admin-grid{grid-template-columns:1fr 1fr!important;gap:7px!important}
+.admin-btn{min-width:0!important;width:100%!important;font-size:14px!important;padding:10px 4px!important;white-space:nowrap!important}
+.admin-btn.coffee{grid-column:1/-1!important}
+.admin-close{display:none!important}
+/* 底部導覽固定兩等分 */
+.bottom-nav{grid-template-columns:1fr 1fr!important;width:min(480px,100%)!important}
+.bottom-nav .bn{width:100%!important}
+/* 首頁建立按鈕不要搶畫面 */
+body:not(.subpage) .nav{bottom:70px!important;padding:7px 14px 6px!important}
+body:not(.subpage) .nav .create-top{font-size:17px!important;padding:9px 10px!important;border-radius:13px!important}
+/* 首頁卡片：完整顯示查看／報名 */
+body:not(.subpage) .content{padding:10px 12px 126px!important}
+body:not(.subpage) .event-card{grid-template-columns:64px minmax(0,1fr) 84px!important;gap:7px!important;padding:9px!important;min-height:112px!important}
+body:not(.subpage) .datebox{height:96px!important}
+body:not(.subpage) .event-title{font-size:18px!important}
+body:not(.subpage) .home-time{font-size:15px!important;white-space:nowrap!important}
+body:not(.subpage) .home-count{font-size:13px!important;white-space:nowrap!important}
+body:not(.subpage) .event-card .view{width:84px!important;max-width:84px!important;font-size:13px!important;padding:9px 2px!important;white-space:nowrap!important;overflow:visible!important}
+body:not(.subpage) .event-note,body:not(.subpage) .latest{display:none!important}
+/* 不顯示關閉團主管理 */
+</style>
 </head>
 <body>
 <div class="app">
 <header class="header">
-  <div class="backTop">‹</div>
+  <div id="backTop" class="backTop">‹</div>
   <svg class="racketSvg" viewBox="0 0 70 110" aria-hidden="true"><ellipse cx="31" cy="29" rx="22" ry="29" fill="none" stroke="#1556a7" stroke-width="6"/><path d="M18 8L44 51M9 20L52 36M10 40L47 16M25 2L54 43" stroke="#9bdcf5" stroke-width="2"/><path d="M30 56L18 103" stroke="#19376d" stroke-width="8" stroke-linecap="round"/><path d="M20 98L16 108" stroke="#302b55" stroke-width="7" stroke-linecap="round"/></svg>
   <svg class="shuttleSvg" viewBox="0 0 48 52" aria-hidden="true"><path d="M8 8L25 29L39 10" fill="none" stroke="#fff" stroke-width="3"/><path d="M8 8L14 34M25 29L22 3M39 10L30 36" stroke="#fff" stroke-width="3"/><path d="M14 34Q24 44 34 36L29 46Q23 51 17 46Z" fill="#fff"/><ellipse cx="23" cy="44" rx="9" ry="4" fill="#ef6680"/></svg>
   <div class="hamb">☰</div>
@@ -299,7 +355,7 @@ body:not(.subpage) .nav .create-top{font-size:17px!important;padding:9px 10px!im
 <main class="content">
 <section id="create" class="hidden"><div class="create-card"><div class="section-title">建立新場次</div><button class="back create-back" onclick="showTab('list')">‹ 返回首頁</button><label>日期</label><input id="date" type="date"><div class="grid"><div><label>開始時間</label><input id="start" type="time" value="19:00"></div><div><label>結束時間</label><input id="end" type="time" value="21:00"></div></div><label>場次名稱</label><input id="title" placeholder="例如：週三羽球"><label>球館</label><input id="venue" placeholder="例如：基隆運動中心"><div class="grid"><div><label>場地數</label><input id="courts" type="number" min="1" value="3"></div><div><label>人數上限</label><input id="limit" type="number" min="1" value="21"></div></div><label>備註</label><textarea id="note" rows="3"></textarea><button id="createBtn" class="primary">建立場次</button></div></section>
 <section id="list"><div id="events" class="events"></div></section>
-<section id="detail" class="hidden"><button id="backBtn" class="back">‹ 返回場次</button><div id="detailCard"></div><div id="rosterCard" class="hidden"></div></section>
+<section id="detail" class="hidden"><div id="detailCard"></div><div id="rosterCard" class="hidden"></div></section>
 <section id="rosterScreen" class="hidden"><div class="roster-page"><div class="back-row"><button id="rosterBack" class="back">‹ 返回首頁</button></div><div id="rosterPageCard"></div></div></section>
 <section id="signupScreen" class="hidden"><div class="back-row"><button id="signupBack" class="back">‹ 返回場次</button></div><div id="signupCard"></div></section>
 <section id="successScreen" class="hidden"><div class="back-row"><button class="back" onclick="showTab('list')">‹ 返回首頁</button></div><div id="successCard"></div></section>
@@ -350,6 +406,6 @@ function subscribeEvent(id){if(realtimeChannel)db.removeChannel(realtimeChannel)
 function setupRealtime(){db.channel('events-list').on('postgres_changes',{event:'*',schema:'public',table:'events'},()=>loadEvents()).subscribe()}
 async function refresh(){if(currentEvent){const {data}=await db.from('events').select('*').eq('id',currentEvent.id).maybeSingle();if(data){currentEvent=data;renderDetail()}else{currentEvent=null;showTab('list')}}else loadEvents()}
 document.querySelectorAll('.bn').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));
-$('newBtn').onclick=async()=>{if(await requireAdmin())showTab('create')};$('createBtn').onclick=createEvent;$('backBtn').onclick=()=>{currentEvent=null;showTab('list')};$('rosterBack').onclick=()=>showTab('list');$('signupBack').onclick=()=>showTab('detail');window.addEventListener('hashchange',()=>{const id=location.hash.startsWith('#event=')?location.hash.slice(7):'';if(id)openEvent(id)});setInterval(refresh,3000);setupRealtime();const now=new Date();$('date').value=new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,10);const hash=location.hash.startsWith('#event=')?location.hash.slice(7):'';if(hash)openEvent(hash);else loadEvents();
+$('newBtn').onclick=async()=>{if(await requireAdmin())showTab('create')};$('createBtn').onclick=createEvent;$('backTop').onclick=()=>{currentEvent=null;showTab('list')};$('backBtn')?.addEventListener('click',()=>{currentEvent=null;showTab('list')});$('rosterBack').onclick=()=>showTab('list');$('signupBack').onclick=()=>showTab('detail');window.addEventListener('hashchange',()=>{const id=location.hash.startsWith('#event=')?location.hash.slice(7):'';if(id)openEvent(id)});setInterval(refresh,3000);setupRealtime();const now=new Date();$('date').value=new Date(now.getTime()-now.getTimezoneOffset()*60000).toISOString().slice(0,10);const hash=location.hash.startsWith('#event=')?location.hash.slice(7):'';if(hash)openEvent(hash);else loadEvents();
 </script>
 </body></html>
