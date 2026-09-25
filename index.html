@@ -85,7 +85,8 @@ html.ios-device .small{font-size:16px}
   transform:translateY(-50%) rotate(-7deg);
   clip-path:polygon(4% 30%, 19% 12%, 37% 22%, 55% 7%, 72% 18%, 95% 28%, 91% 72%, 74% 84%, 57% 75%, 39% 91%, 20% 80%, 3% 68%);
 }
-.event-count .event-status.ongoing::before, .admin-ongoing-badge::before { background:#E8F1ED; }
+.event-count .event-status.ongoing::before { background:#E8F1ED; left:0; right:0; }
+.admin-ongoing-badge::before { background:#E8F1ED; }
 .event-count .event-status.ended::before, .admin-ended-badge:not(.admin-ongoing-badge)::before, .admin-view-ended-badge::before { background:#E3E3E3; }
 .admin-view-ended-badge{color:#23456B!important}
 .badge-confirmed::before, .record .rstatus::before { background:#E8DDBF; }
