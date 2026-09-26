@@ -1,7 +1,12 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#23456B">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="臨打報名系統">
+<link rel="manifest" href="./manifest.webmanifest">
 <title>臨打報名系統</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -113,8 +118,8 @@ html.ios-device .small{font-size:16px}
 <section id="admin" class="screen"><div class="page"><div class="section-title">🔒 團主管理</div><div id="adminList" class="admin-list"></div></div><nav class="bottom-nav admin-bottom-nav" aria-label="團主管理導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button class="nav-item" type="button" data-nav="create" onclick="show('create')"><span class="nav-icon">＋</span><span>建立場次</span></button></nav></section><section id="records" class="screen"><div class="page"><div class="section-title">報名紀錄</div><div class="records-search"><div class="records-name-title">請輸入姓名，查看這個人的所有報名紀錄</div><div class="field"><label>姓名</label><input id="recordsName" type="text" autocomplete="off" placeholder="請輸入姓名"></div></div><div id="recordsList"></div></div><nav class="bottom-nav records-bottom-nav nav-dark" aria-label="報名紀錄導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button class="nav-item" type="button" data-nav="records" onclick="loadRecords()"><span class="nav-icon">▤</span><span>查看紀錄</span></button></nav></section>
 <nav id="globalNav" class="bottom-nav global-nav" aria-label="主要導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button class="nav-item" type="button" data-nav="records" onclick="show('records')"><span class="nav-icon">▤</span><span>報名紀錄</span></button><button class="nav-item" type="button" data-nav="admin" onclick="openAdmin()"><span class="nav-icon">▣</span><span>團主管理</span></button></nav><div id="toast" class="toast"></div><div id="passwordModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true"><div class="modal-card"><div id="passwordModalTitle" class="modal-title"></div><input id="passwordInput" class="field input password-input" type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="new-password" aria-label="密碼"><div class="modal-actions" style="margin-top:16px"><button id="passwordCancelBtn" class="btn btn-soft">取消</button><button id="passwordConfirmBtn" class="btn btn-primary">確認</button></div></div></div><div id="cancelModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true"><div class="modal-card"><div id="cancelModalTitle" class="modal-title"></div><div class="modal-actions"><button id="cancelConfirmBtn" class="btn btn-pink">取消報名</button><button id="cancelBackBtn" class="btn btn-soft">再想想</button></div></div></div><div id="deleteModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true"><div class="modal-card"><div id="deleteModalTitle" class="modal-title"></div><div class="modal-actions"><button id="deleteConfirmBtn" class="btn btn-green">刪除活動</button><button id="deleteBackBtn" class="btn btn-soft">再想想</button></div></div></div></main>
 <script>
-const SUPABASE_URL='https://gtwoqtclkyvujvoxfygq.supabase.co';
-const SUPABASE_KEY='sb_publishable_Bx610qU2vq2qSKY1c_1K7g_ewIxt4eu';
+const SUPABASE_URL='https://jrzzdeaovzmgdshfkrrv.supabase.co';
+const SUPABASE_KEY='sb_publishable_Mkn3j1zIKAbGtlPfHefzBw_LT021nJO';
 const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 let events=[],regs=[],currentEvent=null,currentReg=null,adminViewMode=false;
 const $=id=>document.getElementById(id);
@@ -256,4 +261,10 @@ async function saveEvent(){if(!currentEvent||!$('eTitle'))return;const {data,err
 async function loadRecords(){const input=$('recordsName');const name=input?input.value.trim():'';if(!name){$('recordsList').innerHTML='<div class="empty record-empty">請先輸入姓名</div>';return}const {data,error}=await db.from('registrations').select('*,events(*)').eq('name',name).order('registered_at',{ascending:false});if(error){$('recordsList').innerHTML='<div class="empty record-empty">紀錄讀取失敗，請稍後再試</div>';return}const rows=data||[];$('recordsList').innerHTML=rows.map(r=>`<div class="record"><div class="rdate">${r.events?.event_date||''}</div><div class="rtitle">${esc(r.events?.title||'')}</div><div class="rstatus">${r.status==='waitlist'?'候補':'已報名'}</div></div>`).join('')||`<div class="empty record-empty">找不到「${esc(name)}」的報名紀錄<br>請確認姓名是否輸入正確</div>`}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 loadEvents();setInterval(()=>{if(document.querySelector('#list.active'))loadEvents()},5000);
+</script><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
 </script></body></html>
