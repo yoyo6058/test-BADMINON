@@ -1,12 +1,7 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#23456B">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="臨打報名系統">
-<link rel="manifest" href="./manifest.webmanifest">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>臨打報名系統</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -94,7 +89,7 @@ html.ios-device .small{font-size:16px}
 .admin-ongoing-badge::before { background:#E8F1ED; }
 .event-count .event-status.ended::before, .admin-ended-badge:not(.admin-ongoing-badge)::before, .admin-view-ended-badge::before { background:#E3E3E3; }
 .admin-view-ended-badge{color:#23456B!important}
-.badge-confirmed::before, .record .rstatus::before { background:#EEE6D2; }
+.badge-confirmed::before, .record .rstatus::before { background:#E8DDBF; }
 .event-count .event-status { padding:5px 6px; }
 .admin-ended-badge { padding:4px 9px; }
 .badge-confirmed { padding:4px 9px; }
@@ -261,10 +256,4 @@ async function saveEvent(){if(!currentEvent||!$('eTitle'))return;const {data,err
 async function loadRecords(){const input=$('recordsName');const name=input?input.value.trim():'';if(!name){$('recordsList').innerHTML='<div class="empty record-empty">請先輸入姓名</div>';return}const {data,error}=await db.from('registrations').select('*,events(*)').eq('name',name).order('registered_at',{ascending:false});if(error){$('recordsList').innerHTML='<div class="empty record-empty">紀錄讀取失敗，請稍後再試</div>';return}const rows=data||[];$('recordsList').innerHTML=rows.map(r=>`<div class="record"><div class="rdate">${r.events?.event_date||''}</div><div class="rtitle">${esc(r.events?.title||'')}</div><div class="rstatus">${r.status==='waitlist'?'候補':'已報名'}</div></div>`).join('')||`<div class="empty record-empty">找不到「${esc(name)}」的報名紀錄<br>請確認姓名是否輸入正確</div>`}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 loadEvents();setInterval(()=>{if(document.querySelector('#list.active'))loadEvents()},5000);
-</script><script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  });
-}
 </script></body></html>
