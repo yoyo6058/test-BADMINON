@@ -149,10 +149,9 @@ html.ios-device .small{font-size:16px}
 .signup-info-card .info-title { color:#5F6468 !important; }
 
 /* 2. 首頁已結束卡片：活動名稱、人數同日期灰，字重400；左側分隔線 */
-.event-card.ended { position:relative; }
-.event-card.ended::before {
-  content:""; position:absolute; left:91px; top:14px; bottom:14px; width:1px;
-  background:#D5D9DE;
+.event-card.ended .date {
+  border-right:1px solid #B8BDC3;
+  padding-right:12px;
 }
 .event-card.ended .event-title,
 .event-card.ended .event-count .count-number,
@@ -173,8 +172,8 @@ html.ios-device .small{font-size:16px}
 
 /* 球館列原本的空白占位改由線條地點圖示取代 */
 .signup-info-card .info-venue-line .info-line-spacer{display:none!important;}
-/* V3：任何輸入欄位取得焦點時，鍵盤出現期間隱藏底部導覽列；涵蓋編輯、建立、報名、查詢等頁面 */
-@media (max-width:699px){body:has(input:focus,textarea:focus,select:focus) .bottom-nav{display:none!important}}
+/* V4：任何輸入欄位取得焦點時，鍵盤出現期間隱藏底部導覽列；涵蓋編輯、建立、報名、查詢等頁面 */
+@media (max-width:699px){body.keyboard-input-open .bottom-nav{display:none!important}}
 </style>
 </head>
 <body><main class="app">
@@ -230,6 +229,11 @@ document.addEventListener('focusin',e=>{
    setKeyboardInputOpen(true);
  }
 });
+document.addEventListener('focus',e=>{
+ if(e.target.matches('input,textarea,select')){
+   setKeyboardInputOpen(true);
+ }
+},true);
 document.addEventListener('focusout',e=>{
  if(e.target.matches('input,textarea,select')){
    setTimeout(()=>{
@@ -314,4 +318,10 @@ loadEvents();setInterval(()=>{if(document.querySelector('#list.active'))loadEven
 .signup-info-card .info-title{font-size:16px!important}
 .signup-info-card .info-time-line{font-size:14px!important}
 .signup-info-card .info-venue-line{font-size:14px!important}
+</style>
+
+<style id="workA-v4-targeted-fixes">
+/* V4：只針對指定畫面／位置修改 */
+#signup .signup-info-card .info-title{color:#B09771!important}
+@media (max-width:699px){body.keyboard-input-open .bottom-nav{display:none!important}}
 </style>
