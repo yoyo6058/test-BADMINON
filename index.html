@@ -325,3 +325,8 @@ loadEvents();setInterval(()=>{if(document.querySelector('#list.active'))loadEven
 #signup .signup-info-card .info-title{color:#B09771!important}
 @media (max-width:699px){body.keyboard-input-open .bottom-nav{display:none!important}}
 </style>
+
+<style id="keyboard-focus-final-fix">
+/* Android：任何輸入欄位取得焦點時，該頁底部導覽列隱藏 */
+@media (max-width:699px){body:has(input:focus,textarea:focus,select:focus) .bottom-nav{display:none!important}}
+</style>
