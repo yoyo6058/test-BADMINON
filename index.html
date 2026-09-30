@@ -261,20 +261,102 @@ function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&l
 loadEvents();setInterval(()=>{if(document.querySelector('#list.active'))loadEvents()},5000);
 </script>
 <style id="keyboard-unified-system">
-/* 0928：全系統唯一鍵盤規則。任何輸入欄位取得焦點時，所有底部導覽列隱藏。*/
-body:has(input:focus,textarea:focus,select:focus) .bottom-nav{display:none!important}
+/* 0930：全系統共用鍵盤／導覽列控制。只在輸入狀態期間隱藏導覽列。 */
+body.keyboard-nav-hidden .bottom-nav{display:none!important}
 </style>
 <script id="keyboard-unified-system-script">
 (function(){
   var selector='input,textarea,select';
-  function isField(el){return !!(el&&el.matches&&el.matches(selector));}
-  function hide(){document.querySelectorAll('.bottom-nav').forEach(function(nav){nav.style.setProperty('display','none','important');});}
-  function restore(){if(isField(document.activeElement))return;document.querySelectorAll('.bottom-nav').forEach(function(nav){nav.style.removeProperty('display');});}
-  function onFocus(e){if(isField(e.target))hide();}
+  var hidden=false;
+  var focusField=null;
+  var viewportStart=0;
+  var lastViewport=0;
+  var closeTimer=null;
+  var vv=window.visualViewport||null;
+  var CLOSE_DELTA=80;
+
+  function isField(el){
+    return !!(el&&el.matches&&el.matches(selector));
+  }
+
+  function viewportHeight(){
+    return vv ? vv.height : window.innerHeight;
+  }
+
+  function hideNav(){
+    if(hidden)return;
+    hidden=true;
+    document.body.classList.add('keyboard-nav-hidden');
+  }
+
+  function restoreNav(){
+    if(focusField && isField(document.activeElement))return;
+    hidden=false;
+    focusField=null;
+    document.body.classList.remove('keyboard-nav-hidden');
+  }
+
+  function scheduleRestore(){
+    clearTimeout(closeTimer);
+    closeTimer=setTimeout(function(){
+      if(!isField(document.activeElement))restoreNav();
+    },80);
+  }
+
+  function onFocus(e){
+    if(!isField(e.target))return;
+    focusField=e.target;
+    viewportStart=viewportHeight();
+    lastViewport=viewportStart;
+    hideNav();
+  }
+
+  function onFocusOut(e){
+    if(!isField(e.target))return;
+    setTimeout(function(){
+      if(!isField(document.activeElement))scheduleRestore();
+    },0);
+  }
+
+  function onViewportChange(){
+    var h=viewportHeight();
+    var previous=lastViewport;
+    lastViewport=h;
+
+    /* 鍵盤收起時，Android 有時不觸發 focusout；用 viewport 回復作為第二個共用狀態訊號。 */
+    if(focusField && hidden && h-previous>=CLOSE_DELTA){
+      restoreNav();
+      return;
+    }
+
+    /* 某些裝置一次 resize 就直接回到原高度。 */
+    if(focusField && hidden && h>=viewportStart-CLOSE_DELTA){
+      var active=document.activeElement;
+      if(!isField(active))restoreNav();
+    }
+  }
+
   document.addEventListener('focusin',onFocus,true);
-  document.addEventListener('focus',onFocus,true);
-  document.addEventListener('focusout',function(e){if(isField(e.target))setTimeout(restore,50);},true);
-  document.addEventListener('blur',function(e){if(isField(e.target))setTimeout(restore,50);},true);
+  document.addEventListener('focusout',onFocusOut,true);
+  document.addEventListener('blur',function(e){
+    if(isField(e.target))scheduleRestore();
+  },true);
+
+  if(vv){
+    vv.addEventListener('resize',onViewportChange);
+  }
+  window.addEventListener('resize',onViewportChange);
+  window.addEventListener('orientationchange',function(){
+    setTimeout(onViewportChange,120);
+  });
+
+  document.addEventListener('visibilitychange',function(){
+    if(document.visibilityState==='visible')setTimeout(onViewportChange,120);
+  });
+
+  window.addEventListener('pageshow',function(){
+    setTimeout(onViewportChange,120);
+  });
 })();
 </script>
 </body></html>
