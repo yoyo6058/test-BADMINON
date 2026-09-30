@@ -259,6 +259,60 @@ async function deleteEvent(){if(!currentEvent)return;if(!(await askDeleteEvent(c
 async function editEvent(){if(!currentEvent)return;const e=currentEvent;$('detail').classList.add('editing');$('detailHeading').style.display='none';$('detailCountOutside').style.display='none';const card=$('detailCard');card.innerHTML=`<div class="form-card"><div class="field"><label>活動名稱</label><input id="eTitle" value="${esc(e.title)}"></div><div class="two"><div class="field"><label>日期</label><input id="eDate" type="date" value="${e.event_date}"></div><div class="field"><label>開始</label><input id="eStart" type="time" value="${time(e.start_time)}"></div></div><div class="field"><label>結束</label><input id="eEnd" type="time" value="${time(e.end_time)}"></div><div class="field"><label>球館</label><input id="eVenue" value="${esc(e.venue||'')}"></div><div class="two"><div class="field"><label>場地數</label><input id="eCourts" type="number" value="${e.courts||3}"></div><div class="field"><label>人數上限</label><input id="eLimit" type="number" value="${e.participant_limit||21}"></div></div><div class="field"><label>備註</label><textarea id="eNotes" rows="3">${esc(e.notes||'')}</textarea></div></div>`}
 async function saveEvent(){if(!currentEvent||!$('eTitle'))return;const newLimit=+$('eLimit').value||21;const {data,error}=await db.from('events').update({title:$('eTitle').value.trim(),event_date:$('eDate').value,start_time:$('eStart').value,end_time:$('eEnd').value,venue:$('eVenue').value.trim(),courts:+$('eCourts').value||3,participant_limit:newLimit,notes:$('eNotes').value.trim()}).eq('id',currentEvent.id).select().single();if(error)return toast('修改失敗');currentEvent=data;events=events.map(e=>e.id===data.id?data:e);if(!(await syncRegistrationStatuses(data.id,newLimit)))return toast('上限已儲存，但候補名單更新失敗，請重新整理');const {data:latestRegs}=await db.from('registrations').select('*').eq('event_id',data.id).order('registered_at',{ascending:true});regs=latestRegs||[];adminEditMode=false;$('detail').classList.remove('editing');$('detailHeading').style.display='';$('detailCountOutside').style.display='';toast('已儲存');await renderDetail()}
 async function loadRecords(){const input=$('recordsName');const name=input?input.value.trim():'';if(!name){$('recordsList').innerHTML='<div class="empty record-empty">請先輸入姓名</div>';return}const {data,error}=await db.from('registrations').select('*,events(*)').eq('name',name).order('registered_at',{ascending:false});if(error){$('recordsList').innerHTML='<div class="empty record-empty">紀錄讀取失敗，請稍後再試</div>';return}const rows=data||[];$('recordsList').innerHTML=rows.map(r=>`<div class="record"><div class="rdate">${r.events?.event_date||''}</div><div class="rtitle">${esc(r.events?.title||'')}</div><div class="rstatus">${r.status==='waitlist'?'候補':'已報名'}</div></div>`).join('')||`<div class="empty record-empty">找不到「${esc(name)}」的報名紀錄<br>請確認姓名是否輸入正確</div>`}
+
+/* 多手機同步：不依賴首頁才刷新；目前所在頁面會定期從 Supabase 重新取得資料。 */
+let __activeRefreshBusy=false;
+async function refreshCurrentEvent(){
+  if(!currentEvent?.id)return false;
+  const {data,error}=await db.from('events').select('*').eq('id',currentEvent.id).maybeSingle();
+  if(error)return true;
+  if(!data){
+    currentEvent=null;
+    regs=[];
+    toast('這個活動已被刪除');
+    show('list');
+    return false;
+  }
+  currentEvent=data;
+  events=events.map(e=>e.id===data.id?data:e);
+  return true;
+}
+async function refreshRoster(){
+  if(!currentEvent?.id)return;
+  if(!(await refreshCurrentEvent()))return;
+  const {data,error}=await db.from('registrations').select('*').eq('event_id',currentEvent.id).order('registered_at',{ascending:true});
+  if(error)return;
+  regs=data||[];
+  const {confirmed,waitlist:wait}=splitRegistrationStatuses(regs,currentEvent.participant_limit||21);
+  $('rosterCard').innerHTML=`<div class="roster-card"><div class="roster-date-line">${iconCalendar()}${fmtDate(currentEvent.event_date).m}/${fmtDate(currentEvent.event_date).d}<span class="roster-weekday">（週${fmtDate(currentEvent.event_date).w}）</span></div><div class="roster-event-line"><span class="roster-event-title">${iconRacket()}${esc(currentEvent.title)}</span><span>${iconTime()}${time(currentEvent.start_time)}-${time(currentEvent.end_time)}</span></div><div class="roster-venue-line">${esc(currentEvent.venue||'未填球館')} ・ ${currentEvent.courts||3} 面</div><div class="count"><span class="count-person-wrap">${iconPerson()}</span><strong class="count-number">${confirmed.length}</strong> / ${currentEvent.participant_limit||21} 人</div>${confirmed.map((r,i)=>personRow(r,i+1,'已報名')).join('')}${wait.length?`<div class="small" style="margin-top:14px">候補</div>${wait.map((r,i)=>personRow(r,i+1,'候補')).join('')}`:''}</div>`;
+}
+async function refreshActivePage(){
+  if(__activeRefreshBusy)return;
+  const active=document.querySelector('.screen.active')?.id;
+  if(!active)return;
+  if(active==='detail'&&adminEditMode)return;
+  __activeRefreshBusy=true;
+  try{
+    if(active==='list'){
+      await loadEvents();
+    }else if(active==='detail'){
+      if(await refreshCurrentEvent()){
+        if(adminViewMode)await renderAdminView();
+        else await renderDetail();
+      }
+    }else if(active==='roster'){
+      await refreshRoster();
+    }else if(active==='admin'){
+      await renderAdmin();
+    }else if(active==='records'){
+      const input=$('recordsName');
+      if(input&&input.value.trim())await loadRecords();
+    }
+  }finally{
+    __activeRefreshBusy=false;
+  }
+}
+
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 /* Android/LINE 鍵盤核心：底部導覽列不跟著鍵盤上移。
    只由這一處統一處理所有輸入欄位；鍵盤出現時，把導覽列推回原本的畫面底部，
@@ -297,7 +351,7 @@ function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&l
   update();
 })();
 
-loadEvents();setInterval(()=>{if(document.querySelector('#list.active'))loadEvents()},5000);
+loadEvents();setInterval(refreshActivePage,3000);
 </script>
 
 </body></html>
