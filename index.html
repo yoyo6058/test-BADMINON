@@ -182,8 +182,8 @@ html.ios-device .small{font-size:16px}
 <section id="signup" class="screen"><div class="page"><div class="section-title screen-card-spacer" aria-hidden="true">活動報名</div><div id="signupCard"></div></div><nav class="bottom-nav signup-bottom-nav nav-dark" aria-label="活動報名導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button class="nav-item" type="button" data-nav="signup" onclick="confirmSignup()"><span class="nav-icon">✓</span><span>確認報名</span></button></nav></section>
 <section id="success" class="screen"><div class="page"><div class="section-title screen-card-spacer" aria-hidden="true">報名成功</div><div class="success-card"><div class="success-mark">✓</div><h2>報名成功</h2><div id="successDetail" class="success-detail"></div></div></div><nav class="bottom-nav success-bottom-nav" aria-label="報名成功導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button class="nav-item" type="button" data-nav="success" onclick="showRoster()"><span class="nav-icon">▤</span><span>報名名單</span></button><button class="nav-item" type="button" data-nav="detail" onclick="show('detail')"><span class="nav-icon">▣</span><span>活動報名</span></button></nav></section>
 <section id="roster" class="screen"><div class="page"><div class="section-title">報名名單</div><div id="rosterCard"></div></div><nav class="bottom-nav roster-bottom-nav" aria-label="報名名單導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button class="nav-item" type="button" data-nav="detail" onclick="show('detail')"><span class="nav-icon">▤</span><span>活動報名</span></button></nav></section>
-<section id="create" class="screen"><div class="page"><div class="section-title">建立新場次</div><div class="form-card"><div class="field"><label>活動名稱</label><input id="fTitle" placeholder="例如：In羽out"></div><div class="two"><div class="field"><label>日期</label><input id="fDate" type="date"></div><div class="field"><label>開始時間</label><input id="fStart" type="time"></div></div><div class="field"><label>結束時間</label><input id="fEnd" type="time"></div><div class="field"><label>球館</label><input id="fVenue" placeholder="例如：基隆運動中心"></div><div class="two"><div class="field"><label>場地數</label><input id="fCourts" type="number" min="1" value="3"></div><div class="field"><label>人數上限</label><input id="fLimit" type="number" min="1" value="21"></div></div><div class="field"><label>備註</label><textarea id="fNotes" rows="3" placeholder="可留空"></textarea></div></div></div><nav class="bottom-nav create-bottom-nav nav-dark" aria-label="建立場次導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button id="createSubmit" class="nav-item" data-nav="create" type="button" onclick="submitCreateEvent()"><span class="nav-icon">＋</span><span>建立場次</span></button></nav></section>
-<section id="admin" class="screen"><div class="page"><div class="section-title">🔒 團主管理</div><div id="adminList" class="admin-list"></div></div><nav class="bottom-nav admin-bottom-nav" aria-label="團主管理導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button class="nav-item" type="button" data-nav="create" onclick="show('create')"><span class="nav-icon">＋</span><span>建立場次</span></button></nav></section><section id="records" class="screen"><div class="page"><div class="section-title">報名紀錄</div><div class="records-search"><div class="records-name-title">請輸入姓名，查看這個人的所有報名紀錄</div><div class="field"><label>姓名</label><input id="recordsName" type="text" autocomplete="off" placeholder="請輸入姓名"></div></div><div id="recordsList"></div></div><nav class="bottom-nav records-bottom-nav nav-dark" aria-label="報名紀錄導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button class="nav-item" type="button" data-nav="records" onclick="loadRecords()"><span class="nav-icon">▤</span><span>查看紀錄</span></button></nav></section>
+<section id="create" class="screen"><div class="page"><div class="section-title">建立新場次</div><div class="form-card"><div class="field"><label>活動名稱</label><input id="fTitle" placeholder="例如：In羽out"></div><div class="two"><div class="field"><label>日期</label><input id="fDate" type="date"></div><div class="field"><label>開始時間</label><input id="fStart" type="time"></div></div><div class="field"><label>結束時間</label><input id="fEnd" type="time"></div><div class="field"><label>球館</label><input id="fVenue" placeholder="例如：基隆運動中心"></div><div class="two"><div class="field"><label>場地數</label><input id="fCourts" type="number" min="1" value="3"></div><div class="field"><label>人數上限</label><input id="fLimit" type="number" min="1" value="21"></div></div><div class="field"><label>備註</label><textarea id="fNotes" rows="3" placeholder="可留空"></textarea></div></div></div><nav class="bottom-nav create-bottom-nav nav-dark" aria-label="建立活動導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button id="createSubmit" class="nav-item" data-nav="create" type="button" onclick="submitCreateEvent()"><span class="nav-icon">＋</span><span>建立活動</span></button></nav></section>
+<section id="admin" class="screen"><div class="page"><div class="section-title">🔒 團主管理</div><div id="adminList" class="admin-list"></div></div><nav class="bottom-nav admin-bottom-nav" aria-label="團主管理導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button class="nav-item" type="button" data-nav="create" onclick="show('create')"><span class="nav-icon">＋</span><span>建立活動</span></button></nav></section><section id="records" class="screen"><div class="page"><div class="section-title">報名紀錄</div><div class="records-search"><div class="records-name-title">請輸入姓名，查看這個人的所有報名紀錄</div><div class="field"><label>姓名</label><input id="recordsName" type="text" autocomplete="off" placeholder="請輸入姓名"></div></div><div id="recordsList"></div></div><nav class="bottom-nav records-bottom-nav nav-dark" aria-label="報名紀錄導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button class="nav-item" type="button" data-nav="records" onclick="loadRecords()"><span class="nav-icon">▤</span><span>查看紀錄</span></button></nav></section>
 <nav id="globalNav" class="bottom-nav global-nav" aria-label="主要導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button class="nav-item" type="button" data-nav="records" onclick="show('records')"><span class="nav-icon">▤</span><span>報名紀錄</span></button><button class="nav-item" type="button" data-nav="admin" onclick="openAdmin()"><span class="nav-icon">▣</span><span>團主管理</span></button></nav><div id="toast" class="toast"></div><div id="passwordModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true"><div class="modal-card"><div id="passwordModalTitle" class="modal-title"></div><input id="passwordInput" class="field input password-input" type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="new-password" aria-label="密碼"><div class="modal-actions" style="margin-top:16px"><button id="passwordCancelBtn" class="btn btn-soft">取消</button><button id="passwordConfirmBtn" class="btn btn-primary">確認</button></div></div></div><div id="cancelModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true"><div class="modal-card"><div id="cancelModalTitle" class="modal-title"></div><div class="modal-actions"><button id="cancelConfirmBtn" class="btn btn-pink">取消報名</button><button id="cancelBackBtn" class="btn btn-soft">再想想</button></div></div></div><div id="deleteModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true"><div class="modal-card"><div id="deleteModalTitle" class="modal-title"></div><div class="modal-actions"><button id="deleteConfirmBtn" class="btn btn-green">刪除活動</button><button id="deleteBackBtn" class="btn btn-soft">再想想</button></div></div></div></main>
 <script>
 const SUPABASE_URL='https://jrzzdeaovzmgdshfkrrv.supabase.co';
@@ -226,7 +226,7 @@ async function adminView(id){currentEvent=events.find(e=>e.id===id);if(!currentE
 async function renderAdminView(){if(!currentEvent)return;const e=currentEvent;const {data,error}=await db.from('registrations').select('*').eq('event_id',e.id).order('registered_at',{ascending:true});if(error)return toast('名單讀取失敗');regs=data||[];const confirmed=regs.filter(r=>r.status==='confirmed'),wait=regs.filter(r=>r.status==='waitlist');const d=fmtDate(e.event_date);$('detailHeading').style.display='flex';$('detailHeading').querySelector('.section-title').textContent='查看活動';$('detailCountOutside').style.display='flex';$('detailCountOutside').innerHTML=`<span class="count-person-wrap">${iconPerson()}</span><strong class="count-number">${confirmed.length}</strong><span> / ${e.participant_limit||21} 人</span>`;$('detailCard').innerHTML=`<div class="info-card signup-info-card admin-view-card"><span class="admin-view-ended-badge">已結束</span><div class="info-grid"><div class="info-date"><b>${d.m}/${d.d}</b><span>週${d.w}</span></div><div class="info-title admin-view-title">${iconRacket()}<span class="admin-view-title-text">${esc(e.title)}</span></div><div class="info-line info-time-line">${iconTime()}${time(e.start_time)}-${time(e.end_time)}</div><div class="info-line info-venue-line"><span class="info-line-spacer" aria-hidden="true"></span><span>${esc(e.venue||'未填球館')} ・ ${e.courts||3} 面</span></div></div></div><div class="roster-card" style="margin-top:14px"><div class="section-title" style="margin:0 0 10px">報名名單</div>${confirmed.map((r,i)=>`<div class="person"><span class="person-name">${i+1}. ${esc(r.name)}</span><span class="person-actions"><span class="badge badge-confirmed">已報名</span></span></div>`).join('')}${wait.length?`<div class="small" style="margin-top:14px">候補</div>${wait.map((r,i)=>`<div class="person"><span class="person-name">${i+1}. ${esc(r.name)}</span><span class="person-actions"><span class="badge">候補</span></span></div>`).join('')}`:''}</div>`} 
 async function adminEdit(id){currentEvent=events.find(e=>e.id===id);if(!currentEvent)return;adminEditMode=true;show('detail');editEvent()}
 async function adminDelete(id){currentEvent=events.find(e=>e.id===id);if(!currentEvent)return;if(!(await askDeleteEvent(currentEvent.title)))return;const {error}=await db.from('events').delete().eq('id',currentEvent.id);if(error)return toast('刪除失敗');currentEvent=null;await renderAdmin();await loadEvents()}
-async function openCreate(){if(await requirePassword('建立場次：'))show('create')}
+async function openCreate(){if(await requirePassword('建立活動：'))show('create')}
 async function submitCreateEvent(){
  const btn=$('createSubmit');
  if(btn.dataset.busy==='1')return;
@@ -249,7 +249,7 @@ async function submitCreateEvent(){
    console.error('submitCreateEvent exception:',err);
    toast('建立失敗，請稍後再試');
  }finally{
-   btn.dataset.busy='0';btn.removeAttribute('aria-busy');btn.querySelector('span:last-child').textContent='建立場次';
+   btn.dataset.busy='0';btn.removeAttribute('aria-busy');btn.querySelector('span:last-child').textContent='建立活動';
  }
 }
 function askDeleteEvent(name){return new Promise(resolve=>{const modal=$('deleteModal'),title=$('deleteModalTitle'),yes=$('deleteConfirmBtn'),no=$('deleteBackBtn');title.textContent=`確定要刪除「${name}」這個場次嗎？`;modal.classList.add('show');document.body.classList.add('password-keyboard-open');modal.setAttribute('aria-hidden','false');const close=value=>{modal.classList.remove('show');document.body.classList.remove('password-keyboard-open');modal.setAttribute('aria-hidden','true');yes.onclick=null;no.onclick=null;resolve(value)};yes.onclick=()=>close(true);no.onclick=()=>close(false)})}
@@ -261,102 +261,56 @@ function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&l
 loadEvents();setInterval(()=>{if(document.querySelector('#list.active'))loadEvents()},5000);
 </script>
 <style id="keyboard-unified-system">
-/* 0930：全系統共用鍵盤／導覽列控制。只在輸入狀態期間隱藏導覽列。 */
-body.keyboard-nav-hidden .bottom-nav{display:none!important}
+/* 0930：全系統唯一鍵盤／導覽列控制。所有頁面共用同一套狀態，不依賴各頁自己的導覽列規則。*/
+body.keyboard-ui-inputting .bottom-nav{display:none!important}
 </style>
 <script id="keyboard-unified-system-script">
 (function(){
   var selector='input,textarea,select';
-  var hidden=false;
-  var focusField=null;
-  var viewportStart=0;
-  var lastViewport=0;
-  var closeTimer=null;
-  var vv=window.visualViewport||null;
-  var CLOSE_DELTA=80;
-
-  function isField(el){
-    return !!(el&&el.matches&&el.matches(selector));
+  var state={inputting:false,viewportBase:0,lastViewport:0,restoreTimer:null};
+  function isField(el){return !!(el&&el.matches&&el.matches(selector));}
+  function navs(){return document.querySelectorAll('.bottom-nav');}
+  function hide(){
+    state.inputting=true;
+    document.body.classList.add('keyboard-ui-inputting');
+    navs().forEach(function(nav){nav.style.setProperty('display','none','important');});
   }
-
-  function viewportHeight(){
-    return vv ? vv.height : window.innerHeight;
+  function restore(){
+    state.inputting=false;
+    document.body.classList.remove('keyboard-ui-inputting');
+    navs().forEach(function(nav){nav.style.removeProperty('display');});
+    /* 讓 Android 鍵盤收起後立即重新計算底部固定導覽列的位置。 */
+    void document.body.offsetHeight;
   }
-
-  function hideNav(){
-    if(hidden)return;
-    hidden=true;
-    document.body.classList.add('keyboard-nav-hidden');
-  }
-
-  function restoreNav(){
-    if(focusField && isField(document.activeElement))return;
-    hidden=false;
-    focusField=null;
-    document.body.classList.remove('keyboard-nav-hidden');
-  }
-
+  function currentViewport(){return window.visualViewport?window.visualViewport.height:window.innerHeight;}
   function scheduleRestore(){
-    clearTimeout(closeTimer);
-    closeTimer=setTimeout(function(){
-      if(!isField(document.activeElement))restoreNav();
-    },80);
+    clearTimeout(state.restoreTimer);
+    state.restoreTimer=setTimeout(function(){
+      if(!isField(document.activeElement)) restore();
+    },120);
   }
-
-  function onFocus(e){
-    if(!isField(e.target))return;
-    focusField=e.target;
-    viewportStart=viewportHeight();
-    lastViewport=viewportStart;
-    hideNav();
+  function onFocus(e){if(isField(e.target))hide();}
+  function onFocusOut(e){if(isField(e.target))scheduleRestore();}
+  function onViewport(){
+    var h=currentViewport();
+    if(!state.viewportBase)state.viewportBase=h;
+    var previous=state.lastViewport||h;
+    state.lastViewport=h;
+    /* 鍵盤收起時 viewport 會回升；即使 Android 沒有送出 blur，也立即恢復導覽列。 */
+    if(state.inputting && h>previous+80 && h>=state.viewportBase-30)restore();
   }
-
-  function onFocusOut(e){
-    if(!isField(e.target))return;
-    setTimeout(function(){
-      if(!isField(document.activeElement))scheduleRestore();
-    },0);
-  }
-
-  function onViewportChange(){
-    var h=viewportHeight();
-    var previous=lastViewport;
-    lastViewport=h;
-
-    /* 鍵盤收起時，Android 有時不觸發 focusout；用 viewport 回復作為第二個共用狀態訊號。 */
-    if(focusField && hidden && h-previous>=CLOSE_DELTA){
-      restoreNav();
-      return;
-    }
-
-    /* 某些裝置一次 resize 就直接回到原高度。 */
-    if(focusField && hidden && h>=viewportStart-CLOSE_DELTA){
-      var active=document.activeElement;
-      if(!isField(active))restoreNav();
-    }
-  }
-
   document.addEventListener('focusin',onFocus,true);
+  document.addEventListener('focus',onFocus,true);
   document.addEventListener('focusout',onFocusOut,true);
-  document.addEventListener('blur',function(e){
-    if(isField(e.target))scheduleRestore();
-  },true);
-
-  if(vv){
-    vv.addEventListener('resize',onViewportChange);
+  document.addEventListener('blur',onFocusOut,true);
+  window.addEventListener('resize',onViewport,{passive:true});
+  if(window.visualViewport){
+    window.visualViewport.addEventListener('resize',onViewport,{passive:true});
   }
-  window.addEventListener('resize',onViewportChange);
-  window.addEventListener('orientationchange',function(){
-    setTimeout(onViewportChange,120);
-  });
-
-  document.addEventListener('visibilitychange',function(){
-    if(document.visibilityState==='visible')setTimeout(onViewportChange,120);
-  });
-
-  window.addEventListener('pageshow',function(){
-    setTimeout(onViewportChange,120);
-  });
+  document.addEventListener('visibilitychange',function(){if(!document.hidden&&!isField(document.activeElement))scheduleRestore();});
+  window.addEventListener('pageshow',function(){if(!isField(document.activeElement))restore();});
+  state.viewportBase=currentViewport();
+  state.lastViewport=state.viewportBase;
 })();
 </script>
 </body></html>
