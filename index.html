@@ -317,7 +317,9 @@ function askDeleteEvent(name){return new Promise(resolve=>{const modal=$('delete
 async function deleteEvent(){if(!currentEvent)return;if(!(await askDeleteEvent(currentEvent.title)))return;const {error}=await db.from('events').delete().eq('id',currentEvent.id);if(error)return toast('刪除失敗');currentEvent=null;show('list')}
 async function editEvent(){if(!currentEvent)return;const e=currentEvent;$('detail').classList.add('editing');$('detailHeading').style.display='none';$('detailCountOutside').style.display='none';const card=$('detailCard');card.innerHTML=`<div class="form-card"><div class="field"><label>活動名稱</label><input id="eTitle" value="${esc(e.title)}"></div><div class="two"><div class="field"><label>日期</label><input id="eDate" type="date" value="${e.event_date}"></div><div class="field"><label>開始</label><input id="eStart" type="time" value="${time(e.start_time)}"></div></div><div class="field"><label>結束</label><input id="eEnd" type="time" value="${time(e.end_time)}"></div><div class="field"><label>球館</label><input id="eVenue" value="${esc(e.venue||'')}"></div><div class="two"><div class="field"><label>場地數</label><input id="eCourts" type="number" value="${e.courts||3}"></div><div class="field"><label>人數上限</label><input id="eLimit" type="number" value="${e.participant_limit||21}"></div></div><div class="field"><label>備註</label><textarea id="eNotes" rows="3">${esc(e.notes||'')}</textarea></div></div>`}
 async function saveEvent(){if(!currentEvent||!$('eTitle'))return;const newLimit=+$('eLimit').value||21;const {data,error}=await db.from('events').update({title:$('eTitle').value.trim(),event_date:$('eDate').value,start_time:$('eStart').value,end_time:$('eEnd').value,venue:$('eVenue').value.trim(),courts:+$('eCourts').value||3,participant_limit:newLimit,notes:$('eNotes').value.trim()}).eq('id',currentEvent.id).select().single();if(error)return toast('修改失敗');currentEvent=data;events=events.map(e=>e.id===data.id?data:e);if(!(await syncRegistrationStatuses(data.id,newLimit)))return toast('上限已儲存，但候補名單更新失敗，請重新整理');const {data:latestRegs}=await db.from('registrations').select('*').eq('event_id',data.id).order('registered_at',{ascending:true});regs=latestRegs||[];adminEditMode=false;$('detail').classList.remove('editing');$('detailHeading').style.display='';$('detailCountOutside').style.display='';toast('已儲存');await renderDetail()}
-/* 多手機同步：不依賴首頁才刷新；目前所在頁面會定期從 Supabase 重新取得資料。 */
+/* 多手機同步核心：所有頁面共用同一套 Supabase 同步流程。
+   首頁只做「差異更新」，避免卡片與人數每 3 秒整頁重畫；
+   其他頁面維持原本完整同步，確保 A 手機的新增／取消／修改能同步到 B 手機目前所在頁面。 */
 let __activeRefreshBusy=false;
 function sameEventData(a,b){
   if(!a||!b)return false;
@@ -329,7 +331,7 @@ function registrationSignature(rows){
 async function refreshCurrentEvent(){
   if(!currentEvent?.id)return false;
   const {data,error}=await db.from('events').select('*').eq('id',currentEvent.id).maybeSingle();
-  if(error)return true;
+  if(error)return false;
   if(!data){
     currentEvent=null;
     regs=[];
@@ -337,23 +339,23 @@ async function refreshCurrentEvent(){
     show('list');
     return false;
   }
-  const changed=!sameEventData(currentEvent,data);
   currentEvent=data;
   events=events.map(e=>e.id===data.id?data:e);
-  return !changed;
+  return true;
 }
 async function refreshHomeCounts(){
   const fresh=await fetchHomeEvents();
   if(fresh===null)return;
-  const currentIds=(events||[]).map(e=>e.id).join('|');
-  const freshIds=fresh.map(e=>e.id).join('|');
-  const eventChanged=currentIds!==freshIds || fresh.some((e,i)=>!sameEventData(events[i],e));
+  const oldById=new Map((events||[]).map(e=>[e.id,e]));
+  const sameIds=(events||[]).length===fresh.length && fresh.every(e=>oldById.has(e.id));
+  const eventChanged=!sameIds || fresh.some(e=>!sameEventData(oldById.get(e.id),e));
   if(eventChanged){
     const counts=await fetchHomeCounts(fresh);
     events=fresh;
     renderHomeCards(fresh,counts);
     return;
   }
+  events=fresh;
   for(const e of fresh){
     const {count,error}=await db.from('registrations').select('*',{count:'exact',head:true}).eq('event_id',e.id).eq('status','confirmed');
     if(error)continue;
@@ -365,16 +367,12 @@ async function refreshHomeCounts(){
     });
   }
 }
-
 async function refreshRoster(){
   if(!currentEvent?.id)return;
-  const eventUnchanged=await refreshCurrentEvent();
-  if(eventUnchanged===false)return;
+  if(!await refreshCurrentEvent())return;
   const {data,error}=await db.from('registrations').select('*').eq('event_id',currentEvent.id).order('registered_at',{ascending:true});
   if(error)return;
-  const nextRegs=data||[];
-  if(registrationSignature(regs)===registrationSignature(nextRegs))return;
-  regs=nextRegs;
+  regs=data||[];
   const {confirmed,waitlist:wait}=splitRegistrationStatuses(regs,currentEvent.participant_limit||21);
   $('rosterCard').innerHTML=`<div class="roster-card"><div class="roster-date-line">${iconCalendar()}${fmtDate(currentEvent.event_date).m}/${fmtDate(currentEvent.event_date).d}<span class="roster-weekday">（週${fmtDate(currentEvent.event_date).w}）</span></div><div class="roster-event-line"><span class="roster-event-title">${iconRacket()}${esc(currentEvent.title)}</span><span>${iconTime()}${time(currentEvent.start_time)}-${time(currentEvent.end_time)}</span></div><div class="roster-venue-line">${esc(currentEvent.venue||'未填球館')} ・ ${currentEvent.courts||3} 面</div><div class="count"><span class="count-person-wrap">${iconPerson()}</span><strong class="count-number">${confirmed.length}</strong> / ${currentEvent.participant_limit||21} 人</div>${confirmed.map((r,i)=>personRow(r,i+1,'已報名')).join('')}${wait.length?`<div class="small" style="margin-top:14px">候補</div>${wait.map((r,i)=>personRow(r,i+1,'候補')).join('')}`:''}</div>`;
 }
@@ -386,31 +384,17 @@ async function refreshActivePage(){
   __activeRefreshBusy=true;
   try{
     if(active==='list'){
+      // 首頁保留「不跳動」：只有資料真的改變才重畫卡片。
       await refreshHomeCounts();
     }else if(active==='detail'){
-      const eventUnchanged=await refreshCurrentEvent();
-      if(eventUnchanged===false)return;
-      if(adminViewMode){
-        const {data,error}=await db.from('registrations').select('*').eq('event_id',currentEvent.id).order('registered_at',{ascending:true});
-        if(!error){
-          const nextRegs=data||[];
-          if(registrationSignature(regs)!==registrationSignature(nextRegs)){
-            regs=nextRegs;
-            await renderAdminView();
-          }else{
-            const {confirmed}=splitRegistrationStatuses(regs,currentEvent.participant_limit||21);
-            const el=$('detailCountOutside');
-            const html=`<span class="count-person-wrap">${iconPerson()}</span><strong class="count-number">${confirmed.length}</strong><span> / ${currentEvent.participant_limit||21} 人</span>`;
-            if(el.innerHTML!==html)el.innerHTML=html;
-          }
-        }
-      }else{
-        const {count}=await db.from('registrations').select('*',{count:'exact',head:true}).eq('event_id',currentEvent.id);
-        const confirmedCount=Math.min(count||0,currentEvent.participant_limit||21);
-        const el=$('detailCountOutside');
-        const html=`<span class="count-person-wrap">${iconPerson()}</span><strong class="count-number">${confirmedCount}</strong><span> / ${currentEvent.participant_limit||21} 人</span>`;
-        if(el.innerHTML!==html)el.innerHTML=html;
+      // 詳細頁維持原本完整同步：活動或報名人數有變都立即反映。
+      if(await refreshCurrentEvent()){
+        if(adminViewMode)await renderAdminView();
+        else await renderDetail();
       }
+    }else if(active==='signup'){
+      // 報名頁也持續同步目前活動，避免 B 手機停在此頁時資料停留在舊狀態。
+      await refreshCurrentEvent();
     }else if(active==='roster'){
       await refreshRoster();
     }else if(active==='admin'){
@@ -459,44 +443,7 @@ function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&l
   update();
 })();
 
-loadEvents();
-
-/* 多手機即時同步：Supabase Realtime 為主要同步機制。
-   只有收到資料變更時才刷新目前畫面；不再每 3 秒重複查詢。
-   另保留 60 秒低頻同步，作為 Realtime 斷線／手機背景暫停時的保險。 */
-let __realtimeRefreshTimer=null;
-let __realtimeRetryTimer=null;
-let __realtimeChannel=null;
-function scheduleRealtimeRefresh(){
-  clearTimeout(__realtimeRefreshTimer);
-  __realtimeRefreshTimer=setTimeout(()=>{refreshActivePage().catch(err=>console.error('Realtime refresh:',err))},120);
-}
-function initRealtimeSync(){
-  if(!db||__realtimeChannel)return;
-  const channel=db.channel('badminton-live-sync')
-    .on('postgres_changes',{event:'*',schema:'public',table:'events'},payload=>{
-      console.log('Realtime events:',payload.eventType);
-      scheduleRealtimeRefresh();
-    })
-    .on('postgres_changes',{event:'*',schema:'public',table:'registrations'},payload=>{
-      console.log('Realtime registrations:',payload.eventType);
-      scheduleRealtimeRefresh();
-    });
-  __realtimeChannel=channel;
-  channel.subscribe(status=>{
-    console.log('Realtime status:',status);
-    if(status==='SUBSCRIBED'){
-      clearTimeout(__realtimeRetryTimer);
-      __realtimeRetryTimer=null;
-    }else if(status==='CHANNEL_ERROR'||status==='TIMED_OUT'||status==='CLOSED'){
-      __realtimeChannel=null;
-      clearTimeout(__realtimeRetryTimer);
-      __realtimeRetryTimer=setTimeout(initRealtimeSync,15000);
-    }
-  });
-}
-initRealtimeSync();
-setInterval(refreshActivePage,60000);
+loadEvents();setInterval(refreshActivePage,3000);
 </script>
 
 
