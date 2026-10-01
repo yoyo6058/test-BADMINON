@@ -459,7 +459,44 @@ function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&l
   update();
 })();
 
-loadEvents();setInterval(refreshActivePage,3000);
+loadEvents();
+
+/* 多手機即時同步：Supabase Realtime 為主要同步機制。
+   只有收到資料變更時才刷新目前畫面；不再每 3 秒重複查詢。
+   另保留 60 秒低頻同步，作為 Realtime 斷線／手機背景暫停時的保險。 */
+let __realtimeRefreshTimer=null;
+let __realtimeRetryTimer=null;
+let __realtimeChannel=null;
+function scheduleRealtimeRefresh(){
+  clearTimeout(__realtimeRefreshTimer);
+  __realtimeRefreshTimer=setTimeout(()=>{refreshActivePage().catch(err=>console.error('Realtime refresh:',err))},120);
+}
+function initRealtimeSync(){
+  if(!db||__realtimeChannel)return;
+  const channel=db.channel('badminton-live-sync')
+    .on('postgres_changes',{event:'*',schema:'public',table:'events'},payload=>{
+      console.log('Realtime events:',payload.eventType);
+      scheduleRealtimeRefresh();
+    })
+    .on('postgres_changes',{event:'*',schema:'public',table:'registrations'},payload=>{
+      console.log('Realtime registrations:',payload.eventType);
+      scheduleRealtimeRefresh();
+    });
+  __realtimeChannel=channel;
+  channel.subscribe(status=>{
+    console.log('Realtime status:',status);
+    if(status==='SUBSCRIBED'){
+      clearTimeout(__realtimeRetryTimer);
+      __realtimeRetryTimer=null;
+    }else if(status==='CHANNEL_ERROR'||status==='TIMED_OUT'||status==='CLOSED'){
+      __realtimeChannel=null;
+      clearTimeout(__realtimeRetryTimer);
+      __realtimeRetryTimer=setTimeout(initRealtimeSync,15000);
+    }
+  });
+}
+initRealtimeSync();
+setInterval(refreshActivePage,60000);
 </script>
 
 
