@@ -1194,7 +1194,31 @@ function buildSchedulePrintHtml(rounds){
   const dt=schedulePrintDateTime();
   const venue=currentEvent?.venue||'未填球館';
   const pages=[];
-  const roundsPerPage=7; for(let i=0;i<rounds.length;i+=roundsPerPage)pages.push(rounds.slice(i,i+roundsPerPage));
+  // A4 分頁：依每頁實際可容納的「場次列數」彈性分頁。
+  // 一個輪次視為不可拆分單位；若下一輪完整放不下，就整輪移到下一頁。
+  const PAGE_HEIGHT_MM=265;
+  const PAGE_PADDING_TOP_MM=1;
+  const PAGE_PADDING_BOTTOM_MM=5;
+  const HEADER_BLOCK_MM=41.5; // 標題、日期時間、場地、表頭及間距
+  const COURT_ROW_HEIGHT_MM=15.5;
+  const availableRows=Math.max(1,Math.floor(
+    (PAGE_HEIGHT_MM-PAGE_PADDING_TOP_MM-PAGE_PADDING_BOTTOM_MM-HEADER_BLOCK_MM) /
+    COURT_ROW_HEIGHT_MM
+  ));
+  let page=[];
+  let usedRows=0;
+  rounds.forEach(r=>{
+    const roundRows=Array.isArray(r.matches)?r.matches.length:0;
+    if(!roundRows)return;
+    if(page.length && usedRows+roundRows>availableRows){
+      pages.push(page);
+      page=[];
+      usedRows=0;
+    }
+    page.push(r);
+    usedRows+=roundRows;
+  });
+  if(page.length)pages.push(page);
   const pageHtml=pages.map((page,pi)=>{
     let rows='';
     page.forEach(r=>{
