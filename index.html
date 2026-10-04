@@ -243,8 +243,6 @@ html.ios-device .small{font-size:16px}
 
 <style id="1003-final-work-spec">
 /* 1003 工作版B：只依工作版A＋本次明確要求調整 */
-.schedule-event-title{color:#23456B}
-.schedule-choice.active{background:#23456B;color:#FCFCFC;border-color:#23456B}
 .schedule-round-head span{color:#23456B;background:#F5F0E3;font-size:12px;padding:5px 8px;border-radius:999px}
 /* 1、2號場不再分藍綠；恢復原本顏色，但場地與姓名字體加粗 */
 .schedule-match .schedule-court{font-weight:700;color:#6FA77A}
@@ -283,12 +281,11 @@ html.ios-device .small{font-size:16px}
 /* 工作版A：依目前確認，只調整自動排班結果標題與「使用幾面場／每人目標場次」卡片的選取按鈕 */
 .schedule-result-actions + .schedule-card{}
 .schedule-result-actions .schedule-result-title{}
-.schedule-card .schedule-event-title{color:#23456B}
 [data-courts].schedule-choice.active,[data-target].schedule-choice.active{background:#23456B!important;color:#FCFCFC!important;border-color:#23456B!important}
 </style>
 <style id="this-round-2-changes">
 /* 本輪僅修改：羽樂 Crew 卡其色；自動按鈕加長 */
-.schedule-event-title{color:#B09771!important}
+
 .schedule-choice-row.target-row{grid-template-columns:1fr!important}
 </style>
 
@@ -312,6 +309,20 @@ html.ios-device .small{font-size:16px}
   margin:0 !important;
   white-space:nowrap;
 }
+</style>
+<style id="this-round-second-half-blue">
+/* 本次唯一修改：後半段時段實力安排的選取按鈕改為藍色 */
+
+</style>
+
+
+<style id="schedule-color-rules-clean">
+/* 排班顏色：各區塊獨立控制，彼此不連動 */
+.schedule-event-card .schedule-event-title{color:#B09771!important;}
+.schedule-result-card .schedule-event-title{color:#23456B!important;}
+[data-courts].schedule-choice.active,[data-target].schedule-choice.active{background:#23456B!important;color:#FCFCFC!important;border-color:#23456B!important;}
+[data-mode-group="firstHalfMode"].schedule-choice.active{background:#B09771!important;color:#FCFCFC!important;border-color:#B09771!important;}
+[data-mode-group="secondHalfMode"].schedule-choice.active{background:#23456B!important;color:#FCFCFC!important;border-color:#23456B!important;}
 </style>
 </head>
 <body><main class="app">
@@ -419,7 +430,7 @@ async function renderScheduleSetup(){
   const durationStart=time(currentEvent.start_time), durationEnd=time(currentEvent.end_time);
   const mid=midTime(currentEvent.start_time,currentEvent.end_time);
   $('scheduleCard').innerHTML=`
-    <div class="schedule-card">
+    <div class="schedule-card schedule-event-card">
       <div class="schedule-event-title">${esc(currentEvent.title)}</div>
       <div class="schedule-event-meta">${fmtDate(currentEvent.event_date).m}/${fmtDate(currentEvent.event_date).d}（週${fmtDate(currentEvent.event_date).w}）　${durationStart}-${durationEnd}</div>
       <div class="schedule-event-meta">${esc(currentEvent.venue||'未填球館')} ・ ${scheduleSettings.courts} 面 ・ 已報名 ${players.length} 人</div>
@@ -934,7 +945,7 @@ function exportScheduleA4(rounds){
 function renderGeneratedSchedule(rounds,stats,warning){
   const total=Object.values(stats).reduce((a,s)=>a+s.played,0), vals=Object.values(stats).map(s=>s.played);
   const min=Math.min(...vals),max=Math.max(...vals);
-  let html=`<div class="schedule-card"><div class="schedule-event-title">⚡ 自動排班結果</div>${warning?`<div class="schedule-warning">${esc(warning)}</div>`:''}</div>`;
+  let html=`<div class="schedule-card schedule-result-card"><div class="schedule-event-title">⚡ 自動排班結果</div>${warning?`<div class="schedule-warning">${esc(warning)}</div>`:''}</div>`;
   window.__currentScheduleRounds=rounds;
   rounds.forEach((r,ri)=>{const mode=ri<rounds.length/2?scheduleSettings.firstHalfMode:scheduleSettings.secondHalfMode;html+=`<div class="schedule-card"><div class="schedule-round-head"><strong>第 ${r.round} 輪</strong><span class="${mode==='mixed'?'mode-mixed':'mode-similar'}">${fmtScheduleMode(mode)}</span></div>`;r.matches.forEach(m=>{html+=`<div class="schedule-match court-${Number(m.court)||0}"><div class="schedule-court">${m.court} 號場</div><div class="schedule-team"><span class="schedule-player-inline">${esc(m.a1.name)}${scheduleLevelHtml(m.a1)}</span><span class="schedule-plus">＋</span><span class="schedule-player-inline">${esc(m.a2.name)}${scheduleLevelHtml(m.a2)}</span></div><div class="schedule-team"><span class="schedule-player-inline">${esc(m.b1.name)}${scheduleLevelHtml(m.b1)}</span><span class="schedule-plus">＋</span><span class="schedule-player-inline">${esc(m.b2.name)}${scheduleLevelHtml(m.b2)}</span></div>${scheduleBalanceHtml(m)}</div>`});html+=`</div>`});
   html+=`<div class="schedule-card"><div class="schedule-setting-title">場次統計</div><div class="schedule-stats-grid">${Object.values(stats).sort((a,b)=>b.played-a.played).map(s=>{const partnerRepeats=[...s.partnerCounts.values()].reduce((n,c)=>n+Math.max(0,c-1),0);const opponentRepeats=[...s.opponentCounts.values()].reduce((n,c)=>n+Math.max(0,c-1),0);return `<div class="schedule-stat"><span>${esc(s.name)}${scheduleLevelHtml(s)}</span><b>${s.played} 場</b><small>休 ${s.rest}・最多連打 ${s.maxConsecutive}・最多連休 ${s.maxConsecutiveRest}<br>搭檔重複 ${partnerRepeats}・對手重複 ${opponentRepeats}</small></div>`}).join('')}</div></div>`;
@@ -1348,7 +1359,7 @@ loadEvents();setInterval(refreshActivePage,3000);
 [data-courts].schedule-choice.active,[data-target].schedule-choice.active{background:#23456B!important;color:#FCFCFC!important;border-color:#23456B!important;}
 
 /* 下方「時段實力安排」選取按鈕：卡其色 */
-[data-mode-group].schedule-choice.active{background:#B09771!important;color:#FCFCFC!important;border-color:#B09771!important;}
+
 
 /* 高＋低混搭：藍色字＋淡灰色筆刷 */
 .schedule-round-head span.mode-mixed{color:#23456B!important;}
