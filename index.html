@@ -41,7 +41,7 @@ html.ios-device .badge{font-size:15px}
 html.ios-device .person-name{font-size:18px}
 html.ios-device .small{font-size:16px}
 <style>
-/* 0922V4：深藍＋淺米金＋白色全版面配色 */
+/* 0922V4：深藍 淺米金 白色全版面配色 */
 :root{--navy:#23456B;--title:#5F6468;--green:#5E9B87;--green-text:#23456B;--green-soft:#F5F0E3;--blue:#F5F0E3;--blue-strong:#EDE5D2;--line:#D9DDE2;--text:#4B5563;--muted:#737B83;--pink:#A65F6D;--pink-soft:#F7E9EC;--pink-line:#E5C9CF;--bg:#F1F1F1}
 .event-title,.info-title,.admin-item-title,.record .rtitle,.roster-event-title,.admin-view-title,.admin-view-title-text{color:#B09771}.roster-event-title{font-size:14px}.success-card h2,.success-name,.field label,.admin summary,.name-tools button{color:var(--title)}
 .date,.info-date{color:#5F6468}
@@ -242,7 +242,7 @@ html.ios-device .small{font-size:16px}
 </style>
 
 <style id="1003-final-work-spec">
-/* 1003 工作版B：只依工作版A＋本次明確要求調整 */
+/* 1003 工作版B：只依工作版A 本次明確要求調整 */
 .schedule-round-head span{color:#23456B;background:#F5F0E3;font-size:12px;padding:5px 8px;border-radius:999px}
 /* 1、2號場不再分藍綠；恢復原本顏色，但場地與姓名字體加粗 */
 .schedule-match .schedule-court{font-weight:700;color:#6FA77A}
@@ -264,7 +264,7 @@ html.ios-device .small{font-size:16px}
 /* 場次統計：名字加粗；級數標籤沿用同一套筆刷 */
 .schedule-stat span{font-weight:700;color:#4B5563}
 .schedule-stat .schedule-level{font-weight:700}
-/* 高＋低混搭：藍字保留，但筆刷改綠色 */
+/* 高 低混搭：藍字保留，但筆刷改綠色 */
 .schedule-round-head span{position:relative;display:inline-block;background:transparent!important;padding:2px 8px!important;isolation:isolate}
 .schedule-round-head span::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:50%;height:72%;transform:translateY(-50%) rotate(-2deg);clip-path:polygon(3% 28%,18% 10%,36% 21%,54% 6%,73% 18%,97% 29%,91% 73%,75% 86%,57% 76%,39% 92%,19% 80%,2% 67%);background:#F5F0E3}
 .schedule-round-head span.mode-similar::before{background:#F5F0E3}
@@ -446,15 +446,15 @@ html.ios-device .small{font-size:16px}
 /* 下方「時段實力安排」選取按鈕：卡其色 */
 
 
-/* 高＋低混搭：藍色字＋淡灰色筆刷 */
+/* 高 低混搭：藍色字 淡灰色筆刷 */
 .schedule-round-head span.mode-mixed{color:#23456B!important;}
 .schedule-round-head span.mode-mixed::before{background:#E7E7E7!important;}
 
 /* 列印：每輪字體 +2px、場地 1／2 粗體、姓名粗體；固定每頁 7 輪 */
 </style>
 
-<style id="layout-v2-team-row-spacing">
-/* 排版 V2：A/B 兩隊上下排列；縮小輪次卡片上下距離。其他內容不動。 */
+<style id="layout-v4-fixed-2x2">
+/* 排版 V4：每個場地固定 2 欄 × 2 排：A1 B1 / A2 B2；不使用 號。 */
 .schedule-round-card{
   margin-bottom:8px!important;
   padding-top:14px!important;
@@ -464,22 +464,38 @@ html.ios-device .small{font-size:16px}
   margin-bottom:8px!important;
 }
 .schedule-round-card .schedule-match{
-  grid-template-columns:58px minmax(0,1fr)!important;
-  grid-template-rows:auto auto auto;
+  display:grid!important;
+  grid-template-columns:54px minmax(0,1fr)!important;
+  grid-template-rows:auto auto auto!important;
   column-gap:10px!important;
-  row-gap:2px!important;
-  padding:8px 0!important;
+  row-gap:3px!important;
+  align-items:center!important;
+  padding:7px 0!important;
 }
 .schedule-round-card .schedule-match .schedule-court{
   grid-column:1!important;
   grid-row:1 / span 2!important;
-  align-self:stretch;
-  display:flex;
-  align-items:center;
+  align-self:stretch!important;
+  display:flex!important;
+  align-items:center!important;
 }
 .schedule-round-card .schedule-match .schedule-team{
   grid-column:2!important;
-  width:100%;
+  width:100%!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:0!important;
+  min-width:0!important;
+}
+.schedule-round-card .schedule-match .schedule-team:nth-child(2){
+  grid-row:1!important;
+}
+.schedule-round-card .schedule-match .schedule-team:nth-child(3){
+  grid-row:2!important;
+}
+.schedule-round-card .schedule-match .schedule-team > *{
+  min-width:0!important;
 }
 .schedule-round-card .schedule-match .schedule-balance{
   grid-column:2!important;
@@ -487,48 +503,14 @@ html.ios-device .small{font-size:16px}
   justify-self:start!important;
   margin-top:2px!important;
 }
-</style>
-
-
-<style id="1004V2-ab-layout">
-/* 1004V2：左邊固定 A 隊(a1/a2)，右邊固定 B 隊(b1/b2)；移除＋號。 */
-.schedule-round-card .schedule-match{
-  grid-template-columns:58px minmax(0,1fr) 28px minmax(0,1fr)!important;
-  column-gap:10px!important;
-  align-items:start!important;
-}
-.schedule-round-card .schedule-team{
-  display:flex!important;
-  flex-direction:column!important;
-  gap:4px!important;
-  min-width:0!important;
-  width:100%!important;
-  line-height:1.35!important;
-}
-.schedule-round-card .schedule-team-a{grid-column:2!important;}
-.schedule-round-card .schedule-vs{
-  grid-column:3!important;
-  align-self:center!important;
-  padding-top:0!important;
-}
-.schedule-round-card .schedule-team-b{grid-column:4!important;}
-.schedule-round-card .schedule-player-row{
-  display:flex!important;
-  align-items:baseline!important;
-  min-width:0!important;
-  white-space:nowrap!important;
-}
-.schedule-round-card .schedule-player-name{
-  min-width:0!important;
-  overflow:hidden!important;
-  text-overflow:ellipsis!important;
-}
-.schedule-round-card .schedule-level{
-  flex:0 0 auto!important;
-  margin-left:5px!important;
-}
-.schedule-round-card .schedule-balance{
-  grid-column:2/-1!important;
+@media (max-width:430px){
+  .schedule-round-card .schedule-match{
+    grid-template-columns:52px minmax(0,1fr)!important;
+    column-gap:8px!important;
+  }
+  .schedule-round-card .schedule-match .schedule-team{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  }
 }
 </style>
 
@@ -657,14 +639,14 @@ async function renderScheduleSetup(){
         <div class="schedule-period-title">前半段　${durationStart}–${mid}</div>
         <div class="schedule-mode-row">
           ${modeButton('firstHalfMode','similar','實力相當')}
-          ${modeButton('firstHalfMode','mixed','高＋低混搭')}
+          ${modeButton('firstHalfMode','mixed','高 低混搭')}
         </div>
       </div>
       <div class="schedule-period-card">
         <div class="schedule-period-title">後半段　${mid}–${durationEnd}</div>
         <div class="schedule-mode-row">
           ${modeButton('secondHalfMode','similar','實力相當')}
-          ${modeButton('secondHalfMode','mixed','高＋低混搭')}
+          ${modeButton('secondHalfMode','mixed','高 低混搭')}
         </div>
       </div>
     </div>
@@ -714,7 +696,7 @@ let currentScheduleId=null;
 
 function pairKey(a,b){return a<b?`${a}__${b}`:`${b}__${a}`}
 function levelOf(p){return Number.isFinite(Number(p.level))?Number(p.level):5}
-function fmtScheduleMode(v){return v==='similar'?'實力相當':'高＋低混搭'}
+function fmtScheduleMode(v){return v==='similar'?'實力相當':'高 低混搭'}
 function shuffleByRound(arr,round){
   if(!arr.length)return [];
   const k=(round*3)%arr.length;
@@ -898,7 +880,7 @@ function groupScore(group,mode,stats){
     if(known<4)score+=4;
   }
 
-  // 重要：不能只挑「高＋低」的人湊成一組，還要先確認這4個人能不能拆成
+  // 重要：不能只挑「高 低」的人湊成一組，還要先確認這4個人能不能拆成
   // 兩隊實力接近的組合。否則就可能出現 8+4 VS 4+5 這種明顯失衡。
   const bestSplit=teamOptions(group).reduce((best,opt)=>{
     const a=opt[0].reduce((sum,p)=>sum+levelOf(p),0);
@@ -910,7 +892,7 @@ function groupScore(group,mode,stats){
   score += bestSplit<=2 ? bestSplit*1000 : 100000 + bestSplit*1000;
 
   // 混搭模式除了兩隊總級數接近，也希望四人中高低分布能形成
-  // 「高＋低 VS 高＋低」；這項只作為次要條件，不凌駕於隊伍總實力平衡。
+  // 「高 低 VS 高 低」；這項只作為次要條件，不凌駕於隊伍總實力平衡。
   if(mode==='mixed'){
     const mid=(lv[1]+lv[2])/2;
     const splitOptions=teamOptions(group);
@@ -1030,7 +1012,7 @@ function teamScore(opt,stats,mode){
   sc+=Math.abs(aSum/2-bSum/2)*5;
 
   if(mode==='mixed'){
-    // 高＋低混搭：每隊盡量各有一位高、一位低。
+    // 高 低混搭：每隊盡量各有一位高、一位低。
     // 若一隊兩人都落在四人中的高側或低側，增加明顯懲罰。
     const levels=[a1,a2,b1,b2].slice().sort((x,y)=>x-y);
     const mid=(levels[1]+levels[2])/2;
@@ -1136,7 +1118,7 @@ th{height:17mm;border:1.5px solid #6F7479;background:#E7E7E7!important;font-size
 .schedule-match{grid-template-columns:58px minmax(0,1fr) minmax(0,1fr);gap:10px;}
 .schedule-match .schedule-court{border-right:1px solid #E3E5E8;padding-right:10px;}
 .schedule-match .schedule-vs{display:none;}
-/* 級數差文字 +1px，維持綠字＋綠色筆刷，靠左 */
+/* 級數差文字 +1px，維持綠字 綠色筆刷，靠左 */
 .schedule-balance{font-size:10px!important;justify-self:start!important;text-align:left!important;}
 /* 其他場次名字維持原本顏色與正常字重 */
 .schedule-match .schedule-team{font-weight:400;}
@@ -1155,7 +1137,7 @@ function renderGeneratedSchedule(rounds,stats,warning){
   const min=Math.min(...vals),max=Math.max(...vals);
   let html=`<div class="schedule-card schedule-result-card"><div class="schedule-event-title">⚡ 自動排班結果</div>${warning?`<div class="schedule-warning">${esc(warning)}</div>`:''}</div>`;
   window.__currentScheduleRounds=rounds;
-  rounds.forEach((r,ri)=>{const mode=ri<rounds.length/2?scheduleSettings.firstHalfMode:scheduleSettings.secondHalfMode;html+=`<div class="schedule-card schedule-round-card"><div class="schedule-round-head"><strong>第 ${r.round} 輪</strong><span class="${mode==='mixed'?'mode-mixed':'mode-similar'}">${fmtScheduleMode(mode)}</span></div>`;r.matches.forEach(m=>{html+=`<div class="schedule-match court-${Number(m.court)||0}"><div class="schedule-court">${m.court} 號場</div><div class="schedule-team schedule-team-a"><div class="schedule-player-row"><span class="schedule-player-name">${esc(m.a1.name)}</span>${scheduleLevelHtml(m.a1)}</div><div class="schedule-player-row"><span class="schedule-player-name">${esc(m.a2.name)}</span>${scheduleLevelHtml(m.a2)}</div></div><div class="schedule-vs">VS</div><div class="schedule-team schedule-team-b"><div class="schedule-player-row"><span class="schedule-player-name">${esc(m.b1.name)}</span>${scheduleLevelHtml(m.b1)}</div><div class="schedule-player-row"><span class="schedule-player-name">${esc(m.b2.name)}</span>${scheduleLevelHtml(m.b2)}</div></div>${scheduleBalanceHtml(m)}</div>`});html+=`</div>`});
+  rounds.forEach((r,ri)=>{const mode=ri<rounds.length/2?scheduleSettings.firstHalfMode:scheduleSettings.secondHalfMode;html+=`<div class="schedule-card schedule-round-card"><div class="schedule-round-head"><strong>第 ${r.round} 輪</strong><span class="${mode==='mixed'?'mode-mixed':'mode-similar'}">${fmtScheduleMode(mode)}</span></div>`;r.matches.forEach(m=>{html+=`<div class="schedule-match court-${Number(m.court)||0}"><div class="schedule-court">${m.court} 號場</div><div class="schedule-team"><span class="schedule-player-inline"><span class="schedule-player-name">${esc(m.a1.name)}</span>${scheduleLevelHtml(m.a1)}</span><span class="schedule-plus">＋</span><span class="schedule-player-inline"><span class="schedule-player-name">${esc(m.a2.name)}</span>${scheduleLevelHtml(m.a2)}</span></div><div class="schedule-team"><span class="schedule-player-inline"><span class="schedule-player-name">${esc(m.b1.name)}</span>${scheduleLevelHtml(m.b1)}</span><span class="schedule-plus">＋</span><span class="schedule-player-inline"><span class="schedule-player-name">${esc(m.b2.name)}</span>${scheduleLevelHtml(m.b2)}</span></div>${scheduleBalanceHtml(m)}</div>`});html+=`</div>`});
   html+=`<div class="schedule-card"><div class="schedule-setting-title">場次統計</div><div class="schedule-stats-grid">${Object.values(stats).sort((a,b)=>b.played-a.played).map(s=>{const partnerRepeats=[...s.partnerCounts.values()].reduce((n,c)=>n+Math.max(0,c-1),0);const opponentRepeats=[...s.opponentCounts.values()].reduce((n,c)=>n+Math.max(0,c-1),0);return `<div class="schedule-stat"><span>${esc(s.name)}${scheduleLevelHtml(s)}</span><b>${s.played} 場</b><small>休 ${s.rest}・最多連打 ${s.maxConsecutive}・最多連休 ${s.maxConsecutiveRest}<br>搭檔重複 ${partnerRepeats}・對手重複 ${opponentRepeats}</small></div>`}).join('')}</div></div>`;
   html+=`<div class="schedule-card schedule-result-actions"><div class="schedule-result-buttons"><button type="button" class="btn btn-primary btn-a4" onclick="exportScheduleA4(window.__currentScheduleRounds)">🖨️ 列印</button><button type="button" class="btn btn-primary" onclick="openSchedule()">🔄 重新排班</button></div></div>`;
   $('scheduleCard').innerHTML=html;
@@ -1471,7 +1453,7 @@ loadEvents();setInterval(refreshActivePage,3000);
 .schedule-match{grid-template-columns:58px minmax(0,1fr) minmax(0,1fr);gap:10px;}
 .schedule-match .schedule-court{border-right:1px solid #E3E5E8;padding-right:10px;}
 .schedule-match .schedule-vs{display:none;}
-/* 級數差文字 +1px，維持綠字＋綠色筆刷，靠左 */
+/* 級數差文字 +1px，維持綠字 綠色筆刷，靠左 */
 .schedule-balance{font-size:10px!important;justify-self:start!important;text-align:left!important;}
 /* 其他場次名字維持原本顏色與正常字重 */
 .schedule-match .schedule-team{font-weight:400;}
