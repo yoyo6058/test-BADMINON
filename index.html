@@ -112,6 +112,14 @@ html.ios-device .small{font-size:16px}
 /* 工作版D：移除兩段說明小字；縮小排班設定兩張卡片間距 */
 .schedule-card.schedule-setup-card{margin-bottom:8px!important}
 .schedule-card.schedule-setup-card + .schedule-card{margin-top:-6px!important}
+
+/* V7：B隊整體往左微調 */
+@media (max-width:430px){
+  .schedule-match .schedule-b1,
+  .schedule-match .schedule-b2{
+    transform:translateX(-8px)!important;
+  }
+}
 </style><style id="home-workA-final">
 /* 工作版 A｜首頁本頁調整 */
 .event-card .date b{font-size:20px}
