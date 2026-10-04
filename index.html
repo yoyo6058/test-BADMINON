@@ -289,25 +289,58 @@ html.ios-device .small{font-size:16px}
 .schedule-choice-row.target-row{grid-template-columns:1fr!important}
 </style>
 
-<style id="1003-name-layout">
-/* 每場姓名固定間距：姓名／級數／＋／姓名／級數，避免因名字長短造成＋號跑位 */
+<style id="schedule-layout-clean-v1">
+/* 排班結果排版：姓名、級數、＋固定欄位，避免名字長短互相推擠 */
+.schedule-match{
+  display:grid!important;
+  grid-template-columns:58px minmax(0,1fr) minmax(0,1fr)!important;
+  column-gap:10px!important;
+  row-gap:0!important;
+  align-items:center!important;
+}
 .schedule-team{
-  display:grid !important;
-  grid-template-columns:minmax(0,1fr) max-content 24px minmax(0,1fr) max-content !important;
-  align-items:center;
-  column-gap:6px;
-  white-space:nowrap;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 18px minmax(0,1fr)!important;
+  align-items:center!important;
+  min-width:0!important;
+  gap:4px!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  line-height:1.35!important;
 }
-.schedule-team .schedule-player-inline{
-  min-width:0;
-  white-space:nowrap;
+.schedule-player-inline{
+  display:flex!important;
+  align-items:center!important;
+  min-width:0!important;
+  gap:3px!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
 }
-.schedule-team .schedule-plus{
-  display:block;
-  width:24px;
-  text-align:center;
-  margin:0 !important;
-  white-space:nowrap;
+.schedule-player-name{
+  min-width:0!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+  flex:1 1 auto!important;
+}
+.schedule-team .schedule-level{
+  flex:0 0 auto!important;
+  margin-left:0!important;
+  white-space:nowrap!important;
+}
+.schedule-plus{
+  width:18px!important;
+  min-width:18px!important;
+  margin:0!important;
+  padding:0!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+}
+@media (max-width:430px){
+  .schedule-match{grid-template-columns:54px minmax(0,1fr) minmax(0,1fr)!important;column-gap:8px!important;}
+  .schedule-team{grid-template-columns:minmax(0,1fr) 16px minmax(0,1fr)!important;gap:2px!important;font-size:14px!important;}
+  .schedule-plus{width:16px!important;min-width:16px!important;}
+  .schedule-player-inline{gap:2px!important;}
 }
 </style>
 <style id="this-round-second-half-blue">
@@ -323,6 +356,101 @@ html.ios-device .small{font-size:16px}
 [data-courts].schedule-choice.active,[data-target].schedule-choice.active{background:#23456B!important;color:#FCFCFC!important;border-color:#23456B!important;}
 [data-mode-group="firstHalfMode"].schedule-choice.active{background:#B09771!important;color:#FCFCFC!important;border-color:#B09771!important;}
 [data-mode-group="secondHalfMode"].schedule-choice.active{background:#23456B!important;color:#FCFCFC!important;border-color:#23456B!important;}
+</style>
+
+<style>
+/* 0926V3 修正版：所有 #23456B 藍色按鈕文字統一為 #FCFCFC */
+.btn-primary,
+.btn-create-submit,
+.btn-admin-create,
+.bottom-nav.nav-dark .btn,
+.bottom-nav .btn-home-admin,
+.admin-item-actions .btn-green,
+.admin-item.ended .admin-item-actions .btn-view-ended,
+.event-actions .btn-view,
+.action-grid .btn-green,
+.btn-green,
+#cancelBackBtn,
+#deleteBackBtn,
+#passwordConfirmBtn {
+  color:#FCFCFC!important;
+}
+
+/* 0927：活動報名頁／輸入姓名頁的活動資訊，與首頁卡片完全統一 */
+.signup-info-card{padding:18px 16px;margin-bottom:14px}
+.signup-info-card .info-grid{display:grid;grid-template-columns:96px minmax(0,1fr);gap:3px 16px;align-items:stretch}
+.signup-info-card .info-date{text-align:center;color:#23456B;font-weight:800;line-height:1.05;border-right:1px solid #D5D9DE;padding-right:14px;grid-row:1/4;display:flex;flex-direction:column;justify-content:center;align-items:center;align-self:stretch}
+.signup-info-card .info-date b{font-size:20px;display:block;color:#23456B!important;font-weight:800!important}
+.signup-info-card .info-date span{font-size:15px;margin-top:8px}
+.signup-info-card .info-title{font-size:16px;color:#5F6468;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35;display:block}
+.signup-info-card .info-time-line{font-size:14px;color:#737B83;margin-top:8px;white-space:nowrap;line-height:1.35;display:block}
+.signup-info-card .info-venue-line{font-size:14px;color:#737B83;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35;display:block}
+.signup-info-card .info-venue-line .info-line-spacer{display:inline-block;width:18px;height:17px;vertical-align:middle}
+</style>
+
+<style>/* WORK_A_SIGNUP_SIZES */
+.signup-info-card .info-date b{font-size:20px!important}
+.signup-info-card .info-title{font-size:16px!important}
+.signup-info-card .info-time-line{font-size:14px!important}
+.signup-info-card .info-venue-line{font-size:14px!important}
+</style>
+
+<style id="workA-v4-targeted-fixes">
+/* V4：只針對指定畫面／位置修改 */
+#signup .signup-info-card .info-title{color:#B09771!important}
+</style>
+
+
+<style id="workB-success-waitlist-adjustments">
+/* 工作版 B｜報名成功候補畫面指定配色 */
+.success-date{color:#B09771!important;font-weight:800!important;}
+.success-waitlist-message > div:first-child{color:#D95362!important;font-weight:700!important;}
+.success-wait-position{
+  position:relative!important;
+  display:inline-block!important;
+  color:#659A86!important;
+  font-weight:800!important;
+  padding:2px 7px!important;
+  z-index:0;
+  isolation:isolate;
+}
+.success-wait-position::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:0;right:0;top:50%;height:72%;
+  transform:translateY(-50%) rotate(-5deg);
+  clip-path:polygon(3% 28%,18% 10%,36% 21%,54% 6%,73% 18%,97% 29%,91% 73%,75% 86%,57% 76%,39% 92%,19% 80%,2% 67%);
+  background:#E8F1ED;
+}
+</style>
+
+<style id="1003-workB-latest">
+/* 工作版B：場次統計中，紅框指定的「級數」與「場次」各縮小 1px；其他字體不動 */
+.schedule-stat .schedule-level{font-size:7px!important}
+.schedule-stat > b{font-size:12px!important}
+</style>
+
+<style id="1003V9-final-adjustments">
+/* 本輪最終確認：只處理本輪指定項目 */
+/* 系統：級數 +1px、7場 -1px、每輪場地 +1px */
+.schedule-level{font-size:11px!important;}
+.schedule-stat b{font-size:13px!important;}
+.schedule-court{font-size:13px!important;}
+
+
+
+/* 上方「使用幾面場／自動」選取按鈕：藍色 */
+[data-courts].schedule-choice.active,[data-target].schedule-choice.active{background:#23456B!important;color:#FCFCFC!important;border-color:#23456B!important;}
+
+/* 下方「時段實力安排」選取按鈕：卡其色 */
+
+
+/* 高＋低混搭：藍色字＋淡灰色筆刷 */
+.schedule-round-head span.mode-mixed{color:#23456B!important;}
+.schedule-round-head span.mode-mixed::before{background:#E7E7E7!important;}
+
+/* 列印：每輪字體 +2px、場地 1／2 粗體、姓名粗體；固定每頁 7 輪 */
 </style>
 </head>
 <body><main class="app">
@@ -947,7 +1075,7 @@ function renderGeneratedSchedule(rounds,stats,warning){
   const min=Math.min(...vals),max=Math.max(...vals);
   let html=`<div class="schedule-card schedule-result-card"><div class="schedule-event-title">⚡ 自動排班結果</div>${warning?`<div class="schedule-warning">${esc(warning)}</div>`:''}</div>`;
   window.__currentScheduleRounds=rounds;
-  rounds.forEach((r,ri)=>{const mode=ri<rounds.length/2?scheduleSettings.firstHalfMode:scheduleSettings.secondHalfMode;html+=`<div class="schedule-card"><div class="schedule-round-head"><strong>第 ${r.round} 輪</strong><span class="${mode==='mixed'?'mode-mixed':'mode-similar'}">${fmtScheduleMode(mode)}</span></div>`;r.matches.forEach(m=>{html+=`<div class="schedule-match court-${Number(m.court)||0}"><div class="schedule-court">${m.court} 號場</div><div class="schedule-team"><span class="schedule-player-inline">${esc(m.a1.name)}${scheduleLevelHtml(m.a1)}</span><span class="schedule-plus">＋</span><span class="schedule-player-inline">${esc(m.a2.name)}${scheduleLevelHtml(m.a2)}</span></div><div class="schedule-team"><span class="schedule-player-inline">${esc(m.b1.name)}${scheduleLevelHtml(m.b1)}</span><span class="schedule-plus">＋</span><span class="schedule-player-inline">${esc(m.b2.name)}${scheduleLevelHtml(m.b2)}</span></div>${scheduleBalanceHtml(m)}</div>`});html+=`</div>`});
+  rounds.forEach((r,ri)=>{const mode=ri<rounds.length/2?scheduleSettings.firstHalfMode:scheduleSettings.secondHalfMode;html+=`<div class="schedule-card"><div class="schedule-round-head"><strong>第 ${r.round} 輪</strong><span class="${mode==='mixed'?'mode-mixed':'mode-similar'}">${fmtScheduleMode(mode)}</span></div>`;r.matches.forEach(m=>{html+=`<div class="schedule-match court-${Number(m.court)||0}"><div class="schedule-court">${m.court} 號場</div><div class="schedule-team"><span class="schedule-player-inline"><span class="schedule-player-name">${esc(m.a1.name)}</span>${scheduleLevelHtml(m.a1)}</span><span class="schedule-plus">＋</span><span class="schedule-player-inline"><span class="schedule-player-name">${esc(m.a2.name)}</span>${scheduleLevelHtml(m.a2)}</span></div><div class="schedule-team"><span class="schedule-player-inline"><span class="schedule-player-name">${esc(m.b1.name)}</span>${scheduleLevelHtml(m.b1)}</span><span class="schedule-plus">＋</span><span class="schedule-player-inline"><span class="schedule-player-name">${esc(m.b2.name)}</span>${scheduleLevelHtml(m.b2)}</span></div>${scheduleBalanceHtml(m)}</div>`});html+=`</div>`});
   html+=`<div class="schedule-card"><div class="schedule-setting-title">場次統計</div><div class="schedule-stats-grid">${Object.values(stats).sort((a,b)=>b.played-a.played).map(s=>{const partnerRepeats=[...s.partnerCounts.values()].reduce((n,c)=>n+Math.max(0,c-1),0);const opponentRepeats=[...s.opponentCounts.values()].reduce((n,c)=>n+Math.max(0,c-1),0);return `<div class="schedule-stat"><span>${esc(s.name)}${scheduleLevelHtml(s)}</span><b>${s.played} 場</b><small>休 ${s.rest}・最多連打 ${s.maxConsecutive}・最多連休 ${s.maxConsecutiveRest}<br>搭檔重複 ${partnerRepeats}・對手重複 ${opponentRepeats}</small></div>`}).join('')}</div></div>`;
   html+=`<div class="schedule-card schedule-result-actions"><div class="schedule-result-buttons"><button type="button" class="btn btn-primary btn-a4" onclick="exportScheduleA4(window.__currentScheduleRounds)">🖨️ 列印</button><button type="button" class="btn btn-primary" onclick="openSchedule()">🔄 重新排班</button></div></div>`;
   $('scheduleCard').innerHTML=html;
@@ -1269,101 +1397,3 @@ loadEvents();setInterval(refreshActivePage,3000);
 .schedule-match .schedule-team{font-weight:400;}
 </style>
 </body></html>
-
-<style>
-/* 0926V3 修正版：所有 #23456B 藍色按鈕文字統一為 #FCFCFC */
-.btn-primary,
-.btn-create-submit,
-.btn-admin-create,
-.bottom-nav.nav-dark .btn,
-.bottom-nav .btn-home-admin,
-.admin-item-actions .btn-green,
-.admin-item.ended .admin-item-actions .btn-view-ended,
-.event-actions .btn-view,
-.action-grid .btn-green,
-.btn-green,
-#cancelBackBtn,
-#deleteBackBtn,
-#passwordConfirmBtn {
-  color:#FCFCFC!important;
-}
-
-/* 0927：活動報名頁／輸入姓名頁的活動資訊，與首頁卡片完全統一 */
-.signup-info-card{padding:18px 16px;margin-bottom:14px}
-.signup-info-card .info-grid{display:grid;grid-template-columns:96px minmax(0,1fr);gap:3px 16px;align-items:stretch}
-.signup-info-card .info-date{text-align:center;color:#23456B;font-weight:800;line-height:1.05;border-right:1px solid #D5D9DE;padding-right:14px;grid-row:1/4;display:flex;flex-direction:column;justify-content:center;align-items:center;align-self:stretch}
-.signup-info-card .info-date b{font-size:20px;display:block;color:#23456B!important;font-weight:800!important}
-.signup-info-card .info-date span{font-size:15px;margin-top:8px}
-.signup-info-card .info-title{font-size:16px;color:#5F6468;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35;display:block}
-.signup-info-card .info-time-line{font-size:14px;color:#737B83;margin-top:8px;white-space:nowrap;line-height:1.35;display:block}
-.signup-info-card .info-venue-line{font-size:14px;color:#737B83;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35;display:block}
-.signup-info-card .info-venue-line .info-line-spacer{display:inline-block;width:18px;height:17px;vertical-align:middle}
-</style>
-
-<style>/* WORK_A_SIGNUP_SIZES */
-.signup-info-card .info-date b{font-size:20px!important}
-.signup-info-card .info-title{font-size:16px!important}
-.signup-info-card .info-time-line{font-size:14px!important}
-.signup-info-card .info-venue-line{font-size:14px!important}
-</style>
-
-<style id="workA-v4-targeted-fixes">
-/* V4：只針對指定畫面／位置修改 */
-#signup .signup-info-card .info-title{color:#B09771!important}
-</style>
-
-
-<style id="workB-success-waitlist-adjustments">
-/* 工作版 B｜報名成功候補畫面指定配色 */
-.success-date{color:#B09771!important;font-weight:800!important;}
-.success-waitlist-message > div:first-child{color:#D95362!important;font-weight:700!important;}
-.success-wait-position{
-  position:relative!important;
-  display:inline-block!important;
-  color:#659A86!important;
-  font-weight:800!important;
-  padding:2px 7px!important;
-  z-index:0;
-  isolation:isolate;
-}
-.success-wait-position::before{
-  content:"";
-  position:absolute;
-  z-index:-1;
-  left:0;right:0;top:50%;height:72%;
-  transform:translateY(-50%) rotate(-5deg);
-  clip-path:polygon(3% 28%,18% 10%,36% 21%,54% 6%,73% 18%,97% 29%,91% 73%,75% 86%,57% 76%,39% 92%,19% 80%,2% 67%);
-  background:#E8F1ED;
-}
-</style>
-
-<style id="1003-workB-latest">
-/* 工作版B：場次統計中，紅框指定的「級數」與「場次」各縮小 1px；其他字體不動 */
-.schedule-stat .schedule-level{font-size:7px!important}
-.schedule-stat > b{font-size:12px!important}
-</style>
-
-<style id="1003V9-final-adjustments">
-/* 本輪最終確認：只處理本輪指定項目 */
-/* 系統：級數 +1px、7場 -1px、每輪場地 +1px */
-.schedule-level{font-size:11px!important;}
-.schedule-stat b{font-size:13px!important;}
-.schedule-court{font-size:13px!important;}
-
-/* 系統：姓名與＋固定成「姓名 ＋ 姓名」，避免窄螢幕換行時＋跑到前後 */
-.schedule-team{white-space:normal!important;}
-.schedule-player-inline{display:inline-block;white-space:nowrap;}
-.schedule-plus{display:inline-block;white-space:nowrap;margin:0 7px;}
-
-/* 上方「使用幾面場／自動」選取按鈕：藍色 */
-[data-courts].schedule-choice.active,[data-target].schedule-choice.active{background:#23456B!important;color:#FCFCFC!important;border-color:#23456B!important;}
-
-/* 下方「時段實力安排」選取按鈕：卡其色 */
-
-
-/* 高＋低混搭：藍色字＋淡灰色筆刷 */
-.schedule-round-head span.mode-mixed{color:#23456B!important;}
-.schedule-round-head span.mode-mixed::before{background:#E7E7E7!important;}
-
-/* 列印：每輪字體 +2px、場地 1／2 粗體、姓名粗體；固定每頁 7 輪 */
-</style>
