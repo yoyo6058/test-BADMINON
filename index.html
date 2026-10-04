@@ -588,6 +588,26 @@ html.ios-device .small{font-size:16px}
     gap:2px!important;
   }
 }
+
+/* 本輪修正：輪次標題單行、A隊右移、卡片上下留白縮小 */
+.schedule-round-card .schedule-round-head,
+.schedule-round-card .schedule-round-head *{
+  white-space:nowrap!important;
+}
+.schedule-round-card .schedule-round-head{
+  flex-wrap:nowrap!important;
+}
+.schedule-round-card .schedule-round-head > *{
+  min-width:0!important;
+}
+.schedule-match .schedule-a1,
+.schedule-match .schedule-a2{
+  padding-left:12px!important;
+}
+.schedule-round-card{
+  padding-top:7px!important;
+  padding-bottom:7px!important;
+}
 </style>
 </head>
 <body><main class="app">
