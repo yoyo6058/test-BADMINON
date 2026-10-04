@@ -608,6 +608,18 @@ html.ios-device .small{font-size:16px}
   padding-top:7px!important;
   padding-bottom:7px!important;
 }
+
+/* V6：只修正手機版 1號場／2號場不換行 */
+@media (max-width:430px){
+  .schedule-match{
+    grid-template-columns:58px minmax(0,1fr) minmax(0,1fr)!important;
+    column-gap:2px!important;
+  }
+  .schedule-match .schedule-court{
+    white-space:nowrap!important;
+    overflow:visible!important;
+  }
+}
 </style>
 </head>
 <body><main class="app">
