@@ -6,8 +6,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--keyboard-cover:0px;--navy:#23456B;--title:#5F6468;--blue:#F5F0E3;--blue-strong:#EDE5D2;--line:#D9DDE2;--text:#4B5563;--muted:#737B83;--green:#5E9B87;--green-soft:#F5F0E3;--green-text:#23456B;--pink:#A65F6D;--pink-soft:#F7E9EC;--pink-line:#E5C9CF;--bg:#E7E7E7;--white:#fff;--shadow:0 5px 18px rgba(35,69,107,.08)}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",sans-serif;color:var(--text);background:var(--bg)}button,input,textarea,select{font:inherit}html{font-size:16px;-webkit-text-size-adjust:100%;text-size-adjust:100%;}button{border:0;cursor:pointer}.app{width:100%;max-width:620px;margin:0 auto;min-height:100vh;padding-bottom:100px}.header{background:var(--navy);color:#fcfcfc;padding:0;text-align:center;line-height:0}.header-image{display:block;width:100%;height:auto;margin:0}.header h1{display:inline-block;font-size:22px;margin:0;font-weight:700;letter-spacing:.08em;position:relative}.header h1 .header-icon{position:absolute;left:-44px;right:auto;top:50%;transform:translateY(-50%);width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1}.header p{max-width:430px;margin:4px auto 0;padding-right:20px;text-align:right;font-size:12px;opacity:.82}.page{padding:18px 16px}.screen{display:none}.screen.active{display:block}.section-title{font-size:18px;font-weight:700;color:#5F6468;margin:2px 2px 14px}.event-card,.info-card,.form-card,.roster-card,.success-card{background:#fbfbfb;border:1px solid #D5D9DE;border-radius:12px;box-shadow:var(--shadow)}.event-card{padding:18px 16px;margin-bottom:14px;position:relative}.event-top{display:grid;grid-template-columns:90px minmax(0,1fr);gap:16px;align-items:stretch}.date{width:auto;flex:none;text-align:center;color:#23456B;font-weight:800;line-height:1.05;display:flex;flex-direction:column;justify-content:center;border-right:1px solid #D5D9DE;padding-right:12px}.date b{display:block;font-size:20px}.date span{font-size:15px;margin-top:8px}.event-main{min-width:0;padding:2px 0 0}.event-title-row,.event-meta-row{display:flex;align-items:center;min-width:0}.event-title-row{justify-content:space-between;gap:8px}.event-title{font-size:17px;color:#B09771;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35;min-width:0}.event-time{font-size:14px;color:#737B83;margin-top:9px;white-space:nowrap;line-height:1.35}.event-venue{font-size:14px;color:#737B83;margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35}.event-count{margin:0;white-space:nowrap;display:flex;align-items:center}.event-count-line{display:flex;align-items:center;justify-content:flex-end;gap:3px}.loading-count{visibility:hidden}.count-person-wrap{display:none}.count-person-icon{display:none}.count-person-wrap + .count-number{margin-left:0}.count{display:flex;align-items:center;gap:3px}.event-status{white-space:nowrap;line-height:1;padding:4px 6px;border-radius:12px;font-size:13px}.event-count .event-status{margin:0}.event-status.ended{background:#E3E3E3;color:var(--navy);font-weight:700}.event-status.ongoing{background:#E8F1ED;color:#659A86;font-weight:700}.event-count .count-number{color:#d95362;font-weight:800}.event-actions{display:flex;gap:16px;margin-top:18px}.btn{min-height:46px;border-radius:12px;padding:0 16px;font-weight:700}.btn-primary{background:var(--navy);color:#fcfcfc;border:1px solid #193b5d}.btn-soft{background:var(--blue);border:1px solid var(--line);color:var(--navy)}.btn-green{background:var(--green);color:#fcfcfc;border:1px solid var(--green)}.btn-pink{background:var(--pink-soft);color:var(--pink);border:1px solid var(--pink-line)}.event-actions .btn-soft,.action-grid .btn-soft{background:var(--blue);border:1px solid var(--line);color:var(--navy)}.btn-list{background:#b09771;border:1px solid #967A55;color:#FCFCFC}.event-actions .btn-view{background:var(--green);border:1px solid var(--green);color:#fcfcfc}.action-grid .btn-green{background:var(--green);border:1px solid var(--green);color:#fcfcfc}.action-grid .btn-pink{background:var(--pink-soft);border:1px solid var(--pink-line);color:var(--pink)}.btn-create-submit{background:var(--navy);color:#fcfcfc;border:1px solid #193b5d}.btn-admin-create{background:var(--navy);color:#fcfcfc;border:1px solid var(--navy)}.btn-admin-home{background:#fff;color:var(--navy);border:1px solid var(--line)}.btn-full{width:100%}.event-actions .btn{flex:1;font-size:14px}.empty{text-align:center;padding:45px 15px;color:var(--muted)}.info-card{padding:18px;margin-bottom:14px}.signup-info-card{padding:18px 16px}.info-grid{display:grid;grid-template-columns:78px 1fr;gap:3px 16px;align-items:start}.info-date{text-align:center;color:#5F6468;font-weight:800;border-right:0;padding-right:12px;grid-row:1/4;display:flex;flex-direction:column;justify-content:center;align-items:center;align-self:stretch}.info-date b{font-size:21px;display:block}.info-date span{font-size:13px}.info-title{font-size:16px;font-weight:750;color:#737B83}.signup-info-card .info-date{color:#5F6468;transform:none}.signup-info-card .info-title{color:#737B83;font-size:15px}.signup-info-card .info-time-line{font-size:14px;color:#737B83;margin-left:0}.info-line{font-size:15px;color:var(--muted);margin-top:3px}.signup-info-card .info-title,.signup-info-card .info-time-line,.signup-info-card .info-venue-line{display:grid;grid-template-columns:18px 1fr;align-items:center;column-gap:4px}.signup-info-card .info-venue-line .info-line-spacer{display:block;width:17px;height:17px}.signup-note{font-size:14px;color:#5F6468;line-height:1.6;margin:10px 18px 0;text-decoration-line:underline;text-decoration-style:double;text-decoration-thickness:1px;text-underline-offset:3px}.info-time-line{color:#659A86;white-space:nowrap}.count{text-align:center;font-size:15px;margin:13px 0;color:var(--muted)}.detail-count{margin:16px 0 0}.count strong{font-size:26px;color:#d95362}.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:0}.action-grid>*{min-width:0}.action-grid .btn{font-size:16px;min-height:60px;border-radius:12px}.signup-action-panel{margin-top:0;padding:14px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}.signup-roster-btn{width:100%;margin-top:12px;min-height:60px;background:#b09771;border:1px solid #967A55;color:#FCFCFC;border-radius:12px;font-size:16px;font-weight:700;letter-spacing:0}.admin{margin-top:16px;border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}.admin summary{padding:13px 15px;color:var(--navy);font-weight:700;font-size:14px;cursor:pointer}.admin-body{padding:12px;border-top:1px solid var(--line);display:grid;gap:9px}.form-card{padding:24px 20px}.field{margin-bottom:13px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:var(--navy)}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff;color:var(--text);outline:none}.field input:focus,.field textarea:focus{border-color:var(--navy)}
-.field input[type="date"],.field input[type="time"]{accent-color:var(--navy);color-scheme:light}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.bottom{position:fixed;z-index:10;left:50%;transform:translateX(-50%);bottom:max(12px,env(safe-area-inset-bottom));width:min(calc(100% - 32px),588px);display:flex;gap:10px}.bottom .btn{flex:1;box-shadow:0 4px 15px rgba(0,0,0,.08)}.person-icon{width:19px;height:19px;display:inline-block;vertical-align:-4px;margin-right:4px;fill:currentColor}.info-icon{width:17px;height:17px;display:inline-block;vertical-align:-3px;margin-right:4px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.solid-person{width:19px;height:19px;display:inline-block;vertical-align:-4px;margin-right:5px;fill:currentColor}.racket-icon{font-size:calc(1em - 4px);display:inline-block;line-height:1;vertical-align:0;margin-right:4px}.icon-time,.icon-calendar,.icon-roster,.icon-home,.icon-records{width:17px;height:17px;display:inline-block;vertical-align:-3px;margin-right:4px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.icon-roster{width:1.05em;height:1.05em;vertical-align:-.18em}.action-person{width:19px;height:19px;vertical-align:-4px;margin-right:4px}.count .solid-person,.small .action-person{color:var(--green)}.bottom-nav.nav-dark .btn{background:var(--navy);border:1px solid var(--navy);color:#fcfcfc}.nav-dark .info-icon,.nav-dark .icon-home,.nav-dark .icon-records{color:#fcfcfc}.bottom-nav{position:fixed;z-index:11;left:50%;transform:translateX(-50%);bottom:calc(max(12px,env(safe-area-inset-bottom)) - var(--keyboard-cover));width:min(calc(100% - 32px),588px);display:flex;gap:10px}.bottom-nav .btn{flex:1;box-shadow:0 4px 15px rgba(0,0,0,.08);background:#fff;border:1px solid var(--line);color:var(--navy)}.bottom-nav .btn-home-admin{background:var(--navy);border-color:var(--navy);color:#fcfcfc}.admin-list{display:grid;gap:14px}.admin-item{background:#fbfbfb;border:1px solid #D5D9DE;border-radius:12px;padding:18px 16px}.admin-item-title{font-weight:750;color:#737B83;font-size:12px;margin-top:6px}.admin-item-meta{font-size:16px;color:#737B83;margin-top:0}.admin-item-actions{display:flex;gap:16px;margin-top:18px}.admin-item-actions .btn{flex:1;min-height:40px;font-size:15px}.admin-item-actions .btn-green{background:var(--navy);border:1px solid var(--navy);color:#fcfcfc}.admin-item-actions .btn-pink{background:#b09771;border:1px solid #967A55;color:#FCFCFC}.success-card{text-align:center;padding:28px 20px}.screen-card-spacer{visibility:hidden;height:22px;margin:2px 2px 14px}.success-bottom-nav{display:flex!important}.success-bottom-nav .nav-item{font-size:12px}.success-bottom-nav .nav-icon{font-size:19px}.success-mark{width:58px;height:58px;border-radius:50%;background:#B0966F;color:#FCFCFC;display:grid;place-items:center;margin:0 auto 12px;font-size:30px}.success-card h2{margin:0 0 8px;color:var(--navy)}.success-detail{font-size:15px;line-height:1.8;color:var(--muted)}.success-date{color:#737B83}.success-name{font-size:18px;color:var(--navy);font-weight:800}.success-waitlist-message{line-height:1.9;color:#5F6468}.success-wait-position{color:#B09771;font-weight:800}.admin-item-meta{font-size:16px}.admin-date-line{color:#5F6468;font-weight:800}.admin-time-line{color:#737B83;white-space:nowrap;font-size:14px}.admin-item-title-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px;min-width:0}.admin-item-title-row .admin-item-title{margin-top:0;min-width:0;flex:1}.admin-item-title-row .admin-ended-badge{float:none;flex:none;margin-left:auto}.person{display:flex;align-items:center;gap:10px;padding:11px 3px;border-bottom:1px solid #edf2f6;min-width:0}.person:last-child{border-bottom:0}.person-name{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.person-actions{display:flex;align-items:center;gap:8px;flex:none}.badge{font-size:12px;color:var(--green-text);font-weight:700;white-space:nowrap}.badge-confirmed{background:var(--green-soft);color:var(--green-text);padding:4px 9px;border-radius:12px}.trash-btn{width:38px;height:38px;min-width:38px;padding:0;border-radius:50%;background:transparent;color:#718096;display:grid;place-items:center;border:0;position:relative}.trash-btn::before{content:none}.trash-btn svg{width:20px;height:20px;display:block;position:relative;z-index:1}.trash-btn:active{transform:scale(.97)}.roster-card{padding:9px 18px}.roster-card .info-title{font-size:15px;font-weight:750;color:var(--title)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",sans-serif;color:var(--text);background:var(--bg)}button,input,textarea,select{font:inherit}html{font-size:16px;-webkit-text-size-adjust:100%;text-size-adjust:100%;}button{border:0;cursor:pointer}.app{width:100%;max-width:620px;margin:0 auto;min-height:100vh;padding-bottom:100px}.header{background:var(--navy);color:#fcfcfc;padding:0;text-align:center;line-height:0}.header-image{display:block;width:100%;height:auto;margin:0}.header h1{display:inline-block;font-size:22px;margin:0;font-weight:700;letter-spacing:.08em;position:relative}.header h1 .header-icon{position:absolute;left:-44px;right:auto;top:50%;transform:translateY(-50%);width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1}.header p{max-width:430px;margin:4px auto 0;padding-right:20px;text-align:right;font-size:12px;opacity:.82}.page{padding:18px 16px}.screen{display:none}.screen.active{display:block}.section-title{font-size:18px;font-weight:700;color:#5F6468;margin:2px 2px 14px}.event-card,.info-card,.form-card,.roster-card,.success-card{background:#fbfbfb;border:1px solid #D5D9DE;border-radius:12px;box-shadow:var(--shadow)}.event-card{padding:18px 16px;margin-bottom:14px;position:relative}.event-top{display:grid;grid-template-columns:90px minmax(0,1fr);gap:16px;align-items:stretch}.date{width:auto;flex:none;text-align:center;color:#23456B;font-weight:800;line-height:1.05;display:flex;flex-direction:column;justify-content:center;border-right:1px solid #D5D9DE;padding-right:12px}.date b{display:block;font-size:20px}.date span{font-size:15px;margin-top:8px}.event-main{min-width:0;padding:2px 0 0}.event-title-row,.event-meta-row{display:flex;align-items:center;min-width:0}.event-title-row{justify-content:space-between;gap:8px}.event-title{font-size:17px;color:#B09771;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35;min-width:0}.event-time{font-size:14px;color:#737B83;margin-top:9px;white-space:nowrap;line-height:1.35}.event-venue{font-size:14px;color:#737B83;margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35}.event-count{margin:0;white-space:nowrap;display:flex;align-items:center}.event-count-line{display:flex;align-items:center;justify-content:flex-end;gap:3px}.loading-count{visibility:hidden}.count-person-wrap{display:none}.count-person-icon{display:none}.count-person-wrap + .count-number{margin-left:0}.count{display:flex;align-items:center;gap:3px}.event-status{white-space:nowrap;line-height:1;padding:4px 6px;border-radius:12px;font-size:13px}.event-count .event-status{margin:0}.event-status.ended{background:#E3E3E3;color:var(--navy);font-weight:700}.event-status.ongoing{background:#E8F1ED;color:#659A86;font-weight:700}.event-count .count-number{color:#d95362;font-weight:800}.event-actions{display:flex;gap:16px;margin-top:18px}.btn{min-height:46px;border-radius:12px;padding:0 16px;font-weight:700}.btn-primary{background:var(--navy);color:#fcfcfc;border:1px solid #193b5d}.btn-soft{background:var(--blue);border:1px solid var(--line);color:var(--navy)}.btn-green{background:var(--green);color:#fcfcfc;border:1px solid var(--green)}.btn-pink{background:var(--pink-soft);color:var(--pink);border:1px solid var(--pink-line)}.event-actions .btn-soft,.action-grid .btn-soft{background:var(--blue);border:1px solid var(--line);color:var(--navy)}.btn-list{background:#b09771;border:1px solid #967A55;color:#FCFCFC}.event-actions .btn-view{background:var(--green);border:1px solid var(--green);color:#fcfcfc}.action-grid .btn-green{background:var(--green);border:1px solid var(--green);color:#fcfcfc}.action-grid .btn-pink{background:var(--pink-soft);border:1px solid var(--pink-line);color:var(--pink)}.btn-create-submit{background:var(--navy);color:#fcfcfc;border:1px solid #193b5d}.btn-admin-create{background:var(--navy);color:#fcfcfc;border:1px solid var(--navy)}.btn-admin-home{background:#fff;color:var(--navy);border:1px solid var(--line)}.btn-full{width:100%}.event-actions .btn{flex:1;font-size:14px}.empty{text-align:center;padding:45px 15px;color:var(--muted)}.info-card{padding:18px;margin-bottom:14px}.signup-info-card{padding:18px 16px}.info-grid{display:grid;grid-template-columns:78px 1fr;gap:3px 16px;align-items:start}.info-date{text-align:center;color:#5F6468;font-weight:800;border-right:0;padding-right:12px;grid-row:1/4;display:flex;flex-direction:column;justify-content:center;align-items:center;align-self:stretch}.info-date b{font-size:21px;display:block}.info-date span{font-size:13px}.info-title{font-size:16px;font-weight:750;color:#737B83}.signup-info-card .info-date{color:#5F6468;transform:none}.signup-info-card .info-title{color:#737B83;font-size:15px}.signup-info-card .info-time-line{font-size:14px;color:#737B83;margin-left:0}.info-line{font-size:15px;color:var(--muted);margin-top:3px}.signup-info-card .info-title,.signup-info-card .info-time-line,.signup-info-card .info-venue-line{display:grid;grid-template-columns:18px 1fr;align-items:center;column-gap:4px}.signup-info-card .info-venue-line .info-line-spacer{display:block;width:17px;height:17px}.signup-note{font-size:14px;color:#5F6468;line-height:1.6;margin:10px 18px 0;text-decoration-line:underline;text-decoration-style:double;text-decoration-thickness:1px;text-underline-offset:3px}.info-time-line{color:#659A86;white-space:nowrap}.count{text-align:center;font-size:15px;margin:13px 0;color:var(--muted)}.detail-count{margin:16px 0 0}.count strong{font-size:26px;color:#d95362}.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:0}.action-grid>*{min-width:0}.action-grid .btn{font-size:16px;min-height:60px;border-radius:12px}.signup-action-panel{margin-top:0;padding:14px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}.signup-roster-btn{width:100%;margin-top:12px;min-height:60px;background:#b09771;border:1px solid #967A55;color:#FCFCFC;border-radius:12px;font-size:16px;font-weight:700;letter-spacing:0}.admin{margin-top:16px;border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}.admin summary{padding:13px 15px;color:var(--navy);font-weight:700;font-size:14px;cursor:pointer}.admin-body{padding:12px;border-top:1px solid var(--line);display:grid;gap:9px}.form-card{padding:24px 20px}.field{margin-bottom:13px;min-width:0}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:var(--navy)}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff;color:var(--text);outline:none}.field input:focus,.field textarea:focus{border-color:var(--navy)}
+.field input[type="date"],.field input[type="time"]{accent-color:var(--navy);color-scheme:light}.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;min-width:0}.time-row .field input[type="time"]{display:block;width:100%;min-width:0;max-width:100%;padding-left:8px;padding-right:6px;font-size:14px}.bottom{position:fixed;z-index:10;left:50%;transform:translateX(-50%);bottom:max(12px,env(safe-area-inset-bottom));width:min(calc(100% - 32px),588px);display:flex;gap:10px}.bottom .btn{flex:1;box-shadow:0 4px 15px rgba(0,0,0,.08)}.person-icon{width:19px;height:19px;display:inline-block;vertical-align:-4px;margin-right:4px;fill:currentColor}.info-icon{width:17px;height:17px;display:inline-block;vertical-align:-3px;margin-right:4px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.solid-person{width:19px;height:19px;display:inline-block;vertical-align:-4px;margin-right:5px;fill:currentColor}.racket-icon{font-size:calc(1em - 4px);display:inline-block;line-height:1;vertical-align:0;margin-right:4px}.icon-time,.icon-calendar,.icon-roster,.icon-home,.icon-records{width:17px;height:17px;display:inline-block;vertical-align:-3px;margin-right:4px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.icon-roster{width:1.05em;height:1.05em;vertical-align:-.18em}.action-person{width:19px;height:19px;vertical-align:-4px;margin-right:4px}.count .solid-person,.small .action-person{color:var(--green)}.bottom-nav.nav-dark .btn{background:var(--navy);border:1px solid var(--navy);color:#fcfcfc}.nav-dark .info-icon,.nav-dark .icon-home,.nav-dark .icon-records{color:#fcfcfc}.bottom-nav{position:fixed;z-index:11;left:50%;transform:translateX(-50%);bottom:calc(max(12px,env(safe-area-inset-bottom)) - var(--keyboard-cover));width:min(calc(100% - 32px),588px);display:flex;gap:10px}.bottom-nav .btn{flex:1;box-shadow:0 4px 15px rgba(0,0,0,.08);background:#fff;border:1px solid var(--line);color:var(--navy)}.bottom-nav .btn-home-admin{background:var(--navy);border-color:var(--navy);color:#fcfcfc}.admin-list{display:grid;gap:14px}.admin-item{background:#fbfbfb;border:1px solid #D5D9DE;border-radius:12px;padding:18px 16px}.admin-item-title{font-weight:750;color:#737B83;font-size:12px;margin-top:6px}.admin-item-meta{font-size:16px;color:#737B83;margin-top:0}.admin-item-actions{display:flex;gap:16px;margin-top:18px}.admin-item-actions .btn{flex:1;min-height:40px;font-size:15px}.admin-item-actions .btn-green{background:var(--navy);border:1px solid var(--navy);color:#fcfcfc}.admin-item-actions .btn-pink{background:#b09771;border:1px solid #967A55;color:#FCFCFC}.success-card{text-align:center;padding:28px 20px}.screen-card-spacer{visibility:hidden;height:22px;margin:2px 2px 14px}.success-bottom-nav{display:flex!important}.success-bottom-nav .nav-item{font-size:12px}.success-bottom-nav .nav-icon{font-size:19px}.success-mark{width:58px;height:58px;border-radius:50%;background:#B0966F;color:#FCFCFC;display:grid;place-items:center;margin:0 auto 12px;font-size:30px}.success-card h2{margin:0 0 8px;color:var(--navy)}.success-detail{font-size:15px;line-height:1.8;color:var(--muted)}.success-date{color:#737B83}.success-name{font-size:18px;color:var(--navy);font-weight:800}.success-waitlist-message{line-height:1.9;color:#5F6468}.success-wait-position{color:#B09771;font-weight:800}.admin-item-meta{font-size:16px}.admin-date-line{color:#5F6468;font-weight:800}.admin-time-line{color:#737B83;white-space:nowrap;font-size:14px}.admin-item-title-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px;min-width:0}.admin-item-title-row .admin-item-title{margin-top:0;min-width:0;flex:1}.admin-item-title-row .admin-ended-badge{float:none;flex:none;margin-left:auto}.person{display:flex;align-items:center;gap:10px;padding:11px 3px;border-bottom:1px solid #edf2f6;min-width:0}.person:last-child{border-bottom:0}.person-name{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.person-actions{display:flex;align-items:center;gap:8px;flex:none}.badge{font-size:12px;color:var(--green-text);font-weight:700;white-space:nowrap}.badge-confirmed{background:var(--green-soft);color:var(--green-text);padding:4px 9px;border-radius:12px}.trash-btn{width:38px;height:38px;min-width:38px;padding:0;border-radius:50%;background:transparent;color:#718096;display:grid;place-items:center;border:0;position:relative}.trash-btn::before{content:none}.trash-btn svg{width:20px;height:20px;display:block;position:relative;z-index:1}.trash-btn:active{transform:scale(.97)}.roster-card{padding:9px 18px}.roster-card .info-title{font-size:15px;font-weight:750;color:var(--title)}
 .roster-card .roster-date-line{font-size:19px;color:#5F6468;font-weight:800;display:flex;align-items:center;gap:2px;margin:0 0 8px}.roster-card .roster-weekday{font-size:13px}
 .roster-card .roster-event-line{font-size:15px;color:var(--muted);font-weight:400;display:flex;align-items:center;gap:2px;margin:0 0 12px}
 .roster-card .roster-event-line .roster-event-title{color:#737B83;font-size:15px;font-weight:750}.roster-card .roster-event-line>span:last-child{color:#737B83;white-space:nowrap;margin-left:6px}.name-tools button{font-size:13px}.roster-action{width:100%;margin-top:10px}.modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.35)}.modal.show{display:flex}.modal-card{width:min(100%,360px);background:#fff;border-radius:12px;padding:24px 22px;box-shadow:0 12px 35px rgba(0,0,0,.18);text-align:center}.modal-title{font-size:17px;font-weight:700;color:var(--text);line-height:1.5;margin-bottom:18px;word-break:break-word}.modal-actions{display:flex;gap:14px}.modal-actions .btn{flex:1}.toast{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);background:#263746;color:#fcfcfc;padding:10px 15px;border-radius:12px;font-size:13px;display:none;z-index:30;max-width:calc(100% - 32px);text-align:center}.toast.toast-duplicate{background:transparent;color:#659A86;border-radius:0;font-weight:700;padding:8px 12px;isolation:isolate}
@@ -286,6 +286,7 @@ html.ios-device .small{font-size:16px}
 </style>
 <style id="1003-mode-buttons">
 .schedule-mode-row .schedule-choice{font-size:16px}
+.schedule-mode-row .schedule-choice[data-mode-value="auto"]{grid-column:1 / -1;width:100%;min-height:44px;}
 /* 工作版A：依目前確認，只調整自動排班結果標題與「使用幾面場／每人目標場次」卡片的選取按鈕 */
 .schedule-result-actions + .schedule-card{}
 .schedule-result-actions .schedule-result-title{}
@@ -644,7 +645,7 @@ html.ios-device .small{font-size:16px}
 <section id="success" class="screen"><div class="page"><div class="section-title screen-card-spacer" aria-hidden="true">報名成功</div><div class="success-card"><div class="success-mark">✓</div><h2>報名成功</h2><div id="successDetail" class="success-detail"></div></div></div><nav class="bottom-nav success-bottom-nav" aria-label="報名成功導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button class="nav-item" type="button" data-nav="success" onclick="showRoster()"><span class="nav-icon">▤</span><span>報名名單</span></button><button class="nav-item" type="button" data-nav="detail" onclick="show('detail')"><span class="nav-icon">▣</span><span>活動報名</span></button></nav></section>
 <section id="roster" class="screen"><div class="page"><div class="section-title">報名名單</div><div id="rosterCard"></div></div><nav class="bottom-nav roster-bottom-nav" aria-label="報名名單導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button class="nav-item" type="button" data-nav="detail" onclick="show('detail')"><span class="nav-icon">▤</span><span>活動報名</span></button><button class="nav-item" type="button" data-nav="schedule" onclick="openSchedule()"><span class="nav-icon">🏸</span><span>排班</span></button></nav></section>
 <section id="schedule" class="screen"><div class="page"><div class="section-title">排班</div><div id="scheduleCard"></div></div><nav class="bottom-nav schedule-bottom-nav nav-dark" aria-label="排班導覽"><button class="nav-item" type="button" data-nav="roster" onclick="showRoster()"><span class="nav-icon">▤</span><span>報名名單</span></button><button class="nav-item" type="button" data-nav="schedule" onclick="openSchedule()"><span class="nav-icon">🏸</span><span>排班設定</span></button></nav></section>
-<section id="create" class="screen"><div class="page"><div class="section-title">建立新場次</div><div class="form-card"><div class="field"><label>活動名稱</label><input id="fTitle" placeholder="例如：In羽out"></div><div class="two"><div class="field"><label>日期</label><input id="fDate" type="date"></div><div class="field"><label>開始時間</label><input id="fStart" type="time"></div></div><div class="field"><label>結束時間</label><input id="fEnd" type="time"></div><div class="field"><label>球館</label><input id="fVenue" placeholder="例如：基隆運動中心"></div><div class="two"><div class="field"><label>場地數</label><input id="fCourts" type="number" min="1" value="3"></div><div class="field"><label>人數上限</label><input id="fLimit" type="number" min="1" value="21"></div></div><div class="field"><label>備註</label><textarea id="fNotes" rows="3" placeholder="可留空"></textarea></div></div></div><nav class="bottom-nav create-bottom-nav nav-dark" aria-label="建立活動導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button id="createSubmit" class="nav-item" data-nav="create" type="button" onclick="submitCreateEvent()"><span class="nav-icon">＋</span><span>建立活動</span></button></nav></section>
+<section id="create" class="screen"><div class="page"><div class="section-title">建立新場次</div><div class="form-card"><div class="field"><label>活動名稱</label><input id="fTitle" placeholder="例如：In羽out"></div><div class="field"><label>日期</label><input id="fDate" type="date"></div><div class="two time-row"><div class="field"><label>開始時間</label><input id="fStart" type="time" step="300"></div><div class="field"><label>結束時間</label><input id="fEnd" type="time" step="300"></div></div><div class="field"><label>球館</label><input id="fVenue" placeholder="例如：基隆運動中心"></div><div class="two"><div class="field"><label>場地數</label><input id="fCourts" type="number" min="1" value="3"></div><div class="field"><label>人數上限</label><input id="fLimit" type="number" min="1" value="21"></div></div><div class="field"><label>備註</label><textarea id="fNotes" rows="3" placeholder="可留空"></textarea></div></div></div><nav class="bottom-nav create-bottom-nav nav-dark" aria-label="建立活動導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button id="createSubmit" class="nav-item" data-nav="create" type="button" onclick="submitCreateEvent()"><span class="nav-icon">＋</span><span>建立活動</span></button></nav></section>
 <section id="admin" class="screen"><div class="page"><div class="section-title">🔒 團主管理</div><div id="adminList" class="admin-list"></div></div><nav class="bottom-nav admin-bottom-nav" aria-label="團主管理導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button class="nav-item" type="button" data-nav="create" onclick="show('create')"><span class="nav-icon">＋</span><span>建立活動</span></button></nav></section>
 <nav id="globalNav" class="bottom-nav global-nav" aria-label="主要導覽"><button class="nav-item" type="button" data-nav="list" onclick="show('list')"><span class="nav-icon">⌂</span><span>首頁</span></button><button class="nav-item" type="button" data-nav="admin" onclick="openAdmin()"><span class="nav-icon">▣</span><span>團主管理</span></button></nav><div id="toast" class="toast"></div><div id="passwordModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true"><div class="modal-card"><div id="passwordModalTitle" class="modal-title"></div><input id="passwordInput" class="field input password-input" type="tel" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="new-password" aria-label="密碼"><div class="modal-actions" style="margin-top:16px"><button id="passwordCancelBtn" class="btn btn-soft">取消</button><button id="passwordConfirmBtn" class="btn btn-primary">確認</button></div></div></div><div id="cancelModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true"><div class="modal-card"><div id="cancelModalTitle" class="modal-title"></div><div class="modal-actions"><button id="cancelConfirmBtn" class="btn btn-pink">取消報名</button><button id="cancelBackBtn" class="btn btn-soft">再想想</button></div></div></div><div id="deleteModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true"><div class="modal-card"><div id="deleteModalTitle" class="modal-title"></div><div class="modal-actions"><button id="deleteConfirmBtn" class="btn btn-green">刪除活動</button><button id="deleteBackBtn" class="btn btn-soft">再想想</button></div></div></div></main>
 <script>
@@ -717,7 +718,11 @@ function askCancel(name){return new Promise(resolve=>{const modal=$('cancelModal
 async function cancelRegistration(id){const r=regs.find(x=>x.id===id);if(!r)return;if(!(await askCancel(r.name)))return;const {error}=await db.from('registrations').delete().eq('id',id).eq('event_id',currentEvent.id);if(error)return toast('取消失敗：'+(error.message||'請稍後再試'));if(localStorage.getItem('badminton_reg_'+currentEvent.id)===id)localStorage.removeItem('badminton_reg_'+currentEvent.id);await syncRegistrationStatuses(currentEvent.id,currentEvent.participant_limit||21);toast('已取消報名');await showRoster()}
 function getMine(id){const name=localStorage.getItem('badminton_name')||'';return regs.find(r=>r.event_id===id&&r.name===name)||null}function setMine(id,rid){localStorage.setItem('badminton_reg_'+id,rid)}
 async function cancelMyRegistration(){if(!currentEvent)return;await showRoster()}
-function requirePassword(action){return new Promise(resolve=>{const modal=$('passwordModal'),title=$('passwordModalTitle'),input=$('passwordInput'),yes=$('passwordConfirmBtn'),no=$('passwordCancelBtn');title.textContent=action+'請輸入密碼';input.value='';modal.classList.add('show');modal.setAttribute('aria-hidden','false');const close=value=>{modal.classList.remove('show');modal.setAttribute('aria-hidden','true');yes.onclick=null;no.onclick=null;input.onkeydown=null;resolve(value)};yes.onclick=()=>{const p=input.value;if(p!=='2418'){toast('密碼錯誤');input.value='';input.focus();return}close(true)};no.onclick=()=>close(false);input.onkeydown=e=>{if(e.key==='Enter')yes.click()};setTimeout(()=>{input.focus();input.select()},60)})}
+let scheduleAuthorized=false;
+function requirePassword(action){
+  if(scheduleAuthorized)return Promise.resolve(true);
+  return new Promise(resolve=>{const modal=$('passwordModal'),title=$('passwordModalTitle'),input=$('passwordInput'),yes=$('passwordConfirmBtn'),no=$('passwordCancelBtn');title.textContent=action+'請輸入密碼';input.value='';modal.classList.add('show');modal.setAttribute('aria-hidden','false');const close=value=>{modal.classList.remove('show');modal.setAttribute('aria-hidden','true');yes.onclick=null;no.onclick=null;input.onkeydown=null;resolve(value)};yes.onclick=()=>{const p=input.value;if(p!=='2418'){toast('密碼錯誤');input.value='';input.focus();return}scheduleAuthorized=true;close(true)};no.onclick=()=>close(false);input.onkeydown=e=>{if(e.key==='Enter')yes.click()};setTimeout(()=>{input.focus();input.select()},60)})
+}
 document.addEventListener('input',e=>{if(e.target.id==='passwordInput')e.target.value=e.target.value.replace(/\D/g,'').slice(0,4)});
 async function openSchedule(){
   if(!currentEvent)return toast('請先選擇活動');
@@ -738,7 +743,8 @@ async function renderScheduleSetup(){
     levels=levelRows||[];
   }
   schedulePlayerLevels=new Map(levels.map(x=>[x.name,x.level]));
-  scheduleSettings.courts=Math.max(1,Math.min(3,Number(scheduleSettings.courts)||Number(currentEvent.courts)||3));
+  // 16人以下固定2面；17人以上固定3面。
+  scheduleSettings.courts=players.length<=16?2:3;
   const durationStart=time(currentEvent.start_time), durationEnd=time(currentEvent.end_time);
   const mid=midTime(currentEvent.start_time,currentEvent.end_time);
   $('scheduleCard').innerHTML=`
@@ -751,7 +757,7 @@ async function renderScheduleSetup(){
     <div class="schedule-card">
       <div class="schedule-setting-title">使用幾面場？</div>
       <div class="schedule-choice-row">
-        ${[1,2,3].map(n=>`<button type="button" class="schedule-choice ${n===scheduleSettings.courts?'active':''}" data-courts="${n}" onclick="selectScheduleCourts(${n})">${n} 面</button>`).join('')}
+        ${[1,2,3].map(n=>`<button type="button" class="schedule-choice ${n===scheduleSettings.courts?'active':''}" data-courts="${n}" ${n===scheduleSettings.courts?'':'disabled'}>${n} 面</button>`).join('')}
       </div>
 </div>
 
@@ -762,6 +768,7 @@ async function renderScheduleSetup(){
         <div class="schedule-mode-row">
           ${modeButton('firstHalfMode','similar','實力相當')}
           ${modeButton('firstHalfMode','mixed','高 低混搭')}
+          ${modeButton('firstHalfMode','auto','自動配對')}
         </div>
       </div>
       <div class="schedule-period-card">
@@ -769,6 +776,7 @@ async function renderScheduleSetup(){
         <div class="schedule-mode-row">
           ${modeButton('secondHalfMode','similar','實力相當')}
           ${modeButton('secondHalfMode','mixed','高 低混搭')}
+          ${modeButton('secondHalfMode','auto','自動配對')}
         </div>
       </div>
     </div>
@@ -787,7 +795,9 @@ async function renderScheduleSetup(){
 function midTime(start,end){
   const toMin=t=>{const [h,m]=String(t||'00:00').slice(0,5).split(':').map(Number);return h*60+m};
   const fmt=n=>`${String(Math.floor(n/60)%24).padStart(2,'0')}:${String(n%60).padStart(2,'0')}`;
-  const a=toMin(start),b=toMin(end); return fmt(Math.round((a+(b>=a?b:b+1440-a)/2))%1440);
+  const a=toMin(start),b=toMin(end);
+  const endAbs=b>=a?b:b+1440;
+  return fmt(Math.round((a+(endAbs-a)/2))%1440);
 }
 function modeButton(group,value,label){return `<button type="button" class="schedule-choice ${scheduleSettings[group]===value?'active':''}" data-mode-group="${group}" data-mode-value="${value}" onclick="selectSchedulePeriodMode('${group}','${value}')">${label}</button>`}
 
@@ -825,16 +835,18 @@ function opponentRepeatLabel(s,stats){
   return `對手重複 ${names.join('、')} ${max}`;
 }
 function levelOf(p){return Number.isFinite(Number(p.level))?Number(p.level):5}
-function fmtScheduleMode(v){return v==='similar'?'實力相當':'高 低混搭'}
+function fmtScheduleMode(v){return v==='similar'?'實力相當':v==='auto'?'自動配對':'高 低混搭'}
 function shuffleByRound(arr,round){
   if(!arr.length)return [];
   const k=(round*3)%arr.length;
   return arr.slice(k).concat(arr.slice(0,k));
 }
 let scheduleAlgorithmSeed=1;
+let scheduleQuotaTargets=new Map();
+let scheduleQuotaAverage=0;
 function makeEmptyScheduleStats(all){
   const stats={};
-  all.forEach(p=>stats[p.id]={...p,played:0,rest:0,lastPlayed:false,consecutive:0,maxConsecutive:0,consecutiveRest:0,maxConsecutiveRest:0,partners:new Set(),opponents:new Set(),partnerCounts:new Map(),opponentCounts:new Map()});
+  all.forEach(p=>stats[p.id]={...p,played:0,rest:0,lastPlayed:false,consecutive:0,maxConsecutive:0,consecutive2Count:0,consecutiveRest:0,maxConsecutiveRest:0,partners:new Set(),opponents:new Set(),partnerCounts:new Map(),opponentCounts:new Map()});
   return stats;
 }
 function buildStatsFromRounds(all,rounds,skipIndex=-1){
@@ -846,6 +858,7 @@ function buildStatsFromRounds(all,rounds,skipIndex=-1){
     all.forEach(p=>{
       const st=stats[p.id];
       if(selectedIds.has(p.id)){
+        if(st.consecutive===1) st.consecutive2Count++;
         st.played++; st.consecutive++; st.consecutiveRest=0; st.lastPlayed=true;
         st.maxConsecutive=Math.max(st.maxConsecutive,st.consecutive);
       }else{
@@ -857,6 +870,32 @@ function buildStatsFromRounds(all,rounds,skipIndex=-1){
   }
   return stats;
 }
+function getConsecutiveRuns(rounds, playerId){
+  const selectedByRound=rounds.map(r=>new Set(r.matches.flatMap(m=>[m.a1.id,m.a2.id,m.b1.id,m.b2.id])));
+  const runs=[];
+  let start=-1;
+  for(let i=0;i<=selectedByRound.length;i++){
+    const playing=i<selectedByRound.length && selectedByRound[i].has(playerId);
+    if(playing && start<0){ start=i; }
+    if(!playing && start>=0){
+      const len=i-start;
+      if(len>=2) runs.push({len,start,end:i-1});
+      start=-1;
+    }
+  }
+  return runs;
+}
+function formatConsecutive2Details(rounds, playerId){
+  const runs=getConsecutiveRuns(rounds,playerId);
+  if(!runs.length)return '無';
+  const grouped=new Map();
+  runs.forEach(run=>{
+    if(!grouped.has(run.len))grouped.set(run.len,[]);
+    grouped.get(run.len).push(`${rounds[run.start].round}-${rounds[run.end].round}`);
+  });
+  return [...grouped.entries()].sort((a,b)=>a[0]-b[0]).map(([len,ranges])=>`連打${ranges.length}次：${ranges.join('、')}`).join('<br>');
+}
+
 function selectedPlayersFromRound(round,all){
   const byId=new Map(all.map(p=>[p.id,p]));
   const ids=[];
@@ -1019,6 +1058,26 @@ function groupScore(group,mode,stats){
     // 實力相當：優先控制四人級差，但當同級候選已經造成嚴重對手重複時，
     // 允許「級差最多多 1」的替代組合參與比較；這仍是偏好，不是硬限制。
     score += spread<=1 ? spread*4 : 100000 + (spread-1)*25000;
+  }else if(mode==='auto'){
+    // 自動配對：先讓「同一場的4人實力接近」，再平衡兩隊總級數。
+    // 上一版把兩隊總級數放得太重，會出現 4+8 vs 6+6 這種雖然總分漂亮、
+    // 但其實不是「實力相當一起打」的組合。現在改成：
+    // 1. 四人最大級差最重要
+    // 2. 四人相鄰級差也要小
+    // 3. 再考慮兩隊總級數差
+    const sorted=group.map(levelOf).sort((a,b)=>a-b);
+    const adjacentGapSq=(sorted[1]-sorted[0])**2+(sorted[2]-sorted[1])**2+(sorted[3]-sorted[2])**2;
+    score += spread*18000;
+    score += adjacentGapSq*5000;
+    const sums=[];
+    for(const opt of teamOptions(group)){
+      const a=opt[0].reduce((n,p)=>n+levelOf(p),0);
+      const b=opt[1].reduce((n,p)=>n+levelOf(p),0);
+      sums.push(Math.abs(a-b));
+    }
+    score += Math.min(...sums)*2500;
+    const known=group.filter(p=>Number.isFinite(Number(p.level))).length;
+    if(known<4)score+=4;
   }else{
     // 高低混搭仍以整體結構為主，但不在這裡假設誰是對手。
     const hi=lv.slice(Math.floor(lv.length/2)).reduce((a,b)=>a+b,0);
@@ -1078,17 +1137,47 @@ function combinations3(arr){
 
 // 重新設計的核心：先找「一場4人」的候選，再直接從候選場中組成整輪。
 // 不再先選8/12人後硬切，因此實力分布不會在最後一步把整輪卡死。
-function buildRoundGroupCandidates(all,stats,mode,slots=4){
+function buildRoundGroupCandidates(all,stats,mode,slots=4,round=1,roundsNeeded=1){
   // 只建立一次4人候選，不做深層遞迴。候選本身已經包含「實力」與歷史重複成本。
   const groups=[];
   const combos=combinations4(all);
+  // 只把「上一輪休息、且還有剩餘配額」的人列為本輪必須優先補回。
+  // 14 人／2 面時每輪只有 8 個名額，而上一輪固定只有 6 個人休息，
+  // 因此這個集合在正常可行狀態下必定能全部安排；若超過本輪名額，
+  // 代表前一輪已經產生不可修復的連休狀態，應該讓這條路徑淘汰，而不是卡死整個搜尋。
+  const requiredPlayers=all.filter(p=>stats[p.id].consecutiveRest>0 && (scheduleQuotaTargets.get(p.id)??Infinity)>stats[p.id].played)
+    .sort((a,b)=>{
+      const ar=stats[a.id].consecutiveRest, br=stats[b.id].consecutiveRest;
+      if(ar!==br)return br-ar;
+      const are=(scheduleQuotaTargets.get(a.id)??Infinity)-stats[a.id].played;
+      const bre=(scheduleQuotaTargets.get(b.id)??Infinity)-stats[b.id].played;
+      return bre-are;
+    });
+  if(requiredPlayers.length>matchesPerRound*4)return [];
+  const requiredPlayIds=new Set(requiredPlayers.map(p=>p.id));
   for(const g of combos){
+    // 出場配額是硬限制：達到自己的目標場次後，本輪不得再上場。
+    if(g.some(p=>stats[p.id].played>=((scheduleQuotaTargets.get(p.id)??Infinity))))continue;
+    // 能做到時直接禁止連打第3場。
+    if(g.some(p=>stats[p.id].consecutive>=2))continue;
     const levels=g.map(levelOf);
     const spread=Math.max(...levels)-Math.min(...levels);
-    const three=g.reduce((n,p)=>n+(stats[p.id].consecutive>=2?1:0),0);
+    // 自動配對：先保留能做到兩隊總級數差 <= 1 的4人候選，
+    // 同時在評分上強烈優先『同場四人實力接近』；若整輪無法全滿足，
+    // 後續仍會退到最接近可行解，避免整個排班失敗。
+    if(mode==='auto'){
+      const hasValidSplit=teamOptions(g).some(opt=>{
+        const a=opt[0].reduce((n,p)=>n+levelOf(p),0);
+        const b=opt[1].reduce((n,p)=>n+levelOf(p),0);
+        return Math.abs(a-b)<=1;
+      });
+      if(!hasValidSplit)continue;
+    }
+    const mustPlayCount=g.reduce((n,p)=>n+(requiredPlayIds.has(p.id)?1:0),0);
     let penalty=groupScore(g,mode,stats);
-    if(three>0) penalty += 9000000*three; // 優先避免第三場連打，但永遠保留退讓路徑
-    groups.push({players:g,ids:new Set(g.map(p=>p.id)),score:penalty,spread,three});
+    // 前一輪休息的人優先補回；真正的完整輪次會在分組完成時驗證是否全部補回。
+    penalty += (requiredPlayIds.size-mustPlayCount)*120000;
+    groups.push({players:g,ids:new Set(g.map(p=>p.id)),score:penalty,spread,three:0,mustPlayCount});
   }
   groups.sort((a,b)=>a.score-b.score);
   return groups;
@@ -1130,9 +1219,23 @@ function fairnessCostForGroup(group,stats,all,slots){
 
 // 快速排班核心：用有限次數的 greedy/beam 搜尋取代舊版深層 DFS。
 // 目標是「很接近最佳解，但一定要在瀏覽器可接受時間內完成」。
-async function partitionRoundGroups(all,stats,matchesPerRound,mode){
-  const raw=buildRoundGroupCandidates(all,stats,mode,matchesPerRound*4);
+async function partitionRoundGroups(all,stats,matchesPerRound,mode,round=1,roundsNeeded=1){
+  const raw=buildRoundGroupCandidates(all,stats,mode,matchesPerRound*4,round,roundsNeeded);
   if(!raw.length)return null;
+  // 只把「上一輪休息、且還有剩餘配額」的人列為本輪必須優先補回。
+  // 14 人／2 面時每輪只有 8 個名額，而上一輪固定只有 6 個人休息，
+  // 因此這個集合在正常可行狀態下必定能全部安排；若超過本輪名額，
+  // 代表前一輪已經產生不可修復的連休狀態，應該讓這條路徑淘汰，而不是卡死整個搜尋。
+  const requiredPlayers=all.filter(p=>stats[p.id].consecutiveRest>0 && (scheduleQuotaTargets.get(p.id)??Infinity)>stats[p.id].played)
+    .sort((a,b)=>{
+      const ar=stats[a.id].consecutiveRest, br=stats[b.id].consecutiveRest;
+      if(ar!==br)return br-ar;
+      const are=(scheduleQuotaTargets.get(a.id)??Infinity)-stats[a.id].played;
+      const bre=(scheduleQuotaTargets.get(b.id)??Infinity)-stats[b.id].played;
+      return bre-are;
+    });
+  if(requiredPlayers.length>matchesPerRound*4)return [];
+  const requiredPlayIds=new Set(requiredPlayers.map(p=>p.id));
 
   const index=new Map(all.map((p,i)=>[p.id,i]));
   const maskOf=g=>g.players.reduce((m,p)=>m|(1<<index.get(p.id)),0);
@@ -1165,7 +1268,9 @@ async function partitionRoundGroups(all,stats,matchesPerRound,mode){
     function strictDfs(used,chosen,score){
       if(++nodes>MAX_STRICT_NODES)return;
       if(chosen.length===matchesPerRound){
-        if(!strictBest||score<strictBest.score)strictBest={groups:chosen.slice(),score};
+        const covered=new Set(chosen.flatMap(c=>c.players.map(p=>p.id)));
+        const allRequired=[...requiredPlayIds].every(id=>covered.has(id));
+        if(allRequired && (!strictBest||score<strictBest.score))strictBest={groups:chosen.slice(),score};
         return;
       }
       const need=matchesPerRound-chosen.length;
@@ -1213,9 +1318,13 @@ async function partitionRoundGroups(all,stats,matchesPerRound,mode){
       groups.push(c); used|=c.mask; score+=c.score+c.fair; if(c.spread<=1)strict++;
     }
     if(groups.length===matchesPerRound){
-      // 評價時把「符合實力相當的場數」放在非常高的優先級，但仍保留公平與重複成本。
-      const finalScore=score+(matchesPerRound-strict)*80000000;
-      if(!best||finalScore<best.score)best={groups,score:finalScore,strict};
+      const covered=new Set(groups.flatMap(c=>c.players.map(p=>p.id)));
+      const allRequired=[...requiredPlayIds].every(id=>covered.has(id));
+      if(allRequired){
+        // 評價時把「符合實力相當的場數」放在非常高的優先級，但仍保留公平與重複成本。
+        const finalScore=score+(matchesPerRound-strict)*80000000;
+        if(!best||finalScore<best.score)best={groups,score:finalScore,strict};
+      }
     }
   }
 
@@ -1227,7 +1336,10 @@ async function partitionRoundGroups(all,stats,matchesPerRound,mode){
       groups.push(c);used|=c.mask;
       if(groups.length===matchesPerRound)break;
     }
-    if(groups.length===matchesPerRound)best={groups,score:groups.reduce((n,g)=>n+g.score+g.fair,0),strict:groups.filter(g=>g.spread<=1).length};
+    if(groups.length===matchesPerRound){
+      const covered=new Set(groups.flatMap(c=>c.players.map(p=>p.id)));
+      if([...requiredPlayIds].every(id=>covered.has(id)))best={groups,score:groups.reduce((n,g)=>n+g.score+g.fair,0),strict:groups.filter(g=>g.spread<=1).length};
+    }
   }
   if(!best)return null;
 
@@ -1265,10 +1377,10 @@ function bestPartitionForPlayers(players,count,mode,stats){
   if(!best)return null;
   return best.picked.map((x,i)=>{x.m.court=i+1;return x.m;});
 }
-async function optimizeRound(all,stats,slots,matchesPerRound,round,mode){
+async function optimizeRound(all,stats,slots,matchesPerRound,round,mode,roundsNeeded){
   // 新引擎：直接從全部球員建立4人候選場，再挑出本輪的多場互不重複組合。
   // 這樣「實力相當」是在成為一場的那一刻就被評估，不會因先選人而失去可行組合。
-  const result=await partitionRoundGroups(all,stats,matchesPerRound,mode);
+  const result=await partitionRoundGroups(all,stats,matchesPerRound,mode,round,roundsNeeded||1);
   if(!result)return null;
   const selected=[];
   result.matches.forEach(m=>selected.push(m.a1,m.a2,m.b1,m.b2));
@@ -1292,6 +1404,18 @@ function teamStructureScore(opt,mode){
     return sc;
   }
 
+  if(mode==='auto'){
+    // 自動配對：4人先實力接近，再平衡兩隊總級數。
+    // 這裡不再讓總級數把「實力相當」蓋掉。
+    const matchSpread=Math.max(a1,a2,b1,b2)-Math.min(a1,a2,b1,b2);
+    const teamGapA=Math.abs(a1-a2);
+    const teamGapB=Math.abs(b1-b2);
+    sc += matchSpread*12000;
+    sc += (teamGapA*teamGapA + teamGapB*teamGapB)*1800;
+    sc += totalDiff*2500;
+    return sc;
+  }
+
   // 高低混搭：先確保每隊盡量都有高低球員。
   const ranked=[...a,...b].sort((x,y)=>levelOf(x)-levelOf(y));
   const lowIds=new Set(ranked.slice(0,2).map(p=>p.id));
@@ -1310,14 +1434,17 @@ function teamStructureScore(opt,mode){
   sc += Math.abs(aHigh-bHigh)*80;
   sc += Math.abs(aLow-bLow)*35;
 
-  // 帶弱者補償：8+4=12 時，13級對手屬於明顯不理想。
-  // 不是硬限制，但在有其他合理分法時應該優先避開。
+  // 帶弱者補償只在「隊內級差 >= 3」時啟用。
+  // 啟用後，對手總級數的理想範圍是「本隊總級數 - 2 ～ -1」。
+  // 例如 8+5=13，對手 11～12 最合理；
+  // 8+4=12，對手 10～11 最合理。
+  // 這不是所有高低混搭的通用限制，只有差距 >= 3 才套用。
   const carrierPenalty=(spread,ownSum,oppSum)=>{
     if(spread<3)return 0;
-    const idealMax=ownSum-1;
-    if(oppSum<=idealMax)return 0;
-    const over=oppSum-idealMax;
-    return (spread>=4?1800:1100)*over*over;
+    const low=ownSum-2, high=ownSum-1;
+    if(oppSum>=low && oppSum<=high)return 0;
+    const distance=oppSum<low ? (low-oppSum) : (oppSum-high);
+    return (spread>=4?2400:1800)*distance*distance;
   };
   sc += carrierPenalty(Math.abs(a1-a2),aSum,bSum);
   sc += carrierPenalty(Math.abs(b1-b2),bSum,aSum);
@@ -1339,12 +1466,14 @@ function teamScore(opt,stats,mode){
   return sc;
 }
 
-function makeMatch(group,stats,mode){
-  // 三種2+2拆法全部比較；不再採用「第一個可行拆法」。
-  // 實力相當：4人先符合接近條件，再選兩隊總級數最接近的拆法。
-  // 高低混搭：先鼓勵每隊一高一低，再比較總分與高/低位對位差。
+function makeMatch(group,stats,mode,strictAuto=false){
+  // 三種2+2拆法全部比較；auto 模式可選擇「嚴格 <=1」或「最接近可行」。
   let best=null,score=Infinity;
   for(const opt of teamOptions(group)){
+    const aSum=levelOf(opt[0][0])+levelOf(opt[0][1]);
+    const bSum=levelOf(opt[1][0])+levelOf(opt[1][1]);
+    const totalDiff=Math.abs(aSum-bSum);
+    if(mode==='auto' && strictAuto && totalDiff>1)continue;
     const sc=teamScore(opt,stats,mode);
     if(sc<score){score=sc;best=opt;}
   }
@@ -1442,6 +1571,14 @@ function buildSchedulePrintHtml(rounds){
 h1{text-align:center;font-size:27px;line-height:1.2;letter-spacing:.12em;margin:0 0 6px;font-weight:800;color:#23456B}.print-meta{display:flex;justify-content:center;gap:34px;font-size:19px;line-height:1.2;font-weight:700;margin-bottom:4px}.print-venue{text-align:center;font-size:17px;line-height:1.2;color:#5F6468;margin-bottom:4mm}
 table{width:100%;border-collapse:collapse;table-layout:fixed;border:2px solid #6F7479;background:#fff}.round-col{width:28mm}.court-col{width:15mm}.team-col{width:auto}
 th{height:17mm;border:1.5px solid #6F7479;background:#E7E7E7!important;font-size:21px;font-weight:800;text-align:center;color:#3F4448;-webkit-print-color-adjust:exact;print-color-adjust:exact}td{border-left:1.3px solid #858A8F;border-right:1.3px solid #858A8F;border-bottom:1.3px solid #858A8F;height:15.5mm;font-size:24px}td.round-cell{border-right:1.3px solid #6F7479;border-bottom:1.3px solid #6F7479;text-align:center;vertical-align:middle;font-size:22px;font-weight:800;color:#5F6468}.court-cell{text-align:center;vertical-align:middle;font-size:21px;font-weight:400;color:#5F6468}.team-cell{text-align:left;vertical-align:middle;padding:0 3mm 0 6mm;font-weight:800;color:#333;white-space:nowrap}.court-1 .court-cell{color:#23456B;font-weight:800}.court-2 .court-cell{color:#659A86;font-weight:800}.court-1 .team-cell{color:#23456B}.court-2 .team-cell{color:#659A86}.round-first td{border-top:1.8px solid #6F7479}.round-first:not(:first-child) td{border-top:1.8px solid #6F7479}.print-page-no{position:absolute;bottom:0;right:0;font-size:10px;color:#8A8F94}@media screen{body{background:#eee}.print-page{margin:12px auto;background:#fff;padding-left:0;padding-right:0;box-shadow:0 2px 8px rgba(0,0,0,.12)}}
+
+.schedule-consecutive-report .schedule-report-summary{font-size:16px;font-weight:700;color:#5F6468;margin:0 0 10px;padding:0 2px;}
+.schedule-consecutive-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;}
+.schedule-consecutive-row{border:1px solid #E2E5E8;border-radius:10px;padding:9px 10px;background:#fff;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 8px;align-items:center;}
+.schedule-consecutive-row>span{font-weight:700;color:#3F4448;}
+.schedule-consecutive-row>b{font-size:15px;color:#23456B;}
+.schedule-consecutive-row>small{grid-column:1 / -1;color:#737B83;font-size:12px;line-height:1.5;}
+@media(max-width:700px){.schedule-consecutive-list{grid-template-columns:1fr;}}
 </style></head><body>${pageHtml}
 <style id="1003-workF-final">
 /* 工作版G：場地顏色與高低混搭總級數平衡 */
@@ -1475,7 +1612,7 @@ function renderGeneratedSchedule(rounds,stats,warning){
   let html=`<div class="schedule-card schedule-result-card"><div class="schedule-event-title">⚡ 自動排班結果</div>${warning?`<div class="schedule-warning">${esc(warning)}</div>`:''}</div>`;
   window.__currentScheduleRounds=rounds;
   rounds.forEach((r,ri)=>{const mode=ri<rounds.length/2?scheduleSettings.firstHalfMode:scheduleSettings.secondHalfMode;html+=`<div class="schedule-card schedule-round-card"><div class="schedule-round-head"><strong>第 ${r.round} 輪</strong><span class="${mode==='mixed'?'mode-mixed':'mode-similar'}">${fmtScheduleMode(mode)}</span></div>`;r.matches.forEach(m=>{html+=`<div class="schedule-match court-${Number(m.court)||0}"><div class="schedule-court">${m.court} 號場</div><div class="schedule-player-cell schedule-a1"><span class="schedule-player-inline"><span class="schedule-player-name">${esc(m.a1.name)}</span>${scheduleLevelHtml(m.a1)}</span></div><div class="schedule-player-cell schedule-b1"><span class="schedule-player-inline"><span class="schedule-player-name">${esc(m.b1.name)}</span>${scheduleLevelHtml(m.b1)}</span></div><div class="schedule-player-cell schedule-a2"><span class="schedule-player-inline"><span class="schedule-player-name">${esc(m.a2.name)}</span>${scheduleLevelHtml(m.a2)}</span></div><div class="schedule-player-cell schedule-b2"><span class="schedule-player-inline"><span class="schedule-player-name">${esc(m.b2.name)}</span>${scheduleLevelHtml(m.b2)}</span></div>${scheduleBalanceHtml(m)}</div>`});html+=`</div>`});
-  html+=`<div class="schedule-card"><div class="schedule-setting-title">場次統計</div><div class="schedule-stats-grid">${Object.values(stats).sort((a,b)=>b.played-a.played).map(s=>{const partnerRepeats=[...s.partnerCounts.values()].reduce((n,c)=>n+Math.max(0,c-1),0);return `<div class="schedule-stat"><span>${esc(s.name)}${scheduleLevelHtml(s)}</span><b>${s.played} 場</b><small>休 ${s.rest}・最多連打 ${s.maxConsecutive}・最多連休 ${s.maxConsecutiveRest}<br>搭檔重複 ${partnerRepeats}・${opponentRepeatLabel(s,stats)}</small></div>`}).join('')}</div></div>`;
+  html+=`<div class="schedule-card"><div class="schedule-setting-title">場次統計</div><div class="schedule-stats-grid">${Object.values(stats).sort((a,b)=>b.played-a.played).map(s=>{const partnerRepeats=[...s.partnerCounts.values()].reduce((n,c)=>n+Math.max(0,c-1),0);const c2Details=formatConsecutive2Details(rounds,s.id);return `<div class="schedule-stat"><span>${esc(s.name)}${scheduleLevelHtml(s)}</span><b>${s.played} 場</b><small>休 ${s.rest}・最多連休 ${s.maxConsecutiveRest}<br>${c2Details}<br>搭檔重複 ${partnerRepeats}・${opponentRepeatLabel(s,stats)}</small></div>`}).join('')}</div></div>`;
   html+=`<div class="schedule-card schedule-result-actions"><div class="schedule-result-buttons"><button type="button" class="btn btn-primary btn-a4" onclick="exportScheduleA4(window.__currentScheduleRounds)">🖨️ 列印</button><button type="button" class="btn btn-primary" onclick="openSchedule()">🔄 重新排班</button></div></div>`;
   $('scheduleCard').innerHTML=html;
 }
@@ -1499,8 +1636,8 @@ async function startAutoSchedule(){
     if(startBtn)startBtn.disabled=false;
     return toast('至少需要 4 人才能排班');
   }
-  const courtCount=Math.max(1,Math.min(3,Number(scheduleSettings.courts)||1));
-  const matchesPerRound=Math.min(courtCount,Math.floor(players.length/4));
+  let courtCount=Math.max(1,Math.min(3,Number(scheduleSettings.courts)||1));
+  let matchesPerRound=Math.min(courtCount,Math.floor(players.length/4));
   const slots=matchesPerRound*4;
   if(!slots)return toast('至少需要 4 人才能排班');
   // 依活動實際時段自動計算可排輪數：每輪約 10 分鐘，能排幾輪就排幾輪。
@@ -1509,57 +1646,378 @@ async function startAutoSchedule(){
   const endMinutes=toMinutes(currentEvent.end_time);
   const durationMinutes=(endMinutes>=startMinutes?endMinutes:endMinutes+1440)-startMinutes;
   const roundsNeeded=Math.max(1,Math.floor(durationMinutes/10));
+  // 場數由報名人數自動決定：16人以下2面、17人以上3面。
+  const autoCourtCount=players.length<=16?2:3;
+  const actualMatchesPerRound=Math.min(autoCourtCount,Math.floor(players.length/4));
+  if(actualMatchesPerRound!==matchesPerRound){
+    scheduleSettings.courts=autoCourtCount;
+  }
+  const totalSlots=actualMatchesPerRound*4*roundsNeeded;
+  const baseQuota=Math.floor(totalSlots/players.length);
+  const extraQuota=totalSlots%players.length;
+  const quotaOrder=players.slice().sort((a,b)=>{
+    const av=seededValue((Date.now()+a.id.length*7919)>>>0);
+    const bv=seededValue((Date.now()+b.id.length*7919)>>>0);
+    return av-bv || a.name.localeCompare(b.name);
+  });
+  scheduleQuotaTargets=new Map();
+  quotaOrder.forEach((p,i)=>scheduleQuotaTargets.set(p.id,baseQuota+(i<extraQuota?1:0)));
+  scheduleQuotaAverage=totalSlots/players.length;
+  // 配額計算後，本輪實際使用的場數以自動規則為準。
+  courtCount=autoCourtCount;
+  matchesPerRound=actualMatchesPerRound;
   const levels=new Map(schedulePlayerLevels);
   const all=players.map(p=>({id:p.id,name:p.name,level:levels.get(p.name)??null}));
-  const buildPlan=async(seed)=>{
-    scheduleAlgorithmSeed=seed>>>0;
-    const stats={}; all.forEach(p=>stats[p.id]={...p,played:0,rest:0,lastPlayed:false,consecutive:0,maxConsecutive:0,consecutiveRest:0,maxConsecutiveRest:0,partners:new Set(),opponents:new Set(),partnerCounts:new Map(),opponentCounts:new Map()});
-    const rounds=[];
-    for(let r=1;r<=roundsNeeded;r++){
-      let selected=null, matches=null;
-      const mode=r<=roundsNeeded/2?scheduleSettings.firstHalfMode:scheduleSettings.secondHalfMode;
-      const optimized=await optimizeRound(all,stats,slots,matchesPerRound,r,mode);
-      if(optimized){selected=optimized.selected;matches=optimized.matches;}
-      if(!selected||!matches)return null;
-      const selectedIds=new Set(selected.map(p=>p.id));
-      all.forEach(p=>{
-        if(!selectedIds.has(p.id)){
-          stats[p.id].rest++;
-          stats[p.id].lastPlayed=false;
-          stats[p.id].consecutive=0;
-          stats[p.id].consecutiveRest++;
-          stats[p.id].maxConsecutiveRest=Math.max(stats[p.id].maxConsecutiveRest,stats[p.id].consecutiveRest);
-        }else{
-          stats[p.id].consecutiveRest=0;
-        }
-      });
-      selected.forEach(p=>{stats[p.id].played++;stats[p.id].consecutive++;stats[p.id].lastPlayed=true;stats[p.id].maxConsecutive=Math.max(stats[p.id].maxConsecutive,stats[p.id].consecutive)});
-      matches.forEach(m=>recordMatch(m,stats));
-      rounds.push({round:r,matches});
+  const cloneScheduleStats=(src)=>{
+    const out={};
+    for(const [id,s] of Object.entries(src)){
+      out[id]={...s,
+        partners:new Set(s.partners),
+        opponents:new Set(s.opponents),
+        partnerCounts:new Map(s.partnerCounts),
+        opponentCounts:new Map(s.opponentCounts)
+      };
     }
-    return {rounds,stats};
+    return out;
+  };
+  const applyRoundToStats=(stats,roundMatches)=>{
+    const selectedIds=new Set();
+    for(const m of roundMatches){
+      selectedIds.add(m.a1.id);selectedIds.add(m.a2.id);selectedIds.add(m.b1.id);selectedIds.add(m.b2.id);
+    }
+    all.forEach(p=>{
+      const st=stats[p.id];
+      if(!selectedIds.has(p.id)){
+        st.rest++;
+        st.lastPlayed=false;
+        st.consecutive=0;
+        st.consecutiveRest++;
+        st.maxConsecutiveRest=Math.max(st.maxConsecutiveRest,st.consecutiveRest);
+      }else{
+        st.consecutiveRest=0;
+      }
+    });
+    for(const m of roundMatches){
+      const selected=[m.a1,m.a2,m.b1,m.b2];
+      selected.forEach(p=>{
+        const st=stats[p.id];
+        if(st.consecutive===1) st.consecutive2Count++;
+        st.played++;
+        st.consecutive++;
+        st.lastPlayed=true;
+        st.maxConsecutive=Math.max(st.maxConsecutive,st.consecutive);
+      });
+      recordMatch(m,stats);
+    }
+  };
+  const stateScore=(stats,rounds)=>{
+    const played=all.map(p=>stats[p.id].played);
+    const rests=all.map(p=>stats[p.id].rest);
+    const pAvg=played.reduce((a,b)=>a+b,0)/all.length;
+    const rAvg=rests.reduce((a,b)=>a+b,0)/all.length;
+    let sc=0;
+    sc+=(Math.max(...played)-Math.min(...played))*9000;
+    sc+=(Math.max(...rests)-Math.min(...rests))*5000;
+    for(const p of all){
+      const st=stats[p.id];
+      sc+=Math.pow(st.played-pAvg,2)*1200;
+      sc+=Math.pow(st.rest-rAvg,2)*500;
+      if(st.consecutive>=2)sc+=st.consecutive*250;
+      if(st.consecutiveRest>0)sc+=st.consecutiveRest*1800;
+    }
+    // 連續休息是公平性的高優先成本；真正不可行時才退讓。
+    const rest2=all.reduce((n,p)=>n+(stats[p.id].maxConsecutiveRest>=2?1:0),0);
+    const play3=all.reduce((n,p)=>n+(stats[p.id].maxConsecutive>=3?1:0),0);
+    sc+=rest2*70000+play3*9000000;
+    return sc;
+  };
+
+  // 新核心：先建立「出場矩陣」，再在固定上場名單內安排 2VS2。
+  // 不再把「誰上場」與「怎麼分組」放在同一個搜尋樹裡，避免組合爆炸。
+  // V12 出場矩陣：先決定每個人的「完整上場/休息序列」，再進行 2VS2 配對。
+  // 每個人的序列本身就硬性符合：不能連休 2 場、不能連打 3 場，且精準符合目標場數。
+  // 之後再用局部搜尋把每一輪的人數補到剛好 S 人，避免「先逐輪貪心選人」造成後段連休。
+  const attendancePatternCache=new Map();
+  const getAttendancePatterns=(R,k)=>{
+    const key=R+'|'+k;
+    if(attendancePatternCache.has(key))return attendancePatternCache.get(key);
+    const out=[];
+    const seq=new Array(R).fill(0);
+    const dfs=(i,plays)=>{
+      if(plays>k || plays+(R-i)<k)return;
+      if(i===R){
+        if(plays===k)out.push(seq.slice());
+        return;
+      }
+      // 0=休、1=打：禁止 00 與 111。
+      if(!(i>0 && seq[i-1]===0)){
+        seq[i]=0;
+        dfs(i+1,plays);
+      }
+      if(!(i>=2 && seq[i-1]===1 && seq[i-2]===1)){
+        seq[i]=1;
+        dfs(i+1,plays+1);
+      }
+    };
+    dfs(0,0);
+    attendancePatternCache.set(key,out);
+    return out;
+  };
+
+  const generateAttendancePlan=(seed)=>{
+    const R=roundsNeeded, S=matchesPerRound*4;
+    const targets=new Map(scheduleQuotaTargets);
+    const n=all.length;
+    const patternsByPlayer=all.map(p=>getAttendancePatterns(R,targets.get(p.id)));
+    // 某人的目標場數本身就沒有合法序列，代表硬條件數學上不可同時成立，直接判定無解。
+    if(patternsByPlayer.some(pats=>!pats.length))return null;
+
+    const deadline=performance.now()+2500;
+    const baseSeed=seed>>>0;
+    const rand=(x)=>seededValue((baseSeed+x*2654435761)>>>0);
+    let bestError=Infinity;
+    let bestPhaseCost=Infinity;
+    let bestRows=null;
+
+    const getColumnError=(rows,cols)=>{
+      let e=0;
+      for(let r=0;r<R;r++){
+        const d=cols[r]-S;
+        e+=d*d;
+      }
+      return e;
+    };
+
+    // 6場優先：在還有人未完成基本6場時，盡量不要讓其他人提早進入第7場。
+    // 這不是硬禁止第7場，因為某些人數/輪數組合數學上無法完全分階段。
+    const getPhaseCost=(rows)=>{
+      const counts=new Array(n).fill(0);
+      let cost=0;
+      for(let r=0;r<R;r++){
+        for(let i=0;i<n;i++)if(rows[i][r])counts[i]++;
+        const minCount=Math.min(...counts);
+        if(minCount<6){
+          let earlySeventh=0, earlyEighth=0;
+          for(const c of counts){
+            if(c>6)earlySeventh+=c-6;
+            if(c>7)earlyEighth+=c-7;
+          }
+          cost+=earlySeventh*100000+earlyEighth*300000;
+        }
+      }
+      return cost;
+    };
+    const isBetter=(error,phase)=>{
+      if(error!==0 && bestError===0)return false;
+      if(error===0 && bestError!==0)return true;
+      if(error!==0)return error<bestError;
+      return phase<bestPhaseCost;
+    };
+
+    for(let restart=0;restart<80 && performance.now()<deadline;restart++){
+      const rows=[];
+      const cols=new Array(R).fill(0);
+      for(let i=0;i<n;i++){
+        const pats=patternsByPlayer[i];
+        const idx=Math.floor(rand(restart*1009+i*9176)*pats.length)%pats.length;
+        const row=pats[idx].slice();
+        rows.push(row);
+        for(let r=0;r<R;r++)cols[r]+=row[r];
+      }
+
+      let error=getColumnError(rows,cols);
+      let phase=getPhaseCost(rows);
+      if(isBetter(error,phase)){bestError=error;bestPhaseCost=phase;bestRows=rows.map(row=>row.slice());}
+
+      // 座標下降：一次只換一個人的完整序列，選能讓「每輪上場人數」最接近 S 的方案。
+      // 找不到更好方案時，隨機踢動少數人的序列，再繼續搜尋，避免卡在局部最佳。
+      for(let sweep=0;sweep<35 && performance.now()<deadline;sweep++){
+        let changed=false;
+        const order=Array.from({length:n},(_,i)=>i);
+        for(let i=n-1;i>0;i--){
+          const j=Math.floor(rand(restart*100000+sweep*1000+i*97)* (i+1));
+          [order[i],order[j]]=[order[j],order[i]];
+        }
+        for(const i of order){
+          const current=rows[i];
+          const pats=patternsByPlayer[i];
+          let localBestError=error;
+          let localBest=null;
+          let localBestCols=null;
+          for(let pi=0;pi<pats.length;pi++){
+            const cand=pats[pi];
+            let same=true;
+            for(let r=0;r<R;r++)if(cand[r]!==current[r]){same=false;break;}
+            if(same)continue;
+            let nextError=error;
+            for(let r=0;r<R;r++){
+              const d0=cols[r]-S;
+              const d1=d0-current[r]+cand[r];
+              nextError+=d1*d1-d0*d0;
+            }
+            let betterCandidate=nextError<localBestError;
+            if(nextError===localBestError && nextError===0){
+              const testRows=rows.slice();
+              testRows[i]=cand;
+              const candPhase=getPhaseCost(testRows);
+              const currentPhase=getPhaseCost(rows);
+              betterCandidate=candPhase<currentPhase;
+            }
+            if(betterCandidate){
+              localBestError=nextError;
+              localBest= cand;
+            }
+          }
+          if(localBest){
+            for(let r=0;r<R;r++)cols[r]+=localBest[r]-current[r];
+            rows[i]=localBest.slice();
+            error=localBestError;
+            changed=true;
+            phase=getPhaseCost(rows);
+            if(isBetter(error,phase)){bestError=error;bestPhaseCost=phase;bestRows=rows.map(row=>row.slice());}
+          }
+        }
+        if(!changed){
+          // 輕微重置兩個人，重新探索另一個局部區域。
+          for(let k=0;k<Math.min(2,n);k++){
+            const i=Math.floor(rand(restart*100000+sweep*313+k*719)*n)%n;
+            const pats=patternsByPlayer[i];
+            const row=pats[Math.floor(rand(restart*100000+sweep*337+k*727)*pats.length)%pats.length];
+            for(let r=0;r<R;r++)cols[r]+=row[r]-rows[i][r];
+            rows[i]=row.slice();
+          }
+          error=getColumnError(rows,cols);
+          phase=getPhaseCost(rows);
+          if(isBetter(error,phase)){bestError=error;bestPhaseCost=phase;bestRows=rows.map(row=>row.slice());}
+        }
+      }
+    }
+
+    // 搜尋時間到了但剛好找到精確平衡，仍可直接使用；否則回傳無解，讓畫面明確提示。
+    if(bestRows){
+      const cols=new Array(R).fill(0);
+      for(const row of bestRows)for(let r=0;r<R;r++)cols[r]+=row[r];
+      if(cols.every(x=>x===S)){
+        const rounds=[];
+        for(let r=0;r<R;r++)rounds.push(all.filter((p,i)=>bestRows[i][r]===1).map(p=>p.id));
+        return {rounds,stats:null};
+      }
+    }
+    return null;
+  };
+
+  const pairAttendanceRound=(ids,stats,mode,round)=>{
+    const selected=ids.map(id=>all.find(p=>p.id===id)).filter(Boolean);
+    if(selected.length!==matchesPerRound*4)return null;
+
+    // 對 auto：先做「整輪 <=1」精確搜尋；只有整輪完全沒有解時，
+    // 才退到「最小總級數差」的完整配對。這是避免上一版硬篩造成整場直接無解。
+    const exactPartition=(strictAuto)=>{
+      const candidates=[];
+      for(const g of combinations4(selected)){
+        const m=makeMatch(g,stats,mode,strictAuto);
+        if(!m)continue;
+        const aSum=levelOf(m.a1)+levelOf(m.a2);
+        const bSum=levelOf(m.b1)+levelOf(m.b2);
+        const diff=Math.abs(aSum-bSum);
+        candidates.push({players:g,mask:0,m,score:groupScore(g,mode,stats)+diff*100000});
+      }
+      if(!candidates.length)return null;
+      const idx=new Map(selected.map((p,i)=>[p.id,i]));
+      const bit=p=>1<<idx.get(p.id);
+      candidates.forEach(c=>c.mask=c.players.reduce((m,p)=>m|bit(p),0));
+      const byPlayer=Array.from({length:selected.length},()=>[]);
+      candidates.forEach(c=>c.players.forEach(p=>byPlayer[idx.get(p.id)].push(c)));
+      for(const a of byPlayer)a.sort((x,y)=>x.score-y.score);
+      const fullMask=(1<<selected.length)-1;
+      let best=null;
+      function dfs(used,picked,score){
+        if(used===fullMask){
+          if(!best||score<best.score)best={picked:picked.slice(),score};
+          return;
+        }
+        const need=matchesPerRound-picked.length;
+        let anchor=-1,opts=null;
+        for(let i=0;i<selected.length;i++){
+          if(used&bit(selected[i]))continue;
+          const arr=byPlayer[i].filter(c=>(c.mask&used)===0);
+          if(!arr.length)return;
+          if(!opts||arr.length<opts.length){anchor=i;opts=arr;if(arr.length===1)break;}
+        }
+        if(anchor<0||!opts)return;
+        for(const c of opts){
+          if(picked.length+1>matchesPerRound)break;
+          const next=score+c.score;
+          if(best&&next>=best.score)continue;
+          dfs(used|c.mask,[...picked,c],next);
+        }
+      }
+      dfs(0,[],0);
+      if(!best)return null;
+      const matches=best.picked.map((x,i)=>{x.m.court=i+1;return x.m;});
+      return {matches,score:best.score};
+    };
+
+    if(mode==='auto'){
+      const strict=exactPartition(true);
+      if(strict){strict.matches.autoSkillRelaxed=false;return strict.matches;}
+      const relaxed=exactPartition(false);
+      if(relaxed){
+        relaxed.matches.autoSkillRelaxed=true;
+        return relaxed.matches;
+      }
+      return null;
+    }
+
+    const normal=exactPartition(false);
+    return normal?normal.matches:null;
+  };
+
+
+  const buildPlan=async(seed)=>{
+    const attendance=generateAttendancePlan(seed);
+    if(!attendance)return null;
+    const stats=makeEmptyScheduleStats(all);
+    const rounds=[];
+    const autoSkillRelaxedRounds=[];
+    for(let r=1;r<=roundsNeeded;r++){
+      const mode=r<=roundsNeeded/2?scheduleSettings.firstHalfMode:scheduleSettings.secondHalfMode;
+      const matches=pairAttendanceRound(attendance.rounds[r-1],stats,mode,r);
+      if(!matches)return null;
+      if(mode==='auto' && matches.autoSkillRelaxed)autoSkillRelaxedRounds.push(r);
+      applyRoundToStats(stats,matches);
+      rounds.push({round:r,matches});
+      await new Promise(resolve=>setTimeout(resolve,0));
+    }
+    return {rounds,stats,autoSkillRelaxedRounds};
   };
   let bestPlan=null;
-  // 19 人以上限制完整重建次數，避免瀏覽器長時間卡在「正在計算」。
-  // 真正的改善放在排完後的全局隊伍交換，而不是無限重跑。
-  const attempts=players.length>=19?2:2;
-  for(let attempt=0;attempt<attempts;attempt++){
-    const plan=await buildPlan((Date.now()+attempt*2654435761)>>>0);
+  for(let attempt=0;attempt<8;attempt++){
+    const plan=await buildPlan(((Date.now()>>>0)+attempt*2654435761)>>>0);
     if(!plan)continue;
-    const improved=await improvePairingsGlobally(plan.rounds,all,matchesPerRound);
-    if(!bestPlan||improved.score<bestPlan.score)bestPlan={...improved};
-    if(attempt<attempts-1)await new Promise(resolve=>setTimeout(resolve,0));
+    const score=globalScheduleScore(plan.stats);
+    if(!bestPlan || score<bestPlan.score)bestPlan={...plan,score};
+    if(attempt<7)await new Promise(resolve=>setTimeout(resolve,0));
   }
   if(!bestPlan){
     if(startBtn)startBtn.disabled=false;
     return toast('找不到符合目前條件的完整排班組合，請調整人數或級數後再試。');
   }
   const {rounds,stats}=bestPlan;
+  const quotaValid=all.every(p=>stats[p.id].played===scheduleQuotaTargets.get(p.id));
+  if(!quotaValid){
+    if(startBtn)startBtn.disabled=false;
+    return toast('找不到符合公平出場配額的完整排班，請重新排班。');
+  }
   const max3=Object.values(stats).some(s=>s.maxConsecutive>=3);
   const maxRest2=Object.values(stats).some(s=>s.maxConsecutiveRest>=2);
   const warnings=[];
   if(maxRest2)warnings.push('人數與場數的組合無法完全避免「連休 2 場」，本次結果已盡量降低連休；');
   if(max3)warnings.push('部分情況也無法完全做到「禁止連打 3 場」，本次結果已盡量降低連打。');
+  if(bestPlan.autoSkillRelaxedRounds?.length){
+    const rs=bestPlan.autoSkillRelaxedRounds.join('、');
+    warnings.push(`自動配對：第 ${rs} 輪無法讓所有場次都達到兩隊總級數差 ≤1，已改用該輪可找到的最接近配對；`);
+  }
   const warning=warnings.length?warnings.join(''):null;
   const payload={event_id:currentEvent.id,courts:courtCount,target_games:null,mode:'auto',status:'draft'};
   const {data:schedule,error:scheduleError}=await db.from('schedules').insert(payload).select().single();
